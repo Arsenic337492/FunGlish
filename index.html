@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FunGlish</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <div id="languageMenu" style="display: none;">
+                <button id="lang-ru">Русский</button>
+                <button id="lang-kz">Казахский</button>
+            </div>
+            <button onclick="location.href='index.html'">Главная страница</button>
+            <button id="login-btn">Вход</button>
+            <button id="profile-btn" style="display: none;">Профиль</button>
+        </div>
+        <div class="nav-right">
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <h1>Добро пожаловать на FunGlish!</h1>
+        <p>Здесь вы можете изучать английский язык с помощью нашего уникального метода ассоциаций.</p>
+        <button onclick="location.href='learning.html'">Начать обучение</button>
+    </div>
+
+    <!-- Модальное окно для метода -->
+    <div id="methodModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Метод изучения английского языка через ассоциации - метод, который позволит Вам с легкостью изучить этот важный язык.</p>
+        </div>
+    </div>
+
+    <!-- Модальное окно для входа -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Вход</h2>
+            <form id="loginForm">
+                <label for="username">Логин:</label>
+                <input type="text" id="username" name="username"><br><br>
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" name="password"><br><br>
+                <button type="submit">Войти</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Сайдбар для профиля -->
+    <div id="profileSidebar" class="sidebar">
+        <div class="profile-content">
+            <span class="close-profile">&times;</span>
+            <h2>Профиль</h2>
+            <div class="profile-info">
+                <img src="default-avatar.png" alt="Avatar" class="avatar">
+                <p id="profile-username"></p>
+            </div>
+            <button id="settings-btn">Настройки</button>
+            <button id="logout-btn">Выход</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно для настроек -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-settings">&times;</span>
+            <h2>Настройки аккаунта</h2>
+            <div>
+                <h3>Тема сайта</h3>
+                <button onclick="setTheme('light')">Светлая</button>
+                <button onclick="setTheme('dark')">Темная</button>
+            </div>
+            <div>
+                <h3>Выбор аватара</h3>
+                <div class="avatar-options">
+                    <img src="avatar1.png" alt="Avatar 1" onclick="setAvatar('avatar1.png')">
+                    <img src="avatar2.png" alt="Avatar 2" onclick="setAvatar('avatar2.png')">
+                    <img src="avatar3.png" alt="Avatar 3" onclick="setAvatar('avatar3.png')">
+                </div>
+            </div>
+            <div>
+                <h3>Смена языка</h3>
+                <button onclick="setLanguage('ru')">Русский</button>
+                <button onclick="setLanguage('kz')">Казахский</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
