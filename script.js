@@ -36,61 +36,61 @@ document.addEventListener('DOMContentLoaded', function() {
 // Глобальные массивы данных
 const animalsData = [
     { 
-        imageSrc: 'животные/бык.jpg', 
+        imageSrc: 'IMG_20250430_092619_498.jpg', 
         word: 'Bull [бул]', 
         translation: 'Бык', 
         association: 'Бык ест булку. Представьте большого быка, который с аппетитом ест свежую булку.'
     },
     { 
-        imageSrc: 'животные/жук.jpg', 
+        imageSrc: 'IMG_20250430_093403_754.jpg', 
         word: 'Beetle [битл]', 
         translation: 'Жук', 
         association: 'Жук с битой. Представьте жука, который держит биту.'
     },
     { 
-        imageSrc: 'животные/орел.jpg', 
+        imageSrc: 'IMG-20250428-WA0009.jpg', 
         word: 'Eagle [игл]', 
         translation: 'Орел', 
         association: 'Орел смотрит на иглу. Представьте орла, который внимательно разглядывает иглу.'
     },
     { 
-        imageSrc: 'животные/муравей.jpg', 
+        imageSrc: 'IMG-20250428-WA0014.jpg', 
         word: 'Ant [энт]', 
         translation: 'Муравей', 
         association: 'Муравей держит антенну. Представьте муравья, который несет телевизионную антенну.'
     },
     { 
-        imageSrc: 'животные/кролик.jpg', 
+        imageSrc: 'IMG_20250430_092617_980.jpg', 
         word: 'Bunny [бани]', 
         translation: 'Кролик', 
         association: 'Кролик идет в баню. Представьте кролика с полотенцем, который направляется в баню.'
     },
     { 
-        imageSrc: 'животные/медведь.jpg', 
+        imageSrc: 'IMG_20250430_092551_201.jpg', 
         word: 'Bear [бэа]', 
         translation: 'Медведь', 
         association: 'Медведь с биркой. Представьте медведя, на котором висит большая бирка с ценой.'
     },
     { 
-        imageSrc: 'животные/индейка.jpg', 
+        imageSrc: 'IMG_20250430_093409_921.jpg', 
         word: 'Turkey [тёки]', 
         translation: 'Индейка', 
         association: 'Индейка натирает на терке. Представьте индейку, которая что-то натирает на терке.'
     },
     { 
-        imageSrc: 'животные/суслик.jpg', 
+        imageSrc: 'IMG_20250430_092554_524.jpg', 
         word: 'Gopher [гофэ]', 
         translation: 'Суслик', 
         association: 'Суслик играет в гольф. Представьте суслика с клюшкой для гольфа.'
     },
     { 
-        imageSrc: 'животные/осел.jpg', 
+        imageSrc: 'IMG_20250430_093402_253.jpg', 
         word: 'Donkey [донки]', 
         translation: 'Осел', 
         association: 'Тонкий осел. Представьте очень худого, тонкого осла.'
     },
     { 
-        imageSrc: 'животные/тюлень.jpg', 
+        imageSrc: 'IMG_20250430_092611_874.png', 
         word: 'Seal [сил]', 
         translation: 'Тюлень', 
         association: 'У тюленя много сил. Представьте сильного тюленя, поднимающего тяжести.'
@@ -99,43 +99,43 @@ const animalsData = [
 
 const foodData = [
     { 
-        imageSrc: 'еда/каша.jpg', 
+        imageSrc: 'IMG_20250430_092546_303.jpg', 
         word: 'Porridge [поридж]', 
         translation: 'Каша', 
         association: 'Каша в париже. Представьте, как вы едите кашу возле Эйфелевой башни.'
     },
     { 
-        imageSrc: 'еда/огурец.jpg', 
+        imageSrc: 'IMG_20250430_092616_187.png', 
         word: 'Cucumber [кьюкамбэ]', 
         translation: 'Огурец', 
         association: 'Огурец с крюком. Представьте огурец, к которому прикреплен крюк.'
     },
     { 
-        imageSrc: 'еда/сосиска.jpg', 
+        imageSrc: 'IMG_20250430_092521_394.jpg', 
         word: 'Sausage [сосидж]', 
         translation: 'Сосиска', 
         association: 'Сосиска с соской. Представьте сосиску, которая держит соску.'
     },
     { 
-        imageSrc: 'еда/газировка.jpg', 
+        imageSrc: 'IMG_20250430_092527_385.jpg', 
         word: 'Soda [сода]', 
         translation: 'Газировка', 
         association: 'Газировка в соде. Представьте стакан газировки в пачке соды.'
     },
     { 
-        imageSrc: 'еда/свекла.jpg', 
+        imageSrc: 'IMG_20250430_092535_000.jpg', 
         word: 'Beetroot [битрут]', 
         translation: 'Свекла', 
         association: 'Свекла с битой. Представьте свеклу, держащую бейсбольную биту.'
     },
     { 
-        imageSrc: 'еда/семечка.jpg', 
+        imageSrc: 'IMG_20250430_092539_239.jpg', 
         word: 'Seed [сид]', 
         translation: 'Семечка', 
         association: 'Семечка сидит в кресле. Представьте семечку, которая удобно расположилась в кресле.'
     },
     { 
-        imageSrc: 'еда/слива.jpg', 
+        imageSrc: 'IMG_20250430_092533_382.jpg', 
         word: 'Plum [плам]', 
         translation: 'Слива', 
         association: 'Слива в пламени. Представьте сливу, окруженную пламенем.'
