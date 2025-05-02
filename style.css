@@ -432,97 +432,90 @@ body.light-theme {
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* ===== ТЁМНАЯ ТЕМА (Аметист) ===== */
-body.dark-theme {
-  --bg-gradient: linear-gradient(45deg, #3A1D6D 0%, #5E35B1 50%, #89216B 100%);
-  --text-color: #E2E0FF;
-  --nav-bg: #4A148C;
-  --card-bg: rgba(42, 16, 80, 0.9);
-  --sidebar-bg: #311B92;
-  --button-bg: #FF80AB;
-  --button-text: #3A1D6D;
-  --border-color: #5E35B1;
+/* ===== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ===== */
+:root {
+  /* Тёмная тема (Аметист) */
+  --dark-bg: linear-gradient(45deg, #3A1D6D 0%, #5E35B1 100%);
+  --dark-text: #FFFFFF;
+  --dark-card: #2A1050;
+  --dark-sidebar: #1A0A35;
+  --dark-nav: #4A148C;
+  --dark-button: #FF80AB;
+
+  /* Светлая тема (Янтарь) */
+  --light-bg: linear-gradient(45deg, #FFD54F 0%, #FFA000 100%);
+  --light-text: #5D4037;
+  --light-card: #FFFFFF;
+  --light-sidebar: #FFC107;
+  --light-nav: #FFB300;
+  --light-button: #FF6D00;
 }
 
-/* ===== СВЕТЛАЯ ТЕМА (Янтарь) ===== */
-body.light-theme {
-  --bg-gradient: linear-gradient(45deg, #FFECB3 0%, #FFD54F 50%, #FFA000 100%);
-  --text-color: #5D4037;
-  --nav-bg: #FFB300;
-  --card-bg: rgba(255, 255, 255, 0.9);
-  --sidebar-bg: #FFC107;
-  --button-bg: #FF6D00;
-  --button-text: #FFF8E1;
-  --border-color: #FFD54F;
-}
-
-/* ===== ОБЩИЕ СТИЛИ ===== */
+/* ===== БАЗОВЫЕ СТИЛИ ===== */
 body {
-  background: var(--bg-gradient);
-  background-attachment: fixed;
-  color: var(--text-color);
+  background: var(--bg);
+  color: var(--text);
   transition: all 0.4s ease;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-/* Фон со звёздами и облаками */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 300%;
-  height: 300%;
-  background-image: 
-    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><circle cx="1" cy="1" r="0.5" fill="white" opacity="0.8"/></svg>'),
-    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 10"><path d="M0,5 Q3,0 6,5 Q9,3 12,5" stroke="white" fill="none" opacity="0.2"/></svg>');
-  background-size: 30px 30px, 100px 50px;
-  animation: starsMove 100s linear infinite, cloudsMove 50s linear infinite;
-  z-index: -1;
-  opacity: 0.3;
+/* ===== ТЕМЫ ===== */
+body.dark-theme {
+  --bg: var(--dark-bg);
+  --text: var(--dark-text);
+  --card: var(--dark-card);
+  --sidebar: var(--dark-sidebar);
+  --nav: var(--dark-nav);
+  --button: var(--dark-button);
 }
 
-@keyframes starsMove { to { background-position: 1000px 500px; } }
-@keyframes cloudsMove { to { background-position: 500px 0; } }
+body.light-theme {
+  --bg: var(--light-bg);
+  --text: var(--light-text);
+  --card: var(--light-card);
+  --sidebar: var(--light-sidebar);
+  --nav: var(--light-nav);
+  --button: var(--light-button);
+}
 
+/* ===== КОМПОНЕНТЫ ===== */
 /* Навигация */
 .navbar {
-  background: var(--nav-bg) !important;
+  background: var(--nav) !important;
   padding: 15px 20px;
   display: flex;
   justify-content: space-between;
 }
 
-.nav-right {
-  display: flex;
-  align-items: center;
-}
-
-#themeToggle {
-  background: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 50px;
-  padding: 8px 12px;
-  margin-left: 10px;
-  cursor: pointer;
-}
-
 /* Боковая панель */
 .sidebar {
-  background: var(--sidebar-bg) !important;
-  color: var(--text-color) !important;
+  background: var(--sidebar) !important;
+  color: var(--text) !important;
 }
 
-/* Карточки и контент */
+/* Все карточки и блоки */
 .welcome-message, .word-card, 
 .test-container, .material-container,
-.word-content, .tree-view {
-  background: var(--card-bg) !important;
-  color: var(--text-color) !important;
+.word-content, .tree-view,
+.answers, .result, .question {
+  background: var(--card) !important;
+  color: var(--text) !important;
+  border: none !important;
 }
 
-/* Кнопки (кроме переключателя) */
+/* Кнопки */
 button:not(#themeToggle) {
-  background: var(--button-bg);
-  color: var(--button-text);
+  background: var(--button);
+  color: var(--text);
+}
+
+/* Переключатель темы */
+#themeToggle {
+  background: var(--button);
+  color: var(--text);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 50px;
+  margin-left: 10px;
 }
