@@ -1,3 +1,26 @@
+// Переключение тем
+document.addEventListener('DOMContentLoaded', function() {
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function() {
+      document.body.classList.toggle('dark-theme');
+      document.body.classList.toggle('light-theme');
+      const isDark = document.body.classList.contains('dark-theme');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      themeToggle.textContent = isDark ? '☀️ Светлая' : '🌙 Тёмная';
+    });
+
+    // Применяем сохранённую тему
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark-theme');
+      themeToggle.textContent = '☀️ Светлая';
+    } else {
+      document.body.classList.add('light-theme');
+      themeToggle.textContent = '🌙 Тёмная';
+    }
+  }
+});
+
 // ===== ТЕМЫ И ЭФФЕКТЫ =====
 document.addEventListener('DOMContentLoaded', function() {
   const themeToggle = document.getElementById('themeToggle');
