@@ -519,3 +519,27 @@ button:not(#themeToggle) {
   border-radius: 50px;
   margin-left: 10px;
 }
+
+/* Фиксы для видимости */
+body.dark-theme {
+  --text-color: #ffffff !important;
+  --card-bg: #2A1050 !important;
+}
+
+body.dark-theme .sidebar,
+body.dark-theme .tree-view,
+body.dark-theme .word-card,
+body.dark-theme .test-container {
+  background: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Кнопка темы справа */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+.nav-right {
+  margin-left: auto;
+  padding-right: 20px;
+}
