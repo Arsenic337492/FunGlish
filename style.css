@@ -432,41 +432,64 @@ body.light-theme {
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* ===== ТЁМНАЯ ТЕМА (Аметист) ===== */
+body.dark-theme {
+  --bg-gradient: linear-gradient(45deg, #3A1D6D 0%, #5E35B1 50%, #89216B 100%);
+  --text-color: #E2E0FF;
+  --nav-bg: #4A148C;
+  --card-bg: rgba(42, 16, 80, 0.9);
+  --sidebar-bg: #311B92;
+  --button-bg: #FF80AB;
+  --button-text: #3A1D6D;
+  --border-color: #5E35B1;
+}
+
+/* ===== СВЕТЛАЯ ТЕМА (Янтарь) ===== */
+body.light-theme {
+  --bg-gradient: linear-gradient(45deg, #FFECB3 0%, #FFD54F 50%, #FFA000 100%);
+  --text-color: #5D4037;
+  --nav-bg: #FFB300;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --sidebar-bg: #FFC107;
+  --button-bg: #FF6D00;
+  --button-text: #FFF8E1;
+  --border-color: #FFD54F;
+}
+
 /* ===== ОБЩИЕ СТИЛИ ===== */
 body {
-  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  background: var(--bg-gradient);
+  background-attachment: fixed;
   color: var(--text-color);
   transition: all 0.4s ease;
 }
 
+/* Фон со звёздами и облаками */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300%;
+  height: 300%;
+  background-image: 
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><circle cx="1" cy="1" r="0.5" fill="white" opacity="0.8"/></svg>'),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 10"><path d="M0,5 Q3,0 6,5 Q9,3 12,5" stroke="white" fill="none" opacity="0.2"/></svg>');
+  background-size: 30px 30px, 100px 50px;
+  animation: starsMove 100s linear infinite, cloudsMove 50s linear infinite;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+@keyframes starsMove { to { background-position: 1000px 500px; } }
+@keyframes cloudsMove { to { background-position: 500px 0; } }
+
+/* Навигация */
 .navbar {
   background: var(--nav-bg) !important;
-  box-shadow: var(--shadow);
-}
-
-.sidebar {
-  background: var(--sidebar-bg) !important;
-  color: white !important;
-  border-right: 1px solid var(--border-color);
-}
-
-.word-card, .test-container {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow);
-}
-
-button:not(#themeToggle) {
-  background: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-}
-
-/* ===== ПЕРЕКЛЮЧАТЕЛЬ ===== */
-.navbar {
+  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
 }
 
 .nav-right {
@@ -475,15 +498,31 @@ button:not(#themeToggle) {
 }
 
 #themeToggle {
-  background: transparent;
-  border: 2px solid var(--button-text);
+  background: var(--button-bg);
   color: var(--button-text);
+  border: none;
   border-radius: 50px;
-  padding: 5px 10px;
+  padding: 8px 12px;
+  margin-left: 10px;
   cursor: pointer;
-  transition: all 0.3s;
 }
 
-#themeToggle:hover {
-  opacity: 0.8;
+/* Боковая панель */
+.sidebar {
+  background: var(--sidebar-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Карточки и контент */
+.welcome-message, .word-card, 
+.test-container, .material-container,
+.word-content, .tree-view {
+  background: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Кнопки (кроме переключателя) */
+button:not(#themeToggle) {
+  background: var(--button-bg);
+  color: var(--button-text);
 }
