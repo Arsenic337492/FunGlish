@@ -1,3 +1,45 @@
+// ===== ТЕМЫ И ЭФФЕКТЫ =====
+document.addEventListener('DOMContentLoaded', function() {
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+  applySavedTheme();
+});
+
+function toggleTheme() {
+  const body = document.body;
+  const isDark = body.classList.contains('dark-theme');
+  body.classList.toggle('dark-theme', !isDark);
+  body.classList.toggle('light-theme', isDark);
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+  if (themeToggle) themeToggle.textContent = isDark ? '🌙' : '☀️';
+}
+
+function applySavedTheme() {
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-theme');
+    if (themeToggle) themeToggle.textContent = '☀️';
+  } else {
+    document.body.classList.add('light-theme');
+    if (themeToggle) themeToggle.textContent = '🌙';
+  }
+}
+
+function showSuccessEffects() {
+  if (typeof confetti === 'function') {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#FF80AB', '#4DD0E1', '#FFD54F']
+    });
+  }
+  // Звук "Ией!" (только на learning.html)
+  if (window.location.pathname.includes('learning.html')) {
+    const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3');
+    audio.play().catch(e => console.log("Звук не воспроизведён: ", e));
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('.tree-view a');
     
@@ -429,7 +471,7 @@ function startTest(sectionData, sectionName) {
     }
 
     function showResult(isCorrect, correct, userAnswer) {
-        if (isCorrect) score++;
+        if (isCorrect) showSuccessEffects(); // Добавлен вызов конфетти
         const content = document.getElementById('lesson-content');
         let userBlock = '';
         if (Array.isArray(userAnswer)) {
