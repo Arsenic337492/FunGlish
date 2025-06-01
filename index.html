@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FunGlish</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <button onclick="location.href='index.html'">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="nav-icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+                </svg>
+                FunGlish
+            </button>
+            <button onclick="location.href='learning.html'">Начать обучение</button>
+        </div>
+    </nav>
+
+    <div class="main-content" style="text-align: center; padding-top: 100px;">
+        <h1 style="font-size: 2.5em; margin-bottom: 20px;">Добро пожаловать!</h1>
+        <h2>FunGlish</h2>
+        <p>Здесь вы можете изучать английский язык с помощью нашего уникального метода ассоциаций.</p>
+        
+        <div class="auth-container">
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="showTab('login')">Вход</button>
+                <button class="auth-tab" onclick="showTab('register')">Регистрация</button>
+            </div>
+            
+            <form id="loginForm" class="auth-form">
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Пароль" required>
+                <button type="submit">Войти</button>
+                <p class="error-message" id="loginError"></p>
+            </form>
+            
+            <form id="registerForm" class="auth-form" style="display: none;">
+                <div class="form-row name-row">
+                    <input type="text" placeholder="Имя" required>
+                    <input type="text" placeholder="Фамилия" required>
+                </div>
+                
+                <div class="form-row">
+                    <input type="date" placeholder="Дата рождения" title="Дата рождения" required>
+                </div>
+                
+                <div class="form-row gender-row">
+                    <label>Пол:</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="gender" value="male" required>
+                            Мужской
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="female" required>
+                            Женский
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-row phone-row">
+                    <input type="tel" id="phone" placeholder="Номер телефона" required>
+                </div>
+                
+                <div class="form-row">
+                    <input type="email" placeholder="Email" required>
+                </div>
+                  <div class="form-row">
+                    <div class="password-container">
+                        <input type="password" id="password" placeholder="Пароль" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('password')">👁️</button>
+                        <div class="password-strength"></div>
+                        <div class="password-strength-text"></div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="password-container">
+                        <input type="password" id="confirmPassword" placeholder="Подтвердите пароль" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</button>
+                    </div>
+                </div>
+                
+                <button type="submit">Зарегистрироваться</button>
+                <p class="error-message" id="registerError"></p>
+            </form>
+        </div>
+    </div>    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const phoneInput = document.querySelector("#phone");
+            if (phoneInput) {                const iti = window.intlTelInput(phoneInput, {
+                    initialCountry: "ru",
+                    preferredCountries: ["ru", "by", "kz", "ua"],
+                    separateDialCode: true,
+                    formatOnDisplay: true,
+                });
+
+                // Форматирование при вводе
+                phoneInput.addEventListener('keypress', function(e) {
+                    if (!/^\d$/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') {
+                        e.preventDefault();
+                    }
+                });
+
+                phoneInput.addEventListener('input', function(e) {
+                    let numbers = this.value.replace(/\D/g, '');
+                    if (numbers.length > 10) {
+                        numbers = numbers.substr(0, 10);
+                    }
+                    if (numbers.length > 0) {
+                        let formatted = '';
+                        if (numbers.length > 0) formatted += '(';
+                        formatted += numbers.substr(0, 3);
+                        if (numbers.length > 3) formatted += ') ';
+                        if (numbers.length > 3) formatted += numbers.substr(3, 3);
+                        if (numbers.length > 6) formatted += ' ';
+                        if (numbers.length > 6) formatted += numbers.substr(6, 2);
+                        if (numbers.length > 8) formatted += ' ';
+                        if (numbers.length > 8) formatted += numbers.substr(8, 2);
+                        this.value = formatted;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
