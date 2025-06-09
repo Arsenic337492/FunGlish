@@ -13,15 +13,19 @@ let auth;
 let db;
 
 document.addEventListener('DOMContentLoaded', function() {
-    let isLoggingIn = false; // Флаг для предотвращения множественных запросов
+    let isLoggingIn = false;
 
     try {
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
         auth = firebase.auth();
-        db = firebase.firestore();        // Обработка формы входа        const loginForm = document.querySelector('.login-form');
-        if (loginForm) {            loginForm.addEventListener('submit', async (e) => {
+        db = firebase.firestore();
+
+        // Обработка формы входа
+        const loginForm = document.querySelector('.login-form');
+        if (loginForm) {
+            loginForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 
                 if (isLoggingIn) return;
@@ -40,18 +44,32 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
 
-                try {                    // Попытка входа через Firebase
+                try {
+                    // Попытка входа через Firebase
                     const userCredential = await auth.signInWithEmailAndPassword(email, password);
                     
-                    console.log('Успешный вход:', {
-                        email: userCredential.user.email,
-                        uid: userCredential.user.uid,
-                        time: new Date().toLocaleString()
-                    });
-                    
-                    // Закрываем модальное окно и перенаправляем на страницу обучения
-                    document.getElementById('authModal').classList.remove('active');
-                    window.location.href = 'learning.html';
+                    if (userCredential && userCredential.user) {
+                        const currentUser = auth.currentUser;
+                        
+                        // Принудительно обновляем метаданные пользователя
+                        await currentUser.reload();
+                        
+                        // Делаем повторный вход для обновления времени последнего входа
+                        await auth.signOut();
+                        await auth.signInWithEmailAndPassword(email, password);
+                        
+                        console.log('Успешный вход:', {
+                            email: currentUser.email,
+                            uid: currentUser.uid,
+                            lastLoginAt: new Date().toISOString(),
+                            metadata: currentUser.metadata
+                        });
+
+                        document.getElementById('authModal').classList.remove('active');
+                        window.location.href = 'learning.html';
+                    } else {
+                        throw new Error('Ошибка входа: недействительные учетные данные');
+                    }
                 } catch (error) {
                     let errorMessage = 'Ошибка входа: ';
                     if (error.code === 'auth/network-request-failed') {
