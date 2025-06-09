@@ -43,17 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 try {                    // Попытка входа через Firebase
                     const userCredential = await auth.signInWithEmailAndPassword(email, password);
                     
-                    // Логируем информацию о входе в Firestore
-                    await db.collection('user_logins').add({
-                        userId: userCredential.user.uid,
-                        email: userCredential.user.email,
-                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                        deviceInfo: {
-                            userAgent: navigator.userAgent,
-                            platform: navigator.platform
-                        }
-                    });
-                    
                     console.log('Успешный вход:', {
                         email: userCredential.user.email,
                         uid: userCredential.user.uid,
