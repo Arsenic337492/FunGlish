@@ -40,10 +40,25 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
 
-                try {
-                    // Попытка входа через Firebase
+                try {                    // Попытка входа через Firebase
                     const userCredential = await auth.signInWithEmailAndPassword(email, password);
-                    console.log('Успешный вход:', userCredential.user.email);
+                    
+                    // Логируем информацию о входе в Firestore
+                    await db.collection('user_logins').add({
+                        userId: userCredential.user.uid,
+                        email: userCredential.user.email,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                        deviceInfo: {
+                            userAgent: navigator.userAgent,
+                            platform: navigator.platform
+                        }
+                    });
+                    
+                    console.log('Успешный вход:', {
+                        email: userCredential.user.email,
+                        uid: userCredential.user.uid,
+                        time: new Date().toLocaleString()
+                    });
                     
                     // Закрываем модальное окно и перенаправляем на страницу обучения
                     document.getElementById('authModal').classList.remove('active');
