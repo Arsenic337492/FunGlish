@@ -982,11 +982,10 @@
         padding-left: 90px !important;
     }
 
-    /* Profile Sidebar */
-    .profile-sidebar {
+    /* Profile Sidebar */    .profile-sidebar {
     position: fixed;
     top: 0;
-    right: -400px;
+    right: -440px; /* увеличил отступ на размер паддинга */
     width: 400px;
         height: 100vh;
         background: white;
