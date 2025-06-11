@@ -74,9 +74,62 @@ document.addEventListener('DOMContentLoaded', function() {
                         document.body.appendChild(overlay);
                     }
                     
-                    if (!sidebar) {
-                        sidebar = document.createElement('div');
+                    if (!sidebar) {                        sidebar = document.createElement('div');
                         sidebar.className = 'profile-sidebar';
+                        sidebar.innerHTML = `
+                            <div class="profile-header">
+                                <h2>Мой профиль</h2>
+                                <div class="profile-info">
+                                    <div class="avatar">👤</div>
+                                    <div class="user-details">
+                                        <h3>${user.email}</h3>
+                                        <span class="level">Уровень: Начинающий</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-stats">
+                                <div class="stat-item">
+                                    <span class="stat-value">0</span>
+                                    <span class="stat-label">Выучено слов</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value">0</span>
+                                    <span class="stat-label">Дней подряд</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value">0%</span>
+                                    <span class="stat-label">Правильных ответов</span>
+                                </div>
+                            </div>
+
+                            <div class="profile-sections">
+                                <h3>Прогресс по разделам</h3>
+                                <div class="section-progress">
+                                    <div class="section">
+                                        <span>Животные</span>
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="section">
+                                        <span>Еда</span>
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="logout-button" onclick="auth.signOut().then(() => window.location.reload())">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                    <polyline points="16 17 21 12 16 7"></polyline>
+                                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                                </svg>
+                                Выйти
+                            </button>
+                        `;
                         document.body.appendChild(sidebar);
                     }
                     
