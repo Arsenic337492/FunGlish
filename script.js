@@ -42,9 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             lastSignInTime: userCredential.user.metadata.lastSignInTime,
                             creationTime: userCredential.user.metadata.creationTime
                         }
-                    });
-                    document.getElementById('authModal').classList.remove('active');
-                    window.location.href = 'learning.html';
+                    });                    document.getElementById('authModal').classList.remove('active');
                 }
             } catch (error) {
                 alert(error.message);
