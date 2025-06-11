@@ -12,6 +12,41 @@ const firebaseConfig = {
 let auth;
 let db;
 
+function showAvatarMenu(event) {
+    event.stopPropagation();
+    const menu = event.currentTarget.nextElementSibling;
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+
+function viewAvatar() {
+    alert('Просмотр аватара - в разработке');
+}
+
+function changeAvatar() {
+    alert('Изменение аватара - в разработке');
+}
+
+function deleteAvatar() {
+    alert('Удаление аватара - в разработке');
+}
+
+function showAchievements() {
+    alert('Достижения - в разработке');
+}
+
+function showSettings() {
+    alert('Настройки - в разработке');
+}
+
+document.addEventListener('click', function(event) {
+    const menus = document.querySelectorAll('.avatar-menu');
+    menus.forEach(menu => {
+        if (!menu.contains(event.target) && !event.target.matches('.avatar')) {
+            menu.style.display = 'none';
+        }
+    });
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     // Инициализация Firebase
     if (!firebase.apps.length) {
