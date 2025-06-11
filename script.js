@@ -31,10 +31,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const passwordInput = loginForm.querySelector('.inputForm input[type="password"]');
 
             if (submitButton) submitButton.disabled = true;
-            
-            try {
+              try {
+                console.log('Попытка входа...');
                 const userCredential = await auth.signInWithEmailAndPassword(emailInput.value, passwordInput.value);
                 if (userCredential.user) {
+                    console.log('Успешный вход:', {
+                        email: userCredential.user.email,
+                        uid: userCredential.user.uid,
+                        metadata: {
+                            lastSignInTime: userCredential.user.metadata.lastSignInTime,
+                            creationTime: userCredential.user.metadata.creationTime
+                        }
+                    });
                     document.getElementById('authModal').classList.remove('active');
                     window.location.href = 'learning.html';
                 }
@@ -57,14 +65,32 @@ document.addEventListener('DOMContentLoaded', function() {
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                     Профиль
-                `;
-                button.onclick = async () => {
-                    try {
-                        await auth.signOut();
-                        window.location.reload();
-                    } catch (error) {
-                        console.error('Ошибка выхода:', error);
+                `;                button.onclick = () => {
+                    // Создаем оверлей и сайдбар если их еще нет
+                    let overlay = document.querySelector('.profile-sidebar-overlay');
+                    let sidebar = document.querySelector('.profile-sidebar');
+                    
+                    if (!overlay) {
+                        overlay = document.createElement('div');
+                        overlay.className = 'profile-sidebar-overlay';
+                        document.body.appendChild(overlay);
                     }
+                    
+                    if (!sidebar) {
+                        sidebar = document.createElement('div');
+                        sidebar.className = 'profile-sidebar';
+                        document.body.appendChild(sidebar);
+                    }
+                    
+                    // Открываем сайдбар
+                    overlay.classList.add('active');
+                    sidebar.classList.add('active');
+                    
+                    // Закрытие при клике на оверлей
+                    overlay.onclick = () => {
+                        overlay.classList.remove('active');
+                        sidebar.classList.remove('active');
+                    };
                 };
             } else {
                 button.innerHTML = `
