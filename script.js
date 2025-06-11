@@ -98,8 +98,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                     Профиль
-                `;                button.onclick = () => {
-                    // Создаем оверлей и сайдбар если их еще нет
+                `;
+                button.onclick = () => {
                     let overlay = document.querySelector('.profile-sidebar-overlay');
                     let sidebar = document.querySelector('.profile-sidebar');
                     
@@ -109,70 +109,80 @@ document.addEventListener('DOMContentLoaded', function() {
                         document.body.appendChild(overlay);
                     }
                     
-                    if (!sidebar) {                        sidebar = document.createElement('div');
+                    if (!sidebar) {
+                        sidebar = document.createElement('div');
                         sidebar.className = 'profile-sidebar';
                         sidebar.innerHTML = `
                             <div class="profile-header">
-                                <h2>Мой профиль</h2>
-                                <div class="profile-info">
+                                <div class="profile-top">
                                     <div class="avatar">👤</div>
-                                    <div class="user-details">
-                                        <h3>${user.email}</h3>
-                                        <span class="level">Уровень: Начинающий</span>
+                                    <div class="user-info">
+                                        <h3>Никнейм</h3>
+                                    </div>
+                                    <button class="logout-icon" onclick="auth.signOut().then(() => window.location.reload())">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                            <polyline points="16 17 21 12 16 7"></polyline>
+                                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div class="progress-section">
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 45%"></div>
+                                    </div>
+                                    <div class="progress-stats">
+                                        <span>45% пройдено</span>
+                                        <span>55% осталось</span>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="profile-stats">
                                 <div class="stat-item">
-                                    <span class="stat-value">0</span>
-                                    <span class="stat-label">Выучено слов</span>
+                                    <span class="stat-value">12</span>
+                                    <span class="stat-label">Правильных ответов подряд</span>
                                 </div>
                                 <div class="stat-item">
-                                    <span class="stat-value">0</span>
+                                    <span class="stat-value">3</span>
                                     <span class="stat-label">Дней подряд</span>
                                 </div>
                                 <div class="stat-item">
-                                    <span class="stat-value">0%</span>
-                                    <span class="stat-label">Правильных ответов</span>
+                                    <span class="stat-value">75%</span>
+                                    <span class="stat-label">Точность ответов</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value">2:30</span>
+                                    <span class="stat-label">Время обучения</span>
                                 </div>
                             </div>
 
-                            <div class="profile-sections">
-                                <h3>Прогресс по разделам</h3>
-                                <div class="section-progress">
-                                    <div class="section">
-                                        <span>Животные</span>
-                                        <div class="progress-bar">
-                                            <div class="progress" style="width: 0%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="section">
-                                        <span>Еда</span>
-                                        <div class="progress-bar">
-                                            <div class="progress" style="width: 0%"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="profile-actions">
+                                <button class="action-button achievements-btn" onclick="alert('Достижения - в разработке')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
+                                        <path d="M19 15V9"></path>
+                                        <path d="M5 15V9"></path>
+                                        <path d="M19.8 9c0-1-.8-1.9-1.8-1.9H6c-1 0-1.8.9-1.8 1.9m15.6 0c0 4.4-3.6 8-8 8s-8-3.6-8-8"></path>
+                                    </svg>
+                                    Достижения
+                                </button>
+                                <button class="action-button settings-btn" onclick="alert('Настройки - в разработке')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    Настройки
+                                </button>
                             </div>
-
-                            <button class="logout-button" onclick="auth.signOut().then(() => window.location.reload())">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                    <polyline points="16 17 21 12 16 7"></polyline>
-                                    <line x1="21" y1="12" x2="9" y2="12"></line>
-                                </svg>
-                                Выйти
-                            </button>
                         `;
                         document.body.appendChild(sidebar);
                     }
                     
-                    // Открываем сайдбар
                     overlay.classList.add('active');
                     sidebar.classList.add('active');
                     
-                    // Закрытие при клике на оверлей
                     overlay.onclick = () => {
                         overlay.classList.remove('active');
                         sidebar.classList.remove('active');
