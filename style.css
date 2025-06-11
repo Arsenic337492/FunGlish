@@ -984,44 +984,20 @@
 
     /* Profile Sidebar */
     .profile-sidebar {
-        position: fixed;
-        top: 0;
-        right: -300px;
-        width: 300px;
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
         height: 100vh;
-        background: var(--card);
+        background: white;
         box-shadow: -2px 0 5px rgba(0,0,0,0.1);
         transition: right 0.3s ease;
         z-index: 1001;
         padding: 20px;
-        box-sizing: border-box;
     }
 
     .profile-sidebar.active {
         right: 0;
-    }
-
-    .profile-sidebar-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(5px);
-        display: none;
-        z-index: 1000;
-    }
-
-    .profile-sidebar-overlay.active {
-        display: block;
-    }
-
-    /* Profile Sidebar Styles */
-    .profile-header {
-        margin-bottom: 20px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid #eee;
     }
 
     .profile-top {
@@ -1029,10 +1005,6 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 20px;
-    }
-
-    .avatar-container {
-        position: relative;
     }
 
     .avatar {
@@ -1045,116 +1017,10 @@
         justify-content: center;
         font-size: 30px;
         color: white;
-        cursor: pointer;
-    }
-
-    .avatar-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        display: none;
-        z-index: 1000;
-    }
-
-    .avatar-menu button {
-        display: block;
-        width: 100%;
-        padding: 10px 15px;
-        border: none;
-        background: none;
-        text-align: left;
-        cursor: pointer;
-        white-space: nowrap;
-    }
-
-    .avatar-menu button:hover {
-        background: #f5f5f5;
-    }
-
-    .avatar-container:hover .avatar-menu {
-        display: block;
-    }
-
-    .user-info h3 {
-        margin: 0;
-        font-size: 16px;
-        color: #333;
-    }
-
-    .logout-icon {
-        background: none;
-        border: none;
-        padding: 8px;
-        color: #ff4444;
-        cursor: pointer;
-        border-radius: 50%;
-    }
-
-    .logout-icon:hover {
-        background: rgba(255,68,68,0.1);
     }
 
     .progress-section {
-        margin-top: 20px;
-    }
-
-    .progress-stats {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 5px;
-        font-size: 12px;
-        color: #666;
-    }
-
-    .profile-stats {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin-bottom: 30px;
-        padding: 0 10px;
-    }
-
-    .stat-item {
-        text-align: center;
-        padding: 10px;
-        background: #f5f5f5;
-        border-radius: 8px;
-    }
-
-    .stat-value {
-        display: block;
-        font-size: 24px;
-        font-weight: bold;
-        color: #1976D2;
-    }
-
-    .stat-label {
-        font-size: 12px;
-        color: #666;
-    }
-
-    .profile-sections {
-        margin-bottom: 30px;
-    }
-
-    .section-progress {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .section {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    .section span {
-        font-size: 14px;
-        color: #333;
+        margin: 20px 0;
     }
 
     .progress-bar {
@@ -1167,33 +1033,47 @@
     .progress {
         height: 100%;
         background: #1976D2;
-        transition: width 0.3s ease;
+        transition: width 0.3s;
     }
 
-    .logout-button {
-        width: 100%;
-        margin-top: auto;
+    .progress-stats {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 12px;
-        background: #ff4444 !important;
-        color: white;
-        border: none;
+        justify-content: space-between;
+        margin-top: 5px;
+        font-size: 12px;
+        color: #666;
+    }
+
+    .profile-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin: 20px 0;
+    }
+
+    .stat-item {
+        text-align: center;
+        padding: 15px 10px;
+        background: #f5f5f5;
         border-radius: 8px;
-        cursor: pointer;
-        font-size: 14px;
-        position: absolute;
-        bottom: 20px;
-        left: 0;
-        width: calc(100% - 40px);
-        margin: 0 20px;
+    }
+
+    .stat-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: #1976D2;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        font-size: 12px;
+        color: #666;
+        line-height: 1.2;
     }
 
     .profile-actions {
         margin-top: 30px;
-        padding: 0 10px;
     }
 
     .action-button {
@@ -1208,7 +1088,6 @@
         border-radius: 8px;
         cursor: pointer;
         font-size: 14px;
-        color: #333;
         transition: background 0.2s;
     }
 
@@ -1216,8 +1095,32 @@
         background: #e0e0e0;
     }
 
-    .action-button svg {
-        width: 20px;
-        height: 20px;
-        stroke-width: 1.5;
+    .logout-icon {
+        background: none;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+        color: #ff4444;
+        border-radius: 50%;
+        transition: background 0.2s;
+    }
+
+    .logout-icon:hover {
+        background: rgba(255,68,68,0.1);
+    }
+
+    .profile-sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(2px);
+        display: none;
+        z-index: 1000;
+    }
+
+    .profile-sidebar-overlay.active {
+        display: block;
     }
