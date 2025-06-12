@@ -107,6 +107,30 @@ document.addEventListener('DOMContentLoaded', function() {
     auth = firebase.auth();
     db = firebase.firestore();
 
+    // Инициализация обработчиков для сайдбара
+    const sidebarLinks = document.querySelectorAll('.tree-view a');
+    const lessonContent = document.getElementById('lesson-content');
+
+    // Обработка кликов по ссылкам
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Убираем активный класс у всех ссылок
+            sidebarLinks.forEach(l => l.classList.remove('active'));
+            // Добавляем активный класс текущей ссылке
+            this.classList.add('active');
+
+            // Получаем ID контента из data-атрибута
+            const contentId = this.getAttribute('data-content-id');
+            
+            // Отображаем соответствующий контент
+            if (contentById[contentId]) {
+                lessonContent.innerHTML = contentById[contentId];
+            }
+        });
+    });
+
     // Обработка формы входа
     const loginForm = document.querySelector('.login-form');
     if (loginForm) {
@@ -253,3 +277,93 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Функция проверки ответа в тестах
+function checkAnswer(button) {
+    const buttons = button.parentElement.getElementsByTagName('button');
+    for (let btn of buttons) {
+        btn.disabled = true;
+        if (btn.getAttribute('data-correct') === 'true') {
+            btn.style.background = '#4caf50';
+            btn.style.color = 'white';
+        }
+    }
+    
+    if (button.getAttribute('data-correct') === 'true') {
+        button.insertAdjacentHTML('beforeend', ' ✓');
+    } else {
+        button.style.background = '#f44336';
+        button.style.color = 'white';
+        button.insertAdjacentHTML('beforeend', ' ✗');
+    }
+}
+
+// Контент для разных разделов
+const contentById = {
+    'animals-material': `
+        <div class="word-card">
+            <div class="word-header">
+                <h2>Cat / Кошка</h2>
+            </div>
+            <div class="word-image">
+                <img src="https://placekitten.com/350/350" alt="Cat">
+            </div>
+            <div class="word-content">
+                <h3>Ассоциации:</h3>
+                <ul>
+                    <li>КЭТ - КОТ (созвучно)</li>
+                    <li>CAT - КОТ (первые буквы похожи)</li>
+                </ul>
+                <button class="next-word">Следующее слово →</button>
+            </div>
+        </div>
+    `,
+    'animals-test': `
+        <div class="test-container">
+            <h2>Тестирование: Животные</h2>
+            <div class="progress">Вопрос 1 из 5</div>
+            <div class="question">
+                <h3>Как переводится слово "Cat"?</h3>
+                <div class="answers">
+                    <button onclick="checkAnswer(this)" data-correct="true">Кошка</button>
+                    <button onclick="checkAnswer(this)">Собака</button>
+                    <button onclick="checkAnswer(this)">Птица</button>
+                    <button onclick="checkAnswer(this)">Рыба</button>
+                </div>
+            </div>
+        </div>
+    `,
+    'food-material': `
+        <div class="word-card">
+            <div class="word-header">
+                <h2>Apple / Яблоко</h2>
+            </div>
+            <div class="word-image">
+                <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6" alt="Apple">
+            </div>
+            <div class="word-content">
+                <h3>Ассоциации:</h3>
+                <ul>
+                    <li>APPLE - ЭППЛ (компания Apple)</li>
+                    <li>Яблоко в логотипе Apple</li>
+                </ul>
+                <button class="next-word">Следующее слово →</button>
+            </div>
+        </div>
+    `,
+    'food-test': `
+        <div class="test-container">
+            <h2>Тестирование: Еда</h2>
+            <div class="progress">Вопрос 1 из 5</div>
+            <div class="question">
+                <h3>Как переводится слово "Apple"?</h3>
+                <div class="answers">
+                    <button onclick="checkAnswer(this)" data-correct="true">Яблоко</button>
+                    <button onclick="checkAnswer(this)">Банан</button>
+                    <button onclick="checkAnswer(this)">Апельсин</button>
+                    <button onclick="checkAnswer(this)">Груша</button>
+                </div>
+            </div>
+        </div>
+    `
+};
