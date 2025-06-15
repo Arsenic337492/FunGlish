@@ -298,36 +298,106 @@ function checkAnswer(button) {
     }
 }
 
-// Контент для разных разделов
-const contentById = {    'animals-material': `
+// Массив слов для раздела "Животные"
+const animalWords = [
+    {
+        english: 'Bull',
+        russian: 'Бык',
+        imageId: 'bull',
+        audioId: 'bull-audio',
+        association: 'Представьте, как большой бык ест аппетитную БУЛКУ (BULl). Созвучие слов поможет запомнить английское слово.',
+        examples: [
+            'The bull is very strong - Бык очень сильный',
+            'There is a bull in the field - На поле есть бык'
+        ]
+    },
+    {
+        english: 'Bear',
+        russian: 'Медведь',
+        imageId: 'bear',
+        audioId: 'bear-audio',
+        association: 'Представьте, как медведь БЕРёт (BEARёт) мёд из улья. Созвучие глагола "брать/берёт" с "bear" поможет запомнить слово.',
+        examples: [
+            'The bear loves honey - Медведь любит мёд',
+            'A big brown bear - Большой бурый медведь'
+        ]
+    },
+    {
+        english: 'Cat',
+        russian: 'Кошка',
+        imageId: 'cat',
+        audioId: 'cat-audio',
+        association: 'Представьте, как КОТ (CAT) лежит на диване. Слово "кот" очень похоже на английское "cat".',
+        examples: [
+            'The cat is sleeping - Кошка спит',
+            'I have a black cat - У меня есть чёрная кошка'
+        ]
+    }
+    // Остальные животные будут добавлены аналогично
+];
+
+let currentWordIndex = 0;
+
+// Функция для отображения текущего слова
+function showCurrentWord() {
+    const word = animalWords[currentWordIndex];
+    return `
         <div class="word-card">
             <div class="word-header">
+                <div class="navigation-buttons">
+                    ${currentWordIndex > 0 ? 
+                    '<button class="prev-word" onclick="showPreviousWord()">← Предыдущее слово</button>' : ''}
+                    ${currentWordIndex < animalWords.length - 1 ? 
+                    '<button class="next-word" onclick="showNextWord()">Следующее слово →</button>' : ''}
+                </div>
                 <h2>
-                    Bull / Бык
-                    <button class="speak-btn" title="Прослушать произношение">🔊</button>
+                    ${word.english} / ${word.russian}
+                    <button class="speak-btn" title="Прослушать произношение" onclick="playAudio('${word.audioId}')">🔊</button>
                 </h2>
             </div>
             <div class="word-image">
-                <!-- Сюда вставить картинку быка из папки "животные" -->
+                <!-- Сюда будет вставлено изображение ${word.imageId} из папки "животные" -->
+                <img src="животные/${word.imageId}.jpg" alt="${word.english}">
             </div>
             <div class="word-content">
                 <h3>Ассоциация:</h3>
-                <p class="association-text">
-                    Представьте, как большой бык ест аппетитную БУЛКУ (BULl). 
-                    Созвучие слов "BULL" и "БУЛКА" поможет запомнить английское слово.
-                </p>
-                <!-- Сюда вставить аудио файл с произношением слова "bull" -->
+                <p class="association-text">${word.association}</p>
+                <!-- Сюда будет вставлен аудио файл ${word.audioId} -->
                 <div class="examples">
                     <h3>Примеры использования:</h3>
                     <ul>
-                        <li>"The bull is very strong" - Бык очень сильный</li>
-                        <li>"There is a bull in the field" - На поле есть бык</li>
+                        ${word.examples.map(example => `<li>${example}</li>`).join('')}
                     </ul>
                 </div>
-                <button class="next-word">Следующее слово →</button>
             </div>
         </div>
-    `,
+    `;
+}
+
+function showNextWord() {
+    if (currentWordIndex < animalWords.length - 1) {
+        currentWordIndex++;
+        document.getElementById('lesson-content').innerHTML = showCurrentWord();
+    }
+}
+
+function showPreviousWord() {
+    if (currentWordIndex > 0) {
+        currentWordIndex--;
+        document.getElementById('lesson-content').innerHTML = showCurrentWord();
+    }
+}
+
+// Функция для воспроизведения аудио
+function playAudio(audioId) {
+    // Здесь будет код для воспроизведения аудио файла
+    const audio = new Audio(`audio/${audioId}.mp3`);
+    audio.play();
+}
+
+// Контент для разных разделов
+const contentById = {
+    'animals-material': showCurrentWord(),
     'animals-test': `
         <div class="test-container">
             <h2>Тестирование: Животные</h2>
