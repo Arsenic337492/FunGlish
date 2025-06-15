@@ -1151,3 +1151,30 @@
         font-size: 15px;
         line-height: 1.4;
     }
+
+    .navigation-buttons {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .prev-word,
+    .next-word {
+        padding: 8px 16px;
+        background: var(--button);
+        color: var(--button-text);
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .prev-word:hover,
+    .next-word:hover {
+        background: #1565c0;
+    }
