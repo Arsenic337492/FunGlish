@@ -162,14 +162,14 @@
         margin-bottom: 20px;
     }
 
-    /* Word Cards */
-    .word-card {
+    /* Word Cards */    .word-card {
         background: white;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        padding: 20px;
+        padding: 20px 20px 80px 20px;
         max-width: 800px;
         margin: 0 auto;
+        position: relative;
     }
 
     /* Word Cards с закругленными углами */
@@ -1152,15 +1152,19 @@
         line-height: 1.4;
     }    .navigation-buttons {
         display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-top: 30px;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 40px;
+        box-sizing: border-box;
+        position: absolute;
+        bottom: 20px;
+        left: 0;
     }
 
     .prev-word,
     .next-word {
-        width: 50px;
-        height: 50px;
+        width: 44px;
+        height: 44px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1169,7 +1173,7 @@
         border: none;
         border-radius: 50%;
         cursor: pointer;
-        font-size: 24px;
+        font-size: 20px;
         transition: all 0.2s ease;
     }
 
