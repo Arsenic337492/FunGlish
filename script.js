@@ -344,31 +344,29 @@ function showCurrentWord() {
     return `
         <div class="word-card">
             <div class="word-header">
-                <div class="navigation-buttons">
-                    ${currentWordIndex > 0 ? 
-                    '<button class="prev-word" onclick="showPreviousWord()">← Предыдущее слово</button>' : ''}
-                    ${currentWordIndex < animalWords.length - 1 ? 
-                    '<button class="next-word" onclick="showNextWord()">Следующее слово →</button>' : ''}
-                </div>
                 <h2>
                     ${word.english} / ${word.russian}
                     <button class="speak-btn" title="Прослушать произношение" onclick="playAudio('${word.audioId}')">🔊</button>
                 </h2>
             </div>
             <div class="word-image">
-                <!-- Сюда будет вставлено изображение ${word.imageId} из папки "животные" -->
                 <img src="животные/${word.imageId}.jpg" alt="${word.english}">
             </div>
             <div class="word-content">
                 <h3>Ассоциация:</h3>
                 <p class="association-text">${word.association}</p>
-                <!-- Сюда будет вставлен аудио файл ${word.audioId} -->
                 <div class="examples">
                     <h3>Примеры использования:</h3>
                     <ul>
                         ${word.examples.map(example => `<li>${example}</li>`).join('')}
                     </ul>
                 </div>
+            </div>
+            <div class="navigation-buttons">
+                ${currentWordIndex > 0 ? 
+                '<button class="prev-word" onclick="showPreviousWord()" title="Предыдущее слово">←</button>' : ''}
+                ${currentWordIndex < animalWords.length - 1 ? 
+                '<button class="next-word" onclick="showNextWord()" title="Следующее слово">→</button>' : ''}
             </div>
         </div>
     `;
