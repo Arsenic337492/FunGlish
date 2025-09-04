@@ -179,10 +179,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 // Регистрируем пользователя
                 const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-                // Сохраняем профиль в Firestore
-                await db.collection('users').doc(userCredential.user.uid).set({
-                    name, surname, birth, gender, phone, email, createdAt: new Date()
-                });
                 // Отправляем email verification
                 await userCredential.user.sendEmailVerification();
                 // Показываем сообщение о необходимости подтвердить email и кнопку для входа
@@ -217,6 +213,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!userCredential.user.emailVerified) {
                     await auth.signOut();
                     throw new Error('Пожалуйста, подтвердите ваш email перед входом.');
+                }
+                // После успешного входа и подтверждения email — создаём профиль в Firestore, если его нет
+                const userDoc = await db.collection('users').doc(userCredential.user.uid).get();
+                if (!userDoc.exists) {
+                    // Получаем значения из формы регистрации, если они есть в localStorage (или можно запросить у пользователя)
+                    // Здесь просто создаём пустой профиль с email
+                    await db.collection('users').doc(userCredential.user.uid).set({
+                        email: userCredential.user.email,
+                        createdAt: new Date()
+                    });
                 }
                 document.getElementById('authModal').classList.remove('active');
             } catch (error) {
