@@ -131,32 +131,101 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Обработка формы входа
+    // Инициализация intl-tel-input для телефона в форме регистрации
+    const phoneInput = document.querySelector('.register-form input[type="tel"]');
+    if (phoneInput && window.intlTelInput) {
+        window.intlTelInput(phoneInput, {
+            initialCountry: 'ru',
+            utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js',
+            nationalMode: false
+        });
+    }
+
+    // Обработка формы регистрации
+    const registerForm = document.querySelector('.register-form');
+    if (registerForm) {
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitButton = registerForm.querySelector('button.button-submit');
+            if (submitButton) submitButton.disabled = true;
+            // Удаляем старые ошибки
+            let errorBlock = registerForm.querySelector('.form-errors');
+            if (errorBlock) errorBlock.remove();
+            // Валидация
+            const errors = validateRegisterForm(registerForm);
+            if (errors.length > 0) {
+                const errDiv = document.createElement('div');
+                errDiv.className = 'form-errors';
+                errDiv.style.color = 'red';
+                errDiv.style.marginBottom = '10px';
+                errDiv.innerHTML = errors.map(e => `<div>${e}</div>`).join('');
+                registerForm.insertBefore(errDiv, registerForm.firstChild);
+                if (submitButton) submitButton.disabled = false;
+                return;
+            }
+            // Получаем значения
+            const name = registerForm.querySelector('input[placeholder="Введите имя"]').value.trim();
+            const surname = registerForm.querySelector('input[placeholder="Введите фамилию"]').value.trim();
+            const birth = registerForm.querySelector('input[type="date"]').value;
+            const gender = registerForm.querySelector('input[name="gender"]:checked').value;
+            const phone = registerForm.querySelector('input[type="tel"]').value.trim();
+            const email = registerForm.querySelector('input[type="email"]').value.trim();
+            const password = registerForm.querySelector('input#password').value;
+            try {
+                // Проверяем, не занят ли email
+                const methods = await auth.fetchSignInMethodsForEmail(email);
+                if (methods.length > 0) {
+                    throw new Error('Этот email уже зарегистрирован');
+                }
+                // Регистрируем пользователя
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                // Сохраняем профиль в Firestore
+                await db.collection('users').doc(userCredential.user.uid).set({
+                    name, surname, birth, gender, phone, email, createdAt: new Date()
+                });
+                // Отправляем email verification
+                await userCredential.user.sendEmailVerification();
+                // Показываем сообщение о необходимости подтвердить email
+                registerForm.innerHTML = '<div style="color:green;text-align:center;padding:30px;">Регистрация успешна! Пожалуйста, подтвердите ваш email по ссылке, отправленной на почту.</div>';
+            } catch (error) {
+                const errDiv = document.createElement('div');
+                errDiv.className = 'form-errors';
+                errDiv.style.color = 'red';
+                errDiv.style.marginBottom = '10px';
+                errDiv.innerHTML = error.message;
+                registerForm.insertBefore(errDiv, registerForm.firstChild);
+            } finally {
+                if (submitButton) submitButton.disabled = false;
+            }
+        });
+    }
+
+    // Обработка формы входа: запрещаем вход, если email не подтвержден
     const loginForm = document.querySelector('.login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             const submitButton = loginForm.querySelector('button.button-submit');
-            const emailInput = loginForm.querySelector('.inputForm input[type="text"]');
+            const emailInput = loginForm.querySelector('.inputForm input[type="text"], .inputForm input[type="email"]');
             const passwordInput = loginForm.querySelector('.inputForm input[type="password"]');
-
             if (submitButton) submitButton.disabled = true;
-              try {
-                console.log('Попытка входа...');
+            // Удаляем старые ошибки
+            let errorBlock = loginForm.querySelector('.form-errors');
+            if (errorBlock) errorBlock.remove();
+            try {
                 const userCredential = await auth.signInWithEmailAndPassword(emailInput.value, passwordInput.value);
-                if (userCredential.user) {
-                    console.log('Успешный вход:', {
-                        email: userCredential.user.email,
-                        uid: userCredential.user.uid,
-                        metadata: {
-                            lastSignInTime: userCredential.user.metadata.lastSignInTime,
-                            creationTime: userCredential.user.metadata.creationTime
-                        }
-                    });                    document.getElementById('authModal').classList.remove('active');
+                if (!userCredential.user.emailVerified) {
+                    await auth.signOut();
+                    throw new Error('Пожалуйста, подтвердите ваш email перед входом.');
                 }
+                document.getElementById('authModal').classList.remove('active');
             } catch (error) {
-                alert(error.message);
+                const errDiv = document.createElement('div');
+                errDiv.className = 'form-errors';
+                errDiv.style.color = 'red';
+                errDiv.style.marginBottom = '10px';
+                errDiv.innerHTML = error.message;
+                loginForm.insertBefore(errDiv, loginForm.firstChild);
             } finally {
                 if (submitButton) submitButton.disabled = false;
             }
@@ -277,6 +346,40 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Валидация email
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+// Валидация телефона через intl-tel-input
+function isValidPhone(input) {
+    if (window.intlTelInputGlobals) {
+        const iti = window.intlTelInputGlobals.getInstance(input);
+        return iti && iti.isValidNumber();
+    }
+    return false;
+}
+// Валидация обязательных полей
+function validateRegisterForm(form) {
+    const name = form.querySelector('input[placeholder="Введите имя"]');
+    const surname = form.querySelector('input[placeholder="Введите фамилию"]');
+    const birth = form.querySelector('input[type="date"]');
+    const gender = form.querySelector('input[name="gender"]:checked');
+    const phone = form.querySelector('input[type="tel"]');
+    const email = form.querySelector('input[type="email"]');
+    const password = form.querySelector('input#password');
+    const confirmPassword = form.querySelector('input#confirmPassword');
+    let errors = [];
+    if (!name.value.trim()) errors.push('Имя обязательно');
+    if (!surname.value.trim()) errors.push('Фамилия обязательна');
+    if (!birth.value) errors.push('Дата рождения обязательна');
+    if (!gender) errors.push('Пол обязателен');
+    if (!phone.value.trim() || !isValidPhone(phone)) errors.push('Введите корректный номер телефона');
+    if (!email.value.trim() || !isValidEmail(email.value)) errors.push('Введите корректный email');
+    if (!password.value) errors.push('Пароль обязателен');
+    if (password.value !== confirmPassword.value) errors.push('Пароли не совпадают');
+    return errors;
+}
 
 // Функция проверки ответа в тестах
 function checkAnswer(button) {
