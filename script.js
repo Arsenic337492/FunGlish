@@ -377,9 +377,39 @@ function validateRegisterForm(form) {
     if (!phone.value.trim() || !isValidPhone(phone)) errors.push('Введите корректный номер телефона');
     if (!email.value.trim() || !isValidEmail(email.value)) errors.push('Введите корректный email');
     if (!password.value) errors.push('Пароль обязателен');
+    else if (!isStrongPassword(password.value)) errors.push('Пароль должен содержать минимум 8 символов, заглавную и строчную буквы, цифру и спецсимвол.');
     if (password.value !== confirmPassword.value) errors.push('Пароли не совпадают');
     return errors;
 }
+
+function isStrongPassword(password) {
+    // Минимум 8 символов, хотя бы одна заглавная, одна строчная, одна цифра и один спецсимвол
+    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/.test(password);
+}
+
+// Подсказка о сложности пароля в реальном времени
+
+document.addEventListener('DOMContentLoaded', function() {
+    // ...existing code...
+    const passwordInput = document.querySelector('.register-form input#password');
+    const passwordStrengthText = document.querySelector('.register-form .password-strength-text');
+    if (passwordInput && passwordStrengthText) {
+        passwordInput.addEventListener('input', function() {
+            if (!passwordInput.value) {
+                passwordStrengthText.textContent = '';
+                return;
+            }
+            if (isStrongPassword(passwordInput.value)) {
+                passwordStrengthText.style.color = 'green';
+                passwordStrengthText.textContent = 'Надёжный пароль';
+            } else {
+                passwordStrengthText.style.color = 'red';
+                passwordStrengthText.textContent = 'Пароль должен содержать минимум 8 символов, заглавную и строчную буквы, цифру и спецсимвол.';
+            }
+        });
+    }
+    // ...existing code...
+});
 
 // Функция проверки ответа в тестах
 function checkAnswer(button) {
