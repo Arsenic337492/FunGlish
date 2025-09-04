@@ -185,8 +185,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 // Отправляем email verification
                 await userCredential.user.sendEmailVerification();
-                // Показываем сообщение о необходимости подтвердить email
-                registerForm.innerHTML = '<div style="color:green;text-align:center;padding:30px;">Регистрация успешна! Пожалуйста, подтвердите ваш email по ссылке, отправленной на почту.</div>';
+                // Показываем сообщение о необходимости подтвердить email и кнопку для входа
+                registerForm.innerHTML = '<div style="color:green;text-align:center;padding:30px;">Регистрация успешна! Пожалуйста, подтвердите ваш email по ссылке, отправленной на почту.<br><br><button type="button" class="button-submit" onclick="showLoginForm()">Войти</button></div>';
             } catch (error) {
                 const errDiv = document.createElement('div');
                 errDiv.className = 'form-errors';
