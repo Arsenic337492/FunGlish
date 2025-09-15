@@ -18,47 +18,6 @@
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    .nav-left button {
-        background: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 4px;
-        cursor: pointer;
-        color: #4caf50;
-        font-weight: 500;
-    }
-
-    .nav-left button:hover {
-        background: #f1f1f1;
-    }
-
-    /* Кнопка "Главная страница" на навигационной панели — небесно-голубая */
-    .navbar .nav-left button {
-      background: #87cefa !important;
-      color: #222B45 !important;
-      border: none;
-      font-weight: 600;
-      transition: background 0.2s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .navbar .nav-left button:hover {
-      background: #bfe4ff !important;
-      color: #1976D2 !important;
-    }
-
-    /* Стили для иконки в навбаре */
-    .nav-icon {
-      width: 20px;
-      height: 20px;
-      margin-right: 8px;
-      vertical-align: middle;
-      display: inline-block;
-    }
-
     /* Sidebar */
     .sidebar {
         position: fixed;
@@ -145,13 +104,6 @@
         margin: 0 auto;
     }
 
-    /* Сделать фон lesson-content прозрачным или фиолетовым */
-    #lesson-content {
-      background: transparent !important;
-      box-shadow: none !important;
-      border: none !important;
-    }
-
     .welcome-message {
         text-align: center;
         padding: 40px 0;
@@ -170,25 +122,6 @@
         max-width: 800px;
         margin: 0 auto;
         position: relative;
-    }
-
-    /* Word Cards с закругленными углами */
-    .word-card {
-      border-radius: 16px !important;
-      overflow: hidden;
-    }
-
-    .word-content {
-      border-radius: 12px !important;
-    }
-
-    .word-image img {
-      border-radius: 12px !important; 
-    }
-
-    /* Материалы тоже закругляем */
-    .material-container {
-      border-radius: 16px !important;
     }
 
     .word-header {
@@ -236,23 +169,6 @@
         padding: 10px;
         background: #f5f5f5;
         border-radius: 4px;
-    }
-
-    .next-word {
-        display: block;
-        margin: 30px auto 0;
-        padding: 12px 24px;
-        background: #4caf50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background 0.2s;
-    }
-
-    .next-word:hover {
-        background: #388e3c;
     }
 
     /* Test Container */
@@ -336,23 +252,6 @@
         margin-bottom: 10px;
     }
 
-    .test-container button {
-        display: block;
-        margin: 20px auto;
-        padding: 12px 24px;
-        background: #4caf50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background 0.2s;
-    }
-
-    .test-container button:hover {
-        background: #388e3c;
-    }
-
     /* Matching Styles */
     .matching-list {
         display: flex;
@@ -426,30 +325,6 @@
         color: #333;
     }
 
-    /* Drag & Drop: делаем слова синими и текст белым */
-    .match-word {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none !important;
-    }
-
-    /* Drag & Drop: зона для перетаскивания синяя, текст внутри — белый */
-    .match-dropzone {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none !important;
-    }
-
-    /* Перевод (тот, что справа от зоны) — синий фон, белый текст */
-    .match-row > span {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border-radius: 6px;
-      padding: 6px 12px;
-      margin-left: 12px;
-      display: inline-block;
-    }
-
     matching-feedback {
         margin-top: 18px;
         color: #c62828;
@@ -464,12 +339,6 @@
         background: #f5f5f5;
         padding: 2px 8px;
         border-radius: 4px;
-    }
-
-    /* Анаграмма: розовый фон и белый текст */
-    .anagram {
-      background: var(--button) !important;
-      color: #fff !important;
     }
 
     /* Responsive */
@@ -499,41 +368,36 @@
       --button-text: #fff; /* белый текст на кнопках */
     }
 
-    /* ===== БАЗОВЫЕ СТИЛИ ===== */
+    /* ===== КОМПОНЕНТЫ ===== */
     body {
       background: var(--bg);
       color: var(--text);
       transition: all 0.4s ease;
-      margin: 0;
       font-family: 'Nunito', 'Segoe UI', 'Verdana', 'Tahoma', sans-serif;
     }
 
-    /* ===== КОМПОНЕНТЫ ===== */
     .navbar {
       background: var(--nav) !important;
       color: #fff !important;
-      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       box-sizing: border-box;
-      width: 100%;
     }
 
-    .login-button {
-      border-radius: 999px !important;
-      padding: 8px 20px !important;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
+    .login-button, .navbar .nav-left button {
       background: transparent !important;
       border: 1px solid rgba(255, 255, 255, 0.2) !important;
       color: #fff !important;
+      border-radius: 999px !important;
+      padding: 8px 20px !important;
+      height: 38px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.2s;
     }
 
-    .login-button:hover {
+    .login-button:hover, .navbar .nav-left button:hover {
       background: rgba(255, 255, 255, 0.1) !important;
     }
 
@@ -542,38 +406,15 @@
       color: var(--text) !important;
     }
 
-    /* Явно делаем текст белым для пунктов меню и заголовка в сайдбаре */
     .sidebar h2,
     .tree-view summary,
     .tree-view li a {
       color: var(--text) !important;
     }
-
-    /* Явно делаем summary синим и текст белым */
+    
     .tree-view summary {
       background: var(--button) !important;
       color: var(--button-text) !important;
-    }
-
-    /* Явно делаем текст белым для материалов и тестов */
-    .material-container,
-    .word-card,
-    .test-container,
-    .word-content,
-    .result,
-    .question {
-      background: var(--card) !important;
-      color: var(--text) !important;
-      border: none !important;
-    }
-
-    .welcome-message, .word-card, 
-    .test-container, .material-container,
-    .word-content, .tree-view,
-    .answers, .result, .question {
-      background: var(--card) !important;
-      color: var (--text) !important;
-      border: none !important;
     }
 
     .tree-view li a.active {
@@ -581,13 +422,43 @@
       color: var(--button-text) !important;
     }
 
-    button, .next-word, .test-container button {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none;
+    /* Основной контент */
+    .main-content {
+      background: var(--sidebar) !important;
+      color: var(--text) !important;
+      min-height: 100vh;
+      margin: 0;
+      padding-top: 60px;
+      box-sizing: border-box;
     }
 
-    /* Исправление цвета текста в карточках и тестах */
+    /* Карточки и контейнеры контента */
+    .word-card,
+    .test-container,
+    .material-container,
+    .auth-container,
+    .profile-sidebar {
+      background: var(--card) !important;
+      color: var(--text) !important;
+      border-radius: 16px !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+
+    /* Элементы внутри карточек */
+    .word-content,
+    .question,
+    .result {
+      background: var(--card) !important;
+      color: var(--text) !important;
+      border: none !important;
+      border-radius: 12px !important;
+    }
+
+    .word-image img {
+      border-radius: 12px !important;
+    }
+
     .word-header h2,
     .word-content h3,
     .test-container h2,
@@ -596,44 +467,36 @@
       color: var(--text) !important;
     }
 
-    /* Кнопка темы справа */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    /* Явно делаем текст белым для приветствия и описаний */
-    .welcome-message h1,
-    .welcome-message p,
-    .test-container .progress,
-    .test-container p,
-    .test-container label,
-    .test-container input,
-    .test-container textarea,
-    .test-container select,
-    .final-score p {
-      color: var(--text) !important;
-    }
-
-    /* Для input/textarea/select также можно добавить background для лучшей видимости */
-    .test-container input,
-    .test-container textarea,
-    .test-container select {
-      background: #1A0A35 !important;
-      border: 1px solid #444 !important;
-    }
-
-    /* Инпуты в тестах: синий текст как у навигационной панели */
-    .test-container input,
-    .test-container textarea,
-    .test-container select {
-      background: #1A0A35 !important;
-      border: 1px solid #444 !important;
-      color: var(--nav) !important;
+    /* Кнопки */
+    button,
+    .next-word,
+    .test-container button,
+    .answers button,
+    .premium-button {
+      background: var(--button) !important;
+      color: var(--button-text) !important;
+      border: none;
+      border-radius: 999px !important;
+      padding: 10px 20px;
+      height: 38px;
+      font-size: 1em;
       font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
     }
 
-    /* Инпуты в тестах: синий фон как у навигационной панели, текст белый */
+    .next-word {
+      display: block;
+      margin: 30px auto 0;
+    }
+
+    .test-container button {
+      display: block;
+      margin: 20px auto;
+    }
+
+    /* Инпуты */
+    .auth-form input:not([type="radio"]),
     .test-container input,
     .test-container textarea,
     .test-container select {
@@ -641,43 +504,31 @@
       border: 1.5px solid #1565c0 !important;
       color: #fff !important;
       font-weight: 600;
+      border-radius: 8px !important;
+      padding: 12px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
-    /* Инпуты в тестах: синий фон как у навигационной панели, текст белый, слегка скругленные углы */
-    .test-container input,
-    .test-container textarea,
-    .test-container select {
-      background: var(--nav) !important;
-      border: 1.5px solid #1565c0 !important;
-      color: #fff !important;
-      font-weight: 600;
-      border-radius: 8px !important; /* как у .anagram */
+    /* Стиль для Анаграммы */
+    .anagram {
+      background: var(--button) !important;
+      color: var(--button-text) !important;
+      font-family: monospace;
+      font-size: 1.2em;
+      letter-spacing: 2px;
+      padding: 2px 8px;
+      border-radius: 4px;
     }
 
-    /* Сделать материал и карточку полностью фиолетовыми */
-    .material-container,
-    .word-card {
-      background: var(--card) !important;
-      color: var(--text) !important;
-      box-shadow: none !important;
-      border: none !important;
-    }
-
-    /* Drag & Drop: делаем слова жёлтыми и текст тёмным */
-    .match-word {
+    /* Drag & Drop */
+    .match-word, .match-dropzone {
       background: var(--button) !important;
       color: var(--button-text) !important;
       border: none !important;
+      border-radius: 6px;
     }
 
-    /* Drag & Drop: зона для перетаскивания жёлтая, текст внутри — тёмный */
-    .match-dropzone {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none !important;
-    }
-
-    /* Перевод (тот, что справа от зоны) — жёлтый фон, тёмный текст */
     .match-row > span {
       background: var(--button) !important;
       color: var(--button-text) !important;
@@ -687,97 +538,39 @@
       display: inline-block;
     }
 
-    /* Явно делаем summary жёлтым и текст тёмным */
-    .tree-view summary {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
+    /* Навигационные кнопки */
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 40px;
+      box-sizing: border-box;
+      position: absolute;
+      bottom: 20px;
+      left: 0;
     }
 
-    /* Активные ссылки и кнопки — жёлтые */
-    .tree-view li a.active {
-      background: var(--button);
-      color: var(--button-text) !important;
-    }
-
-    button, .next-word, .test-container button {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none;
-    }
-
-    /* Кнопки: прямоугольные с полукруглыми боками */
-    button,
-    .next-word,
-    .test-container button,
-    .navbar .nav-left button {
-      border-radius: 999px !important; /* максимальный радиус для полукруглых боков */
-      padding-left: 32px !important;
-      padding-right: 32px !important;
-      min-width: 120px;
+    .prev-word, .next-word {
+      width: 44px;
       height: 44px;
-      font-size: 1.1em;
-      font-weight: 600;
-      /* ...existing background/color rules... */
-    }
-
-    /* Кнопки: чуть короче и ниже */
-    button,
-    .next-word,
-    .test-container button,
-    .navbar .nav-left button {
-      border-radius: 999px !important;
-      padding-left: 20px !important;
-      padding-right: 20px !important;
-      min-width: 80px;
-      height: 38px;
-      font-size: 1em;
-      font-weight: 600;
-      /* ...existing background/color rules... */
-    }
-
-    /* Исправление цвета текста в карточках и тестах */
-    .word-header h2,
-    .word-content h3,
-    .test-container h2,
-    .question h3,
-    .final-score h3 {
-      color: var(--text) !important;
-    }
-
-    /* Для кнопок и заголовков тоже используем этот шрифт */
-    button,
-    .next-word,
-    .test-container button,
-    .navbar .nav-left button,
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Nunito', 'Segoe UI', 'Verdana', 'Tahoma', sans-serif;
-    }
-
-    /* Кнопка озвучки: маленькая, круглая, и иконка по центру */
-    .speak-btn {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
-      width: 32px;
-      height: 32px;
-      padding: 0;
-      margin-left: 8px;
-      border-radius: 50%;
-      font-size: 1.2em;
-      background: var(--button) !important;
-      color: var(--button-text) !important;
+      background: var(--button);
+      color: var(--button-text);
       border: none;
+      border-radius: 50%;
       cursor: pointer;
-      vertical-align: middle;
-      transition: background 0.2s;
+      font-size: 20px;
+      transition: all 0.2s ease;
     }
 
-    .speak-btn:hover {
-      background: #bfe4ff !important;
-      color: #1976D2 !important;
+    .prev-word:hover, .next-word:hover {
+      background: #1565c0;
+      transform: scale(1.1);
     }
 
-    /* Кнопка озвучки: маленькая, круглая, и иконка по центру, смайлик меньше */
+    /* Кнопка озвучки */
     .speak-btn {
       display: inline-flex;
       align-items: center;
@@ -787,31 +580,7 @@
       padding: 0;
       margin-left: 8px;
       border-radius: 50%;
-      font-size: 1em;
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none;
-      cursor: pointer;
-      vertical-align: middle;
-      transition: background 0.2s;
-    }
-
-    .speak-btn:hover {
-      background: #bfe4ff !important;
-      color: #1976D2 !important;
-    }
-
-    /* Кнопка озвучки: маленькая, круглая, и иконка по центру, смайлик очень маленький */
-    .speak-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      padding: 0;
-      margin-left: 8px;
-      border-radius: 50%;
-      font-size: 0.9em; /* уменьшили размер смайлика */
+      font-size: 0.9em;
       background: var(--button) !important;
       color: var(--button-text) !important;
       border: none;
@@ -826,387 +595,38 @@
       color: #1976D2 !important;
     }
 
-    /* Главная страница использует тот же фон, что и сайдбар */
-    .main-content {
-      background: var(--sidebar) !important;
-      color: var(--text) !important;
-      min-height: 100vh;
-      margin: 0;
-      padding-top: 60px;
-      box-sizing: border-box;
+    /* Иконка в навбаре */
+    .nav-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      vertical-align: middle;
+      display: inline-block;
     }
 
-    /* Premium Features Styles */
-    #premium-features {
-      margin-top: 40px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      text-align: left;
+    /* Индикатор силы пароля */
+    .password-strength-indicator {
+      width: 100%;
+      height: 6px;
+      background: #e0e0e0;
+      border-radius: 3px;
+      margin-top: -10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      display: none;
     }
 
-    #premium-features h2 {
-      margin-bottom: 16px;
-      color: var(--text);
+    .password-strength-indicator .strength-bar {
+      height: 100%;
+      width: 0;
+      background: transparent;
+      transition: width 0.3s ease, background-color 0.3s ease;
     }
 
-    #premium-features ul {
-      list-style: none;
-      padding: 0;
-      margin: 20px 0;
+    /* Иконки видимости пароля */
+    .toggle-password .visible {
+      display: none;
     }
-
-    #premium-features li {
-      margin: 10px 0;
-      font-size: 16px;
-      color: var(--text);
+    .toggle-password .hidden {
+      display: inline-block;
     }
-
-    .premium-button {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none;
-      border-radius: 999px;
-      padding: 12px 24px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-
-
-
-    /* Authentication Styles */
-    .auth-container {
-        max-width: 400px;
-        margin: 40px auto;
-        padding: 20px;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .auth-tabs {
-        display: flex;
-        margin-bottom: 20px;
-        border-bottom: 2px solid #e0e0e0;
-    }
-
-    .auth-tab {
-        flex: 1;
-        padding: 10px;
-        border: none;
-        background: none;
-        font-size: 16px;
-        cursor: pointer;
-        color: #666;
-    }
-
-    .auth-tab.active {
-        color: #4caf50;
-        border-bottom: 2px solid #4caf50;
-        margin-bottom: -2px;
-    }
-
-    /* Auth Form Styles */
-    .auth-form {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        width: 100%;
-    }
-
-    .form-row {
-        position: relative;
-        width: 100%;
-    }
-
-    .auth-form input:not([type="radio"]) {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 16px;
-        box-sizing: border-box;
-    }
-
-    .toggle-password {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        border: none;
-        background: none;
-        cursor: pointer;
-        color: #666;
-        padding: 0;
-        width: 12px;
-        height: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-    }
-
-    .gender-row {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 4px 0;
-    }
-
-    .radio-group {
-        display: flex;
-        gap: 12px;
-    }
-
-    .radio-group label {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        cursor: pointer;
-        font-size: 14px;
-    }
-
-    /* Telephone Input Styles */
-    .iti {
-        width: 100% !important;
-    }
-
-    .phone-row {
-        position: relative;
-        width: 100%;
-    }
-
-    .phone-row input {
-        width: 100% !important;
-        padding-left: 90px !important;
-    }
-
-    /* Profile Sidebar */    .profile-sidebar {
-    position: fixed;
-    top: 0;
-    right: -440px; /* увеличил отступ на размер паддинга */
-    width: 400px;
-        height: 100vh;
-        background: white;
-        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-        transition: right 0.3s ease;
-        z-index: 1001;
-        padding: 20px;
-    }
-
-    .profile-sidebar.active {
-        right: 0;
-    }
-
-    .profile-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    }
-
-    .avatar {
-        width: 60px;
-        height: 60px;
-        background: #1976D2;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 30px;
-        color: white;
-    }
-
-    .progress-section {
-        margin: 20px 0;
-    }
-
-    .progress-bar {
-        height: 8px;
-        background: #eee;
-        border-radius: 4px;
-        overflow: hidden;
-    }
-
-    .progress {
-        height: 100%;
-        background: #1976D2;
-        transition: width 0.3s;
-    }
-
-    .progress-stats {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 5px;
-        font-size: 12px;
-        color: #666;
-    }
-
-    .profile-stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-        margin: 20px 0;
-    }
-
-    .stat-item {
-        text-align: center;
-        padding: 15px 10px;
-        background: #f5f5f5;
-        border-radius: 8px;
-    }
-
-    .stat-value {
-        font-size: 24px;
-        font-weight: bold;
-        color: #1976D2;
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    .stat-label {
-        font-size: 12px;
-        color: #666;
-        line-height: 1.2;
-    }
-
-    .profile-actions {
-        margin-top: 30px;
-    }
-
-    .action-button {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 12px;
-        margin-bottom: 10px;
-        background: #f5f5f5;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 14px;
-        transition: background 0.2s;
-    }
-
-    .action-button:hover {
-        background: #e0e0e0;
-    }
-
-    .logout-icon {
-        background: none;
-        border: none;
-        padding: 8px;
-        cursor: pointer;
-        color: #ff4444;
-        border-radius: 50%;
-        transition: background 0.2s;
-    }
-
-    .logout-icon:hover {
-        background: rgba(255,68,68,0.1);
-    }
-
-    .profile-sidebar-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-        backdrop-filter: blur(2px);
-        display: none;
-        z-index: 1000;
-    }
-
-    .profile-sidebar-overlay.active {
-        display: block;
-    }
-
-    .association-text {
-        padding: 15px;
-        background: #f5f5f5;
-        border-radius: 8px;
-        line-height: 1.5;
-        font-size: 16px;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    .examples {
-        margin-top: 20px;
-    }
-
-    .examples ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .examples li {
-        padding: 10px 15px;
-        background: #f5f5f5;
-        border-radius: 8px;
-        margin-bottom: 10px;
-        font-size: 15px;
-        line-height: 1.4;
-    }    .navigation-buttons {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        padding: 0 40px;
-        box-sizing: border-box;
-        position: absolute;
-        bottom: 20px;
-        left: 0;
-    }
-
-    .prev-word,
-    .next-word {
-        width: 44px;
-        height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--button);
-        color: var(--button-text);
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        font-size: 20px;
-        transition: all 0.2s ease;
-    }
-
-    .prev-word:hover,
-    .next-word:hover {
-        background: #1565c0;
-        transform: scale(1.1);
-    }
-
-/* Индикатор силы пароля */
-.password-strength-indicator {
-    width: 100%;
-    height: 6px;
-    background: #e0e0e0;
-    border-radius: 3px;
-    margin-top: -10px; /* Регулировка, чтобы индикатор находился прямо под полем ввода пароля */
-    margin-bottom: 10px;
-    overflow: hidden;
-    display: none; /* Изначально скрыт, показывается с помощью JavaScript */
-}
-
-.password-strength-indicator .strength-bar {
-    height: 100%;
-    width: 0;
-    background: transparent;
-    transition: width 0.3s ease, background-color 0.3s ease;
-}
-
-/* Стили для иконок видимости пароля */
-.toggle-password .visible {
-  display: none; /* Сначала скрываем иконку "глаз" */
-}
-
-.toggle-password .hidden {
-  display: inline-block; /* Сначала показываем иконку "перечеркнутый глаз" */
-}
