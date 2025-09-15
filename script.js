@@ -34,8 +34,10 @@ function showAchievements() {
     // Закрываем сайдбар
     const overlay = document.querySelector('.profile-sidebar-overlay');
     const sidebar = document.querySelector('.profile-sidebar');
-    overlay.classList.remove('active');
-    sidebar.classList.remove('active');
+    if (overlay && sidebar) {
+        overlay.classList.remove('active');
+        sidebar.classList.remove('active');
+    }
 
     // Создаем модальное окно достижений
     const modalOverlay = document.createElement('div');
@@ -64,8 +66,10 @@ function showSettings() {
     // Закрываем сайдбар
     const overlay = document.querySelector('.profile-sidebar-overlay');
     const sidebar = document.querySelector('.profile-sidebar');
-    overlay.classList.remove('active');
-    sidebar.classList.remove('active');
+    if (overlay && sidebar) {
+        overlay.classList.remove('active');
+        sidebar.classList.remove('active');
+    }
 
     // Создаем модальное окно настроек
     const modalOverlay = document.createElement('div');
@@ -151,6 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Удаляем старые ошибки
             let errorBlock = registerForm.querySelector('.form-errors');
             if (errorBlock) errorBlock.remove();
+            
             // Валидация
             const errors = validateRegisterForm(registerForm);
             if (errors.length > 0) {
@@ -163,6 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (submitButton) submitButton.disabled = false;
                 return;
             }
+            
             // Получаем значения
             const name = registerForm.querySelector('input[placeholder="Введите имя"]').value.trim();
             const surname = registerForm.querySelector('input[placeholder="Введите фамилию"]').value.trim();
@@ -171,17 +177,27 @@ document.addEventListener('DOMContentLoaded', function() {
             const phone = registerForm.querySelector('input[type="tel"]').value.trim();
             const email = registerForm.querySelector('input[type="email"]').value.trim();
             const password = registerForm.querySelector('input#password').value;
+
             try {
-                // Проверяем, не занят ли email
-                const methods = await auth.fetchSignInMethodsForEmail(email);
-                if (methods.length > 0) {
-                    throw new Error('Этот email уже зарегистрирован');
-                }
                 // Регистрируем пользователя
                 const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+
                 // Отправляем email verification
-                await userCredential.user.sendEmailVerification();
-                // Показываем сообщение о необходимости подтвердить email и кнопку для входа
+                await user.sendEmailVerification();
+                
+                // Сохраняем данные пользователя в Firestore
+                await db.collection('users').doc(user.uid).set({
+                    name: name,
+                    surname: surname,
+                    email: email,
+                    birth: birth,
+                    gender: gender,
+                    phone: phone,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                // Показываем сообщение об успехе
                 registerForm.innerHTML = '<div style="color:green;text-align:center;padding:30px;">Регистрация успешна! Пожалуйста, подтвердите ваш email по ссылке, отправленной на почту.<br><br><button type="button" class="button-submit" onclick="showLoginForm()">Войти</button></div>';
             } catch (error) {
                 const errDiv = document.createElement('div');
@@ -196,13 +212,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Обработка формы входа: запрещаем вход, если email не подтвержден
+    // Обработка формы входа
     const loginForm = document.querySelector('.login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const submitButton = loginForm.querySelector('button.button-submit');
-            const emailInput = loginForm.querySelector('.inputForm input[type="text"], .inputForm input[type="email"]');
+            const emailInput = loginForm.querySelector('.inputForm input[type="text"]');
             const passwordInput = loginForm.querySelector('.inputForm input[type="password"]');
             if (submitButton) submitButton.disabled = true;
             // Удаляем старые ошибки
@@ -210,27 +226,19 @@ document.addEventListener('DOMContentLoaded', function() {
             if (errorBlock) errorBlock.remove();
             try {
                 const userCredential = await auth.signInWithEmailAndPassword(emailInput.value, passwordInput.value);
-                if (!userCredential.user.emailVerified) {
-                    await auth.signOut();
-                    throw new Error('Пожалуйста, подтвердите ваш email перед входом.');
-                }
-                // После успешного входа и подтверждения email — создаём профиль в Firestore, если его нет
-                const userDoc = await db.collection('users').doc(userCredential.user.uid).get();
-                if (!userDoc.exists) {
-                    // Получаем значения из формы регистрации, если они есть в localStorage (или можно запросить у пользователя)
-                    // Здесь просто создаём пустой профиль с email
-                    await db.collection('users').doc(userCredential.user.uid).set({
-                        email: userCredential.user.email,
-                        createdAt: new Date()
-                    });
-                }
+                
+                // Закрываем модальное окно после успешного входа
                 document.getElementById('authModal').classList.remove('active');
             } catch (error) {
                 const errDiv = document.createElement('div');
                 errDiv.className = 'form-errors';
                 errDiv.style.color = 'red';
                 errDiv.style.marginBottom = '10px';
-                errDiv.innerHTML = error.message;
+                if (error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
+                    errDiv.innerHTML = 'Неверный email или пароль.';
+                } else {
+                    errDiv.innerHTML = error.message;
+                }
                 loginForm.insertBefore(errDiv, loginForm.firstChild);
             } finally {
                 if (submitButton) submitButton.disabled = false;
@@ -239,117 +247,131 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Отслеживание состояния авторизации
-    auth.onAuthStateChanged(user => {
+    auth.onAuthStateChanged(async user => {
         const loginButtons = document.querySelectorAll('.login-button');
-        loginButtons.forEach(button => {
-            if (user) {
-                button.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                    Профиль
-                `;
-                button.onclick = () => {
-                    let overlay = document.querySelector('.profile-sidebar-overlay');
-                    let sidebar = document.querySelector('.profile-sidebar');
-                    
-                    if (!overlay) {
-                        overlay = document.createElement('div');
-                        overlay.className = 'profile-sidebar-overlay';
-                        document.body.appendChild(overlay);
-                    }
-                    
-                    if (!sidebar) {
-                        sidebar = document.createElement('div');
-                        sidebar.className = 'profile-sidebar';
-                        sidebar.innerHTML = `
-                            <div class="profile-header">
-                                <div class="profile-top">
-                                    <div class="avatar">👤</div>
-                                    <div class="user-info">
-                                        <h3>Никнейм</h3>
-                                    </div>
-                                    <button class="logout-icon" onclick="auth.signOut().then(() => window.location.reload())">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                            <polyline points="16 17 21 12 16 7"></polyline>
-                                            <line x1="21" y1="12" x2="9" y2="12"></line>
-                                        </svg>
-                                    </button>
-                                </div>
+        const loginButton = document.querySelector('.login-button');
+        const lessonContent = document.getElementById('lesson-content');
 
-                                <div class="progress-section">
-                                    <div class="progress-bar">
-                                        <div class="progress" style="width: 45%"></div>
-                                    </div>
-                                    <div class="progress-stats">
-                                        <span>45% пройдено</span>
-                                        <span>55% осталось</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="profile-stats">
-                                <div class="stat-item">
-                                    <span class="stat-value">12</span>
-                                    <span class="stat-label">Правильных ответов подряд</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-value">3</span>
-                                    <span class="stat-label">Дней подряд</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-value">75%</span>
-                                    <span class="stat-label">Точность ответов</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-value">2:30</span>
-                                    <span class="stat-label">Время обучения</span>
-                                </div>
-                            </div>
+        // Скрываем блок "премиум-фич"
+        const premiumFeatures = document.getElementById('premium-features');
+        if (premiumFeatures) {
+            premiumFeatures.style.display = user ? 'none' : 'block';
+        }
 
-                            <div class="profile-actions">                                <button class="action-button achievements-btn" onclick="showAchievements()">
+        if (user) {
+            // Пользователь залогинен
+            const userDoc = await db.collection('users').doc(user.uid).get();
+            const userData = userDoc.exists ? userDoc.data() : { name: 'Пользователь', surname: '' };
+            const displayName = userData.name || 'Пользователь';
+
+            // Обновляем кнопку входа
+            loginButton.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                Профиль
+            `;
+            loginButton.onclick = () => {
+                let overlay = document.querySelector('.profile-sidebar-overlay');
+                let sidebar = document.querySelector('.profile-sidebar');
+                
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.className = 'profile-sidebar-overlay';
+                    document.body.appendChild(overlay);
+                }
+                
+                if (!sidebar) {
+                    sidebar = document.createElement('div');
+                    sidebar.className = 'profile-sidebar';
+                    sidebar.innerHTML = `
+                        <div class="profile-header">
+                            <div class="profile-top">
+                                <div class="avatar">👤</div>
+                                <div class="user-info">
+                                    <h3>${displayName}</h3>
+                                </div>
+                                <button class="logout-icon" onclick="auth.signOut().then(() => window.location.reload())">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
-                                        <path d="M19 15V9"></path>
-                                        <path d="M5 15V9"></path>
-                                        <path d="M19.8 9c0-1-.8-1.9-1.8-1.9H6c-1 0-1.8.9-1.8 1.9m15.6 0c0 4.4-3.6 8-8 8s-8-3.6-8-8"></path>
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                        <polyline points="16 17 21 12 16 7"></polyline>
+                                        <line x1="21" y1="12" x2="9" y2="12"></line>
                                     </svg>
-                                    Достижения
-                                </button>
-                                <button class="action-button settings-btn" onclick="showSettings()">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                    Настройки
                                 </button>
                             </div>
-                        `;
-                        document.body.appendChild(sidebar);
-                    }
-                    
-                    overlay.classList.add('active');
-                    sidebar.classList.add('active');
-                    
-                    overlay.onclick = () => {
-                        overlay.classList.remove('active');
-                        sidebar.classList.remove('active');
-                    };
+                            <div class="progress-section">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 45%"></div>
+                                </div>
+                                <div class="progress-stats">
+                                    <span>45% пройдено</span>
+                                    <span>55% осталось</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">12</span>
+                                <span class="stat-label">Правильных ответов подряд</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">3</span>
+                                <span class="stat-label">Дней подряд</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">75%</span>
+                                <span class="stat-label">Точность ответов</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">2:30</span>
+                                <span class="stat-label">Время обучения</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-actions">    
+                            <button class="action-button achievements-btn" onclick="showAchievements()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
+                                    <path d="M19 15V9"></path>
+                                    <path d="M5 15V9"></path>
+                                    <path d="M19.8 9c0-1-.8-1.9-1.8-1.9H6c-1 0-1.8.9-1.8 1.9m15.6 0c0 4.4-3.6 8-8 8s-8-3.6-8-8"></path>
+                                </svg>
+                                Достижения
+                            </button>
+                            <button class="action-button settings-btn" onclick="showSettings()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                Настройки
+                            </button>
+                        </div>
+                    `;
+                    document.body.appendChild(sidebar);
+                }
+                
+                overlay.classList.add('active');
+                sidebar.classList.add('active');
+                
+                overlay.onclick = () => {
+                    overlay.classList.remove('active');
+                    sidebar.classList.remove('active');
                 };
-            } else {
-                button.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path d="M15 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H15"/>
-                        <path d="M10 17L15 12L10 7"/>
-                        <path d="M15 12H3"/>
-                    </svg>
-                    Вход
-                `;
-                button.onclick = showLoginModal;
-            }
-        });
+            };
+        } else {
+            // Пользователь не залогинен
+            loginButton.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M15 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H15"/>
+                    <path d="M10 17L15 12L10 7"/>
+                    <path d="M15 12H3"/>
+                </svg>
+                Вход
+            `;
+            loginButton.onclick = showLoginModal;
+        }
     });
 });
 
@@ -442,8 +464,8 @@ const animalWords = [
     {
         english: 'Bull',
         russian: 'Бык',
-        imageId: 'bull',
-        audioId: 'bull-audio',
+        image: 'животные/bull.jpg',
+        audio: 'audio/bull-audio.mp3',
         association: 'Представьте, как большой бык ест аппетитную БУЛКУ (BULl). Созвучие слов поможет запомнить английское слово.',
         examples: [
             'The bull is very strong - Бык очень сильный',
@@ -453,8 +475,8 @@ const animalWords = [
     {
         english: 'Bear',
         russian: 'Медведь',
-        imageId: 'bear',
-        audioId: 'bear-audio',
+        image: 'животные/bear.jpg',
+        audio: 'audio/bear-audio.mp3',
         association: 'Представьте, как медведь БЕРёт (BEARёт) мёд из улья. Созвучие глагола "брать/берёт" с "bear" поможет запомнить слово.',
         examples: [
             'The bear loves honey - Медведь любит мёд',
@@ -464,8 +486,8 @@ const animalWords = [
     {
         english: 'Cat',
         russian: 'Кошка',
-        imageId: 'cat',
-        audioId: 'cat-audio',
+        image: 'животные/cat.jpg',
+        audio: 'audio/cat-audio.mp3',
         association: 'Представьте, как КОТ (CAT) лежит на диване. Слово "кот" очень похоже на английское "cat".',
         examples: [
             'The cat is sleeping - Кошка спит',
@@ -485,11 +507,11 @@ function showCurrentWord() {
             <div class="word-header">
                 <h2>
                     ${word.english} / ${word.russian}
-                    <button class="speak-btn" title="Прослушать произношение" onclick="playAudio('${word.audioId}')">🔊</button>
+                    <button class="speak-btn" title="Прослушать произношение" onclick="playAudio('${word.audio}')">🔊</button>
                 </h2>
             </div>
             <div class="word-image">
-                <img src="животные/${word.imageId}.jpg" alt="${word.english}">
+                <img src="${word.image}" alt="${word.english}">
             </div>
             <div class="word-content">
                 <h3>Ассоциация:</h3>
@@ -526,9 +548,9 @@ function showPreviousWord() {
 }
 
 // Функция для воспроизведения аудио
-function playAudio(audioId) {
+function playAudio(audioPath) {
     // Здесь будет код для воспроизведения аудио файла
-    const audio = new Audio(`audio/${audioId}.mp3`);
+    const audio = new Audio(audioPath);
     audio.play();
 }
 
