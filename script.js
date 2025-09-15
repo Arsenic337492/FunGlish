@@ -135,16 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Инициализация intl-tel-input для телефона в форме регистрации
-    const phoneInput = document.querySelector('.register-form input[type="tel"]');
-    if (phoneInput && window.intlTelInput) {
-        window.intlTelInput(phoneInput, {
-            initialCountry: 'ru',
-            utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js',
-            nationalMode: false
-        });
-    }
-
     // Обработка формы регистрации
     const registerForm = document.querySelector('.register-form');
     if (registerForm) {
@@ -174,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const surname = registerForm.querySelector('input[placeholder="Введите фамилию"]').value.trim();
             const birth = registerForm.querySelector('input[type="date"]').value;
             const gender = registerForm.querySelector('input[name="gender"]:checked').value;
-            const phone = registerForm.querySelector('input[type="tel"]').value.trim();
             const email = registerForm.querySelector('input[type="email"]').value.trim();
             const password = registerForm.querySelector('input#password').value;
 
@@ -193,7 +182,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     email: email,
                     birth: birth,
                     gender: gender,
-                    phone: phone,
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
 
@@ -218,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const submitButton = loginForm.querySelector('button.button-submit');
-            const emailInput = loginForm.querySelector('.inputForm input[type="text"]');
+            const emailInput = loginForm.querySelector('.inputForm input[type="email"]');
             const passwordInput = loginForm.querySelector('.inputForm input[type="password"]');
             if (submitButton) submitButton.disabled = true;
             // Удаляем старые ошибки
@@ -375,17 +363,32 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Функция для переключения видимости пароля
+function togglePasswordVisibility(id, button) {
+    const input = document.getElementById(id);
+    const icon = button.querySelector('.password-toggle-icon');
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.08 2.39m-4.63-4.63a3 3 0 1 1-4.24-4.24"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+            </svg>
+        `;
+    } else {
+        input.type = 'password';
+        icon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+        `;
+    }
+}
+
 // Валидация email
 function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-// Валидация телефона через intl-tel-input
-function isValidPhone(input) {
-    if (window.intlTelInputGlobals) {
-        const iti = window.intlTelInputGlobals.getInstance(input);
-        return iti && iti.isValidNumber();
-    }
-    return false;
 }
 // Валидация обязательных полей
 function validateRegisterForm(form) {
@@ -393,7 +396,6 @@ function validateRegisterForm(form) {
     const surname = form.querySelector('input[placeholder="Введите фамилию"]');
     const birth = form.querySelector('input[type="date"]');
     const gender = form.querySelector('input[name="gender"]:checked');
-    const phone = form.querySelector('input[type="tel"]');
     const email = form.querySelector('input[type="email"]');
     const password = form.querySelector('input#password');
     const confirmPassword = form.querySelector('input#confirmPassword');
@@ -402,7 +404,6 @@ function validateRegisterForm(form) {
     if (!surname.value.trim()) errors.push('Фамилия обязательна');
     if (!birth.value) errors.push('Дата рождения обязательна');
     if (!gender) errors.push('Пол обязателен');
-    if (!phone.value.trim() || !isValidPhone(phone)) errors.push('Введите корректный номер телефона');
     if (!email.value.trim() || !isValidEmail(email.value)) errors.push('Введите корректный email');
     if (!password.value) errors.push('Пароль обязателен');
     else if (!isStrongPassword(password.value)) errors.push('Пароль должен содержать минимум 8 символов, заглавную и строчную буквы, цифру и спецсимвол.');
@@ -410,9 +411,18 @@ function validateRegisterForm(form) {
     return errors;
 }
 
+function getPasswordStrength(password) {
+    let score = 0;
+    if (password.length >= 8) score++;
+    if (/[a-z]/.test(password)) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/\d/.test(password)) score++;
+    if (/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) score++;
+    return score;
+}
+
 function isStrongPassword(password) {
-    // Минимум 8 символов, хотя бы одна заглавная, одна строчная, одна цифра и один спецсимвол
-    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/.test(password);
+    return getPasswordStrength(password) >= 4;
 }
 
 // Подсказка о сложности пароля в реальном времени
@@ -420,22 +430,48 @@ function isStrongPassword(password) {
 document.addEventListener('DOMContentLoaded', function() {
     // ...existing code...
     const passwordInput = document.querySelector('.register-form input#password');
-    const passwordStrengthText = document.querySelector('.register-form .password-strength-text');
-    if (passwordInput && passwordStrengthText) {
+    const passwordStrengthIndicator = document.querySelector('.register-form .password-strength-indicator');
+    if (passwordInput && passwordStrengthIndicator) {
         passwordInput.addEventListener('input', function() {
-            if (!passwordInput.value) {
-                passwordStrengthText.textContent = '';
-                return;
-            }
-            if (isStrongPassword(passwordInput.value)) {
-                passwordStrengthText.style.color = 'green';
-                passwordStrengthText.textContent = 'Надёжный пароль';
+            const strength = getPasswordStrength(this.value);
+            passwordStrengthIndicator.className = 'password-strength-indicator';
+            
+            if (this.value === '') {
+                passwordStrengthIndicator.style.display = 'none';
             } else {
-                passwordStrengthText.style.color = 'red';
-                passwordStrengthText.textContent = 'Пароль должен содержать минимум 8 символов, заглавную и строчную буквы, цифру и спецсимвол.';
+                passwordStrengthIndicator.style.display = 'flex';
+                let color;
+                let width;
+                if (strength <= 1) {
+                    color = 'red';
+                    width = '20%';
+                } else if (strength <= 3) {
+                    color = 'yellow';
+                    width = '60%';
+                } else {
+                    color = 'green';
+                    width = '100%';
+                }
+                passwordStrengthIndicator.querySelector('.strength-bar').style.width = width;
+                passwordStrengthIndicator.querySelector('.strength-bar').style.backgroundColor = color;
             }
         });
     }
+
+    // Инициализация кнопки "показать пароль" для формы входа
+    const loginPasswordInput = document.getElementById('loginPassword');
+    const loginPasswordToggle = document.querySelector('.login-form .password-toggle-btn');
+    if (loginPasswordInput && loginPasswordToggle) {
+        loginPasswordToggle.addEventListener('click', () => togglePasswordVisibility('loginPassword', loginPasswordToggle));
+    }
+    
+    // Инициализация кнопки "показать пароль" для формы регистрации
+    const registerPasswordInput = document.getElementById('password');
+    const registerPasswordToggle = document.querySelector('.register-form .password-toggle-btn');
+    if (registerPasswordInput && registerPasswordToggle) {
+        registerPasswordToggle.addEventListener('click', () => togglePasswordVisibility('password', registerPasswordToggle));
+    }
+
     // ...existing code...
 });
 
@@ -549,7 +585,6 @@ function showPreviousWord() {
 
 // Функция для воспроизведения аудио
 function playAudio(audioPath) {
-    // Здесь будет код для воспроизведения аудио файла
     const audio = new Audio(audioPath);
     audio.play();
 }
