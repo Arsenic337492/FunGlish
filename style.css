@@ -1,1184 +1,1203 @@
 /*
-    Base styles */
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
-    }
-
-    /* Navbar */
-    .navbar {
-        background-color: #4caf50;
-        padding: 15px 20px;
-        position: fixed;
-        width: 100%;
-        top: 0;
-        z-index: 1000;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .nav-left button {
-        background: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 4px;
-        cursor: pointer;
-        color: #4caf50;
-        font-weight: 500;
-    }
-
-    .nav-left button:hover {
-        background: #f1f1f1;
-    }
-
-    /* Кнопка "Главная страница" на навигационной панели — небесно-голубая */
-    .navbar .nav-left button {
-      background: #87cefa !important;
-      color: #222B45 !important;
-      border: none;
-      font-weight: 600;
-      transition: background 0.2s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .navbar .nav-left button:hover {
-      background: #bfe4ff !important;
-      color: #1976D2 !important;
-    }
-
-    /* Стили для иконки в навбаре */
-    .nav-icon {
-      width: 20px;
-      height: 20px;
-      margin-right: 8px;
-      vertical-align: middle;
-      display: inline-block;
-    }
-
-    /* Sidebar */
-    .sidebar {
-        position: fixed;
-        top: 60px;
-        left: 0;
-        width: 280px;
-        height: calc(100vh - 60px);
-        background: white;
-        border-right: 1px solid #e0e0e0;
-        overflow-y: auto;
-        padding: 20px;
-        box-sizing: border-box;
-    }
-
-    .sidebar h2 {
-        margin: 0 0 20px 0;
-        font-size: 18px;
-        color: #333;
-    }
-
-    /* Tree View */
-    .tree-view {
-        list-style: none;
-        padding: 0;
-    }
-
-    .tree-view details {
-        margin-bottom: 10px;
-    }
-
-    .tree-view summary {
-        cursor: pointer;
-        padding: 10px;
-        background: #f8f9fa;
-        border-radius: 4px;
-        font-weight: 500;
-        color: #333;
-        transition: all 0.2s ease;
-    }
-
-    .tree-view summary:hover {
-        background: #e8f5e9;
-    }
-
-    .tree-view ul {
-        list-style: none;
-        padding-left: 20px;
-        margin: 5px 0;
-    }
-
-    .tree-view li a {
-        display: block;
-        padding: 8px 10px;
-        margin: 4px 0;
-        color: #555;
-        text-decoration: none;
-        border-radius: 4px;
-        transition: all 0.2s ease;
-    }
-
-    .tree-view li a:hover {
-        background: #e8f5e9;
-        color: #2e7d32;
-    }
-
-    .tree-view li a.active {
-        background: #4caf50;
-        color: white;
-    }
-
-    /* Main Content */
-    .content {
-        margin-left: 280px;
-        padding: 80px 20px 20px;
-        min-height: calc(100vh - 60px);
-    }
-
-    #lesson-content {
-        background: white;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    /* Сделать фон lesson-content прозрачным или фиолетовым */
-    #lesson-content {
-      background: transparent !important;
-      box-shadow: none !important;
-      border: none !important;
-    }
-
-    .welcome-message {
-        text-align: center;
-        padding: 40px 0;
-    }
-
-    .welcome-message h1 {
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    /* Word Cards */    .word-card {
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        padding: 20px 20px 80px 20px;
-        max-width: 800px;
-        margin: 0 auto;
-        position: relative;
-    }
-
-    /* Word Cards с закругленными углами */
-    .word-card {
-      border-radius: 16px !important;
-      overflow: hidden;
-    }
-
-    .word-content {
-      border-radius: 12px !important;
-    }
-
-    .word-image img {
-      border-radius: 12px !important; 
-    }
-
-    /* Материалы тоже закругляем */
-    .material-container {
-      border-radius: 16px !important;
-    }
-
-    .word-header {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .word-header h2 {
-        font-size: 2em;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    .word-image {
-        margin: 20px 0;
-        text-align: center;
-    }
-
-    .word-image img {
-        max-width: 350px;
-        max-height: 40vh;
-        margin: 0 auto;
-        display: block;
-        object-fit: contain;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    .word-content {
-        padding: 20px;
-    }
-
-    .word-content h3 {
-        color: #4caf50;
-        margin: 20px 0 10px;
-    }
-
-    .word-content ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .word-content li {
-        margin: 10px 0;
-        padding: 10px;
-        background: #f5f5f5;
-        border-radius: 4px;
-    }
-
-    .next-word {
-        display: block;
-        margin: 30px auto 0;
-        padding: 12px 24px;
-        background: #4caf50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background 0.2s;
-    }
-
-    .next-word:hover {
-        background: #388e3c;
-    }
-
-    /* Test Container */
-    .test-container {
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        padding: 30px;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .test-container h2 {
-        color: #333;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
-    /* Test Styles */
-    .progress {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #666;
-    }
-
-    .question {
-        margin: 20px 0;
-    }
-
-    .question h3 {
-        font-size: 1.5em;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
-    .answers {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        margin-top: 20px;
-    }
-
-    .answers button {
-        padding: 15px;
-        border: 2px solid #4caf50;
-        background: white;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: all 0.2s;
-    }
-
-    .answers button:hover {
-        background: #e8f5e9;
-    }
-
-    .result {
-        text-align: center;
-        padding: 20px;
-        margin: 20px 0;
-        border-radius: 8px;
-    }
-
-    .result.correct {
-        background: #e8f5e9;
-        color: #2e7d32;
-    }
-
-    .result.incorrect {
-        background: #ffebee;
-        color: #c62828;
-    }
-
-    .final-score {
-        text-align: center;
-        margin: 30px 0;
-    }
-
-    .final-score h3 {
-        font-size: 1.5em;
-        margin-bottom: 10px;
-    }
-
-    .test-container button {
-        display: block;
-        margin: 20px auto;
-        padding: 12px 24px;
-        background: #4caf50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background 0.2s;
-    }
-
-    .test-container button:hover {
-        background: #388e3c;
-    }
-
-    /* Matching Styles */
-    .matching-list {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-bottom: 20px;
-    }
-
-    .match-row {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        margin-bottom: 4px;
-        background: #f8f9fa;
-        border-radius: 6px;
-        padding: 6px 0;
-        min-height: 40px;
-    }
-
-    .match-word {
-        min-width: 120px;
-        font-weight: 500;
-        background: #fff;
-        border: 1px solid #bdbdbd;
-        border-radius: 6px;
-        padding: 6px 12px;
-        margin-right: 10px;
-        cursor: grab;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        user-select: none;
-    }
-
-    .match-word.dragging {
-        opacity: 0.5;
-    }
-
-    .match-word .drag-handle {
-        cursor: grab;
-        color: #bdbdbd;
-        font-size: 1.2em;
-        margin-right: 6px;
-        letter-spacing: 2px;
-    }
-
-    .match-dropzone {
-        flex: 1;
-        min-height: 36px;
-        border: 2px dashed #bdbdbd;
-        border-radius: 6px;
-        background: #fff;
-        display: flex;
-        align-items: center;
-        padding: 4px 10px;
-        transition: border-color 0.2s;
-    }
-
-    .match-dropzone.over {
-        border-color: #4caf50;
-        background: #e8f5e9;
-    }
-
-    .match-dropzone.filled {
-        border-style: solid;
-        border-color: #4caf50;
-    }
-
-    .match-dropzone .dropped-word {
-        font-weight: 500;
-        color: #333;
-    }
-
-    /* Drag & Drop: делаем слова синими и текст белым */
-    .match-word {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none !important;
-    }
-
-    /* Drag & Drop: зона для перетаскивания синяя, текст внутри — белый */
-    .match-dropzone {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none !important;
-    }
-
-    /* Перевод (тот, что справа от зоны) — синий фон, белый текст */
-    .match-row > span {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border-radius: 6px;
-      padding: 6px 12px;
-      margin-left: 12px;
-      display: inline-block;
-    }
-
-    matching-feedback {
-        margin-top: 18px;
-        color: #c62828;
-        font-size: 1em;
-    }
-
-    /* Anagram Styles */
-    .anagram {
-        font-family: monospace;
-        font-size: 1.2em;
-        letter-spacing: 2px;
-        background: #f5f5f5;
-        padding: 2px 8px;
-        border-radius: 4px;
-    }
-
-    /* Анаграмма: розовый фон и белый текст */
-    .anagram {
-      background: var(--button) !important;
-      color: #fff !important;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-        .sidebar {
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-        }
-        
-        .content {
-            margin-left: 0;
-        }
-        
-        .sidebar.open {
-            transform: translateX(0);
-        }
-    }
-
-    /* ===== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ===== */
-    :root {
-      --bg: #87cefa;         /* небесно-голубой фон */
-      --text: #222B45;       /* тёмно-синий/чёрный текст */
-      --card: #FFFFFF;       /* белый для карточек */
-      --sidebar: #bfe4ff;    /* светло-голубой для сайдбара */
-      --nav: #1976D2;        /* ярко-синий для навигации */
-      --button: #1976D2;     /* ярко-синий для кнопок и активных элементов */
-      --button-text: #fff;   /* белый текст на кнопках */
-    }
-
-    /* ===== БАЗОВЫЕ СТИЛИ ===== */
-    body {
-      background: var(--bg);
-      color: var(--text);
-      transition: all 0.4s ease;
-      margin: 0;
-      font-family: 'Nunito', 'Segoe UI', 'Verdana', 'Tahoma', sans-serif;
-    }
-
-    /* ===== КОМПОНЕНТЫ ===== */
-    .navbar {
-      background: var(--nav) !important;
-      color: #fff !important;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-sizing: border-box;
-      width: 100%;
-    }
-
-    .login-button {
-      border-radius: 999px !important;
-      padding: 8px 20px !important;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      background: transparent !important;
-      border: 1px solid rgba(255, 255, 255, 0.2) !important;
-      color: #fff !important;
-    }
-
-    .login-button:hover {
-      background: rgba(255, 255, 255, 0.1) !important;
-    }
-
-    .sidebar {
-      background: var(--sidebar) !important;
-      color: var(--text) !important;
-    }
-
-    /* Явно делаем текст белым для пунктов меню и заголовка в сайдбаре */
-    .sidebar h2,
-    .tree-view summary,
-    .tree-view li a {
-      color: var(--text) !important;
-    }
-
-    /* Явно делаем summary синим и текст белым */
-    .tree-view summary {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-    }
-
-    /* Явно делаем текст белым для материалов и тестов */
-    .material-container,
-    .word-card,
-    .test-container,
-    .word-content,
-    .result,
-    .question {
-      background: var(--card) !important;
-      color: var(--text) !important;
-      border: none !important;
-    }
-
-    .welcome-message, .word-card, 
-    .test-container, .material-container,
-    .word-content, .tree-view,
-    .answers, .result, .question {
-      background: var(--card) !important;
-      color: var (--text) !important;
-      border: none !important;
-    }
-
-    .tree-view li a.active {
-      background: var(--button);
-      color: var(--button-text) !important;
-    }
-
-    button, .next-word, .test-container button {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none;
-    }
-
-    /* Исправление цвета текста в карточках и тестах */
-    .word-header h2,
-    .word-content h3,
-    .test-container h2,
-    .question h3,
-    .final-score h3 {
-      color: var(--text) !important;
-    }
-
-    /* Кнопка темы справа */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    /* Явно делаем текст белым для приветствия и описаний */
-    .welcome-message h1,
-    .welcome-message p,
-    .test-container .progress,
-    .test-container p,
-    .test-container label,
-    .test-container input,
-    .test-container textarea,
-    .test-container select,
-    .final-score p {
-      color: var(--text) !important;
-    }
-
-    /* Для input/textarea/select также можно добавить background для лучшей видимости */
-    .test-container input,
-    .test-container textarea,
-    .test-container select {
-      background: #1A0A35 !important;
-      border: 1px solid #444 !important;
-    }
-
-    /* Инпуты в тестах: синий текст как у навигационной панели */
-    .test-container input,
-    .test-container textarea,
-    .test-container select {
-      background: #1A0A35 !important;
-      border: 1px solid #444 !important;
-      color: var(--nav) !important;
-      font-weight: 600;
-    }
-
-    /* Инпуты в тестах: синий фон как у навигационной панели, текст белый */
-    .test-container input,
-    .test-container textarea,
-    .test-container select {
-      background: var(--nav) !important;
-      border: 1.5px solid #1565c0 !important;
-      color: #fff !important;
-      font-weight: 600;
-    }
-
-    /* Инпуты в тестах: синий фон как у навигационной панели, текст белый, слегка скругленные углы */
-    .test-container input,
-    .test-container textarea,
-    .test-container select {
-      background: var(--nav) !important;
-      border: 1.5px solid #1565c0 !important;
-      color: #fff !important;
-      font-weight: 600;
-      border-radius: 8px !important; /* как у .anagram */
-    }
-
-    /* Сделать материал и карточку полностью фиолетовыми */
-    .material-container,
-    .word-card {
-      background: var(--card) !important;
-      color: var(--text) !important;
-      box-shadow: none !important;
-      border: none !important;
-    }
-
-    /* Drag & Drop: делаем слова жёлтыми и текст тёмным */
-    .match-word {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none !important;
-    }
-
-    /* Drag & Drop: зона для перетаскивания жёлтая, текст внутри — тёмный */
-    .match-dropzone {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none !important;
-    }
-
-    /* Перевод (тот, что справа от зоны) — жёлтый фон, тёмный текст */
-    .match-row > span {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border-radius: 6px;
-      padding: 6px 12px;
-      margin-left: 12px;
-      display: inline-block;
-    }
-
-    /* Явно делаем summary жёлтым и текст тёмным */
-    .tree-view summary {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-    }
-
-    /* Активные ссылки и кнопки — жёлтые */
-    .tree-view li a.active {
-      background: var(--button);
-      color: var(--button-text) !important;
-    }
-
-    button, .next-word, .test-container button {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none;
-    }
-
-    /* Кнопки: прямоугольные с полукруглыми боками */
-    button,
-    .next-word,
-    .test-container button,
-    .navbar .nav-left button {
-      border-radius: 999px !important; /* максимальный радиус для полукруглых боков */
-      padding-left: 32px !important;
-      padding-right: 32px !important;
-      min-width: 120px;
-      height: 44px;
-      font-size: 1.1em;
-      font-weight: 600;
-      /* ...existing background/color rules... */
-    }
-
-    /* Кнопки: чуть короче и ниже */
-    button,
-    .next-word,
-    .test-container button,
-    .navbar .nav-left button {
-      border-radius: 999px !important;
-      padding-left: 20px !important;
-      padding-right: 20px !important;
-      min-width: 80px;
-      height: 38px;
-      font-size: 1em;
-      font-weight: 600;
-      /* ...existing background/color rules... */
-    }
-
-    /* Исправление цвета текста в карточках и тестах */
-    .word-header h2,
-    .word-content h3,
-    .test-container h2,
-    .question h3,
-    .final-score h3 {
-      color: var(--text) !important;
-    }
-
-    /* Для кнопок и заголовков тоже используем этот шрифт */
-    button,
-    .next-word,
-    .test-container button,
-    .navbar .nav-left button,
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Nunito', 'Segoe UI', 'Verdana', 'Tahoma', sans-serif;
-    }
-
-    /* Кнопка озвучки: маленькая, круглая, и иконка по центру */
-    .speak-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      padding: 0;
-      margin-left: 8px;
-      border-radius: 50%;
-      font-size: 1.2em;
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none;
-      cursor: pointer;
-      vertical-align: middle;
-      transition: background 0.2s;
-    }
-
-    .speak-btn:hover {
-      background: #bfe4ff !important;
-      color: #1976D2 !important;
-    }
-
-    /* Кнопка озвучки: маленькая, круглая, и иконка по центру, смайлик меньше */
-    .speak-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      padding: 0;
-      margin-left: 8px;
-      border-radius: 50%;
-      font-size: 1em;
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none;
-      cursor: pointer;
-      vertical-align: middle;
-      transition: background 0.2s;
-    }
-
-    .speak-btn:hover {
-      background: #bfe4ff !important;
-      color: #1976D2 !important;
-    }
-
-    /* Кнопка озвучки: маленькая, круглая, и иконка по центру, смайлик очень маленький */
-    .speak-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      padding: 0;
-      margin-left: 8px;
-      border-radius: 50%;
-      font-size: 0.9em; /* уменьшили размер смайлика */
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none;
-      cursor: pointer;
-      vertical-align: middle;
-      transition: background 0.2s;
-      line-height: 1;
-    }
-
-    .speak-btn:hover {
-      background: #bfe4ff !important;
-      color: #1976D2 !important;
-    }
-
-    /* Главная страница использует тот же фон, что и сайдбар */
-    .main-content {
-      background: var(--sidebar) !important;
-      color: var(--text) !important;
-      min-height: 100vh;
-      margin: 0;
-      padding-top: 60px;
-      box-sizing: border-box;
-    }
-
-    /* Premium Features Styles */
-    #premium-features {
-      margin-top: 40px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      text-align: left;
-    }
-
-    #premium-features h2 {
-      margin-bottom: 16px;
-      color: var(--text);
-    }
-
-    #premium-features ul {
-      list-style: none;
-      padding: 0;
-      margin: 20px 0;
-    }
-
-    #premium-features li {
-      margin: 10px 0;
-      font-size: 16px;
-      color: var(--text);
-    }
-
-    .premium-button {
-      background: var(--button) !important;
-      color: var(--button-text) !important;
-      border: none;
-      border-radius: 999px;
-      padding: 12px 24px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-
-
-
-    /* Authentication Styles */
-    .auth-container {
-        max-width: 400px;
-        margin: 40px auto;
-        padding: 20px;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .auth-tabs {
-        display: flex;
-        margin-bottom: 20px;
-        border-bottom: 2px solid #e0e0e0;
-    }
-
-    .auth-tab {
-        flex: 1;
-        padding: 10px;
-        border: none;
-        background: none;
-        font-size: 16px;
-        cursor: pointer;
-        color: #666;
-    }
-
-    .auth-tab.active {
-        color: #4caf50;
-        border-bottom: 2px solid #4caf50;
-        margin-bottom: -2px;
-    }
-
-    /* Auth Form Styles */
-    .auth-form {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        width: 100%;
-    }
-
-    .form-row {
-        position: relative;
-        width: 100%;
-    }
-
-    .auth-form input:not([type="radio"]) {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 16px;
-        box-sizing: border-box;
-    }
-
-    .toggle-password {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        border: none;
-        background: none;
-        cursor: pointer;
-        color: #666;
-        padding: 0;
-        width: 12px;
-        height: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-    }
-
-    .gender-row {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 4px 0;
-    }
-
-    .radio-group {
-        display: flex;
-        gap: 12px;
-    }
-
-    .radio-group label {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        cursor: pointer;
-        font-size: 14px;
-    }
-
-    /* Telephone Input Styles */
-    .iti {
-        width: 100% !important;
-    }
-
-    .phone-row {
-        position: relative;
-        width: 100%;
-    }
-
-    .phone-row input {
-        width: 100% !important;
-        padding-left: 90px !important;
-    }
-
-    /* Profile Sidebar */    .profile-sidebar {
-    position: fixed;
-    top: 0;
-    right: -440px; /* увеличил отступ на размер паддинга */
-    width: 400px;
-        height: 100vh;
-        background: white;
-        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-        transition: right 0.3s ease;
-        z-index: 1001;
-        padding: 20px;
-    }
-
-    .profile-sidebar.active {
-        right: 0;
-    }
-
-    .profile-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    }
-
-    .avatar {
-        width: 60px;
-        height: 60px;
-        background: #1976D2;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 30px;
-        color: white;
-    }
-
-    .progress-section {
-        margin: 20px 0;
-    }
-
-    .progress-bar {
-        height: 8px;
-        background: #eee;
-        border-radius: 4px;
-        overflow: hidden;
-    }
-
-    .progress {
-        height: 100%;
-        background: #1976D2;
-        transition: width 0.3s;
-    }
-
-    .progress-stats {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 5px;
-        font-size: 12px;
-        color: #666;
-    }
-
-    .profile-stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-        margin: 20px 0;
-    }
-
-    .stat-item {
-        text-align: center;
-        padding: 15px 10px;
-        background: #f5f5f5;
-        border-radius: 8px;
-    }
-
-    .stat-value {
-        font-size: 24px;
-        font-weight: bold;
-        color: #1976D2;
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    .stat-label {
-        font-size: 12px;
-        color: #666;
-        line-height: 1.2;
-    }
-
-    .profile-actions {
-        margin-top: 30px;
-    }
-
-    .action-button {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 12px;
-        margin-bottom: 10px;
-        background: #f5f5f5;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 14px;
-        transition: background 0.2s;
-    }
-
-    .action-button:hover {
-        background: #e0e0e0;
-    }
-
-    .logout-icon {
-        background: none;
-        border: none;
-        padding: 8px;
-        cursor: pointer;
-        color: #ff4444;
-        border-radius: 50%;
-        transition: background 0.2s;
-    }
-
-    .logout-icon:hover {
-        background: rgba(255,68,68,0.1);
-    }
-
-    .profile-sidebar-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-        backdrop-filter: blur(2px);
-        display: none;
-        z-index: 1000;
-    }
-
-    .profile-sidebar-overlay.active {
-        display: block;
-    }
-
-    .association-text {
-        padding: 15px;
-        background: #f5f5f5;
-        border-radius: 8px;
-        line-height: 1.5;
-        font-size: 16px;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    .examples {
-        margin-top: 20px;
-    }
-
-    .examples ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .examples li {
-        padding: 10px 15px;
-        background: #f5f5f5;
-        border-radius: 8px;
-        margin-bottom: 10px;
-        font-size: 15px;
-        line-height: 1.4;
-    }    .navigation-buttons {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        padding: 0 40px;
-        box-sizing: border-box;
-        position: absolute;
-        bottom: 20px;
-        left: 0;
-    }
-
-    .prev-word,
-    .next-word {
-        width: 44px;
-        height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--button);
-        color: var(--button-text);
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        font-size: 20px;
-        transition: all 0.2s ease;
-    }
-
-    .prev-word:hover,
-    .next-word:hover {
-        background: #1565c0;
-        transform: scale(1.1);
-    }
+    Base styles */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    /* Navbar */
+    .navbar {
+        background-color: #4caf50;
+        padding: 15px 20px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .nav-left button {
+        background: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #4caf50;
+        font-weight: 500;
+    }
+
+    .nav-left button:hover {
+        background: #f1f1f1;
+    }
+
+    /* Кнопка "Главная страница" на навигационной панели — небесно-голубая */
+    .navbar .nav-left button {
+      background: #87cefa !important;
+      color: #222B45 !important;
+      border: none;
+      font-weight: 600;
+      transition: background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .navbar .nav-left button:hover {
+      background: #bfe4ff !important;
+      color: #1976D2 !important;
+    }
+
+    /* Стили для иконки в навбаре */
+    .nav-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 280px;
+        height: calc(100vh - 60px);
+        background: white;
+        border-right: 1px solid #e0e0e0;
+        overflow-y: auto;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .sidebar h2 {
+        margin: 0 0 20px 0;
+        font-size: 18px;
+        color: #333;
+    }
+
+    /* Tree View */
+    .tree-view {
+        list-style: none;
+        padding: 0;
+    }
+
+    .tree-view details {
+        margin-bottom: 10px;
+    }
+
+    .tree-view summary {
+        cursor: pointer;
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 4px;
+        font-weight: 500;
+        color: #333;
+        transition: all 0.2s ease;
+    }
+
+    .tree-view summary:hover {
+        background: #e8f5e9;
+    }
+
+    .tree-view ul {
+        list-style: none;
+        padding-left: 20px;
+        margin: 5px 0;
+    }
+
+    .tree-view li a {
+        display: block;
+        padding: 8px 10px;
+        margin: 4px 0;
+        color: #555;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+    }
+
+    .tree-view li a:hover {
+        background: #e8f5e9;
+        color: #2e7d32;
+    }
+
+    .tree-view li a.active {
+        background: #4caf50;
+        color: white;
+    }
+
+    /* Main Content */
+    .content {
+        margin-left: 280px;
+        padding: 80px 20px 20px;
+        min-height: calc(100vh - 60px);
+    }
+
+    #lesson-content {
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    /* Сделать фон lesson-content прозрачным или фиолетовым */
+    #lesson-content {
+      background: transparent !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+
+    .welcome-message {
+        text-align: center;
+        padding: 40px 0;
+    }
+
+    .welcome-message h1 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    /* Word Cards */    .word-card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        padding: 20px 20px 80px 20px;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    /* Word Cards с закругленными углами */
+    .word-card {
+      border-radius: 16px !important;
+      overflow: hidden;
+    }
+
+    .word-content {
+      border-radius: 12px !important;
+    }
+
+    .word-image img {
+      border-radius: 12px !important; 
+    }
+
+    /* Материалы тоже закругляем */
+    .material-container {
+      border-radius: 16px !important;
+    }
+
+    .word-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .word-header h2 {
+        font-size: 2em;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .word-image {
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    .word-image img {
+        max-width: 350px;
+        max-height: 40vh;
+        margin: 0 auto;
+        display: block;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .word-content {
+        padding: 20px;
+    }
+
+    .word-content h3 {
+        color: #4caf50;
+        margin: 20px 0 10px;
+    }
+
+    .word-content ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .word-content li {
+        margin: 10px 0;
+        padding: 10px;
+        background: #f5f5f5;
+        border-radius: 4px;
+    }
+
+    .next-word {
+        display: block;
+        margin: 30px auto 0;
+        padding: 12px 24px;
+        background: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.2s;
+    }
+
+    .next-word:hover {
+        background: #388e3c;
+    }
+
+    /* Test Container */
+    .test-container {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        padding: 30px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .test-container h2 {
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Test Styles */
+    .progress {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #666;
+    }
+
+    .question {
+        margin: 20px 0;
+    }
+
+    .question h3 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .answers {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .answers button {
+        padding: 15px;
+        border: 2px solid #4caf50;
+        background: white;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.2s;
+    }
+
+    .answers button:hover {
+        background: #e8f5e9;
+    }
+
+    .result {
+        text-align: center;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+    }
+
+    .result.correct {
+        background: #e8f5e9;
+        color: #2e7d32;
+    }
+
+    .result.incorrect {
+        background: #ffebee;
+        color: #c62828;
+    }
+
+    .final-score {
+        text-align: center;
+        margin: 30px 0;
+    }
+
+    .final-score h3 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .test-container button {
+        display: block;
+        margin: 20px auto;
+        padding: 12px 24px;
+        background: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.2s;
+    }
+
+    .test-container button:hover {
+        background: #388e3c;
+    }
+
+    /* Matching Styles */
+    .matching-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .match-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 4px;
+        background: #f8f9fa;
+        border-radius: 6px;
+        padding: 6px 0;
+        min-height: 40px;
+    }
+
+    .match-word {
+        min-width: 120px;
+        font-weight: 500;
+        background: #fff;
+        border: 1px solid #bdbdbd;
+        border-radius: 6px;
+        padding: 6px 12px;
+        margin-right: 10px;
+        cursor: grab;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        user-select: none;
+    }
+
+    .match-word.dragging {
+        opacity: 0.5;
+    }
+
+    .match-word .drag-handle {
+        cursor: grab;
+        color: #bdbdbd;
+        font-size: 1.2em;
+        margin-right: 6px;
+        letter-spacing: 2px;
+    }
+
+    .match-dropzone {
+        flex: 1;
+        min-height: 36px;
+        border: 2px dashed #bdbdbd;
+        border-radius: 6px;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        padding: 4px 10px;
+        transition: border-color 0.2s;
+    }
+
+    .match-dropzone.over {
+        border-color: #4caf50;
+        background: #e8f5e9;
+    }
+
+    .match-dropzone.filled {
+        border-style: solid;
+        border-color: #4caf50;
+    }
+
+    .match-dropzone .dropped-word {
+        font-weight: 500;
+        color: #333;
+    }
+
+    /* Drag & Drop: делаем слова синими и текст белым */
+    .match-word {
+      background: var(--button) !important;
+      color: var(--button-text) !important;
+      border: none !important;
+    }
+
+    /* Drag & Drop: зона для перетаскивания синяя, текст внутри — белый */
+    .match-dropzone {
+      background: var(--button) !important;
+      color: var(--button-text) !important;
+      border: none !important;
+    }
+
+    /* Перевод (тот, что справа от зоны) — синий фон, белый текст */
+    .match-row > span {
+      background: var(--button) !important;
+      color: var(--button-text) !important;
+      border-radius: 6px;
+      padding: 6px 12px;
+      margin-left: 12px;
+      display: inline-block;
+    }
+
+    matching-feedback {
+        margin-top: 18px;
+        color: #c62828;
+        font-size: 1em;
+    }
+
+    /* Anagram Styles */
+    .anagram {
+        font-family: monospace;
+        font-size: 1.2em;
+        letter-spacing: 2px;
+        background: #f5f5f5;
+        padding: 2px 8px;
+        border-radius: 4px;
+    }
+
+    /* Анаграмма: розовый фон и белый текст */
+    .anagram {
+      background: var(--button) !important;
+      color: #fff !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .sidebar {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .content {
+            margin-left: 0;
+        }
+        
+        .sidebar.open {
+            transform: translateX(0);
+        }
+    }
+
+    /* ===== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ===== */
+    :root {
+      --bg: #87cefa;         /* небесно-голубой фон */
+      --text: #222B45;       /* тёмно-синий/чёрный текст */
+      --card: #FFFFFF;       /* белый для карточек */
+      --sidebar: #bfe4ff;    /* светло-голубой для сайдбара */
+      --nav: #1976D2;        /* ярко-синий для навигации */
+      --button: #1976D2;     /* ярко-синий для кнопок и активных элементов */
+      --button-text: #fff;   /* белый текст на кнопках */
+    }
+
+    /* ===== БАЗОВЫЕ СТИЛИ ===== */
+    body {
+      background: var(--bg);
+      color: var(--text);
+      transition: all 0.4s ease;
+      margin: 0;
+      font-family: 'Nunito', 'Segoe UI', 'Verdana', 'Tahoma', sans-serif;
+    }
+
+    /* ===== КОМПОНЕНТЫ ===== */
+    .navbar {
+      background: var(--nav) !important;
+      color: #fff !important;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .login-button {
+      border-radius: 999px !important;
+      padding: 8px 20px !important;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      background: transparent !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      color: #fff !important;
+    }
+
+    .login-button:hover {
+      background: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .sidebar {
+      background: var(--sidebar) !important;
+      color: var(--text) !important;
+    }
+
+    /* Явно делаем текст белым для пунктов меню и заголовка в сайдбаре */
+    .sidebar h2,
+    .tree-view summary,
+    .tree-view li a {
+      color: var(--text) !important;
+    }
+
+    /* Явно делаем summary синим и текст белым */
+    .tree-view summary {
+      background: var(--button) !important;
+      color: var(--button-text) !important;
+    }
+
+    /* Явно делаем текст белым для материалов и тестов */
+    .material-container,
+    .word-card,
+    .test-container,
+    .word-content,
+    .result,
+    .question {
+      background: var(--card) !important;
+      color: var(--text) !important;
+      border: none !important;
+    }
+
+    .welcome-message, .word-card, 
+    .test-container, .material-container,
+    .word-content, .tree-view,
+    .answers, .result, .question {
+      background: var(--card) !important;
+      color: var (--text) !important;
+      border: none !important;
+    }
+
+    .tree-view li a.active {
+      background: var(--button);
+      color: var(--button-text) !important;
+    }
+
+    button, .next-word, .test-container button {
+      background: var(--button) !important;
+      color: var(--button-text) !important;
+      border: none;
+    }
+
+    /* Исправление цвета текста в карточках и тестах */
+    .word-header h2,
+    .word-content h3,
+    .test-container h2,
+    .question h3,
+    .final-score h3 {
+      color: var(--text) !important;
+    }
+
+    /* Кнопка темы справа */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Явно делаем текст белым для приветствия и описаний */
+    .welcome-message h1,
+    .welcome-message p,
+    .test-container .progress,
+    .test-container p,
+    .test-container label,
+    .test-container input,
+    .test-container textarea,
+    .test-container select,
+    .final-score p {
+      color: var(--text) !important;
+    }
+
+    /* Для input/textarea/select также можно добавить background для лучшей видимости */
+    .test-container input,
+    .test-container textarea,
+    .test-container select {
+      background: #1A0A35 !important;
+      border: 1px solid #444 !important;
+    }
+
+    /* Инпуты в тестах: синий текст как у навигационной панели */
+    .test-container input,
+    .test-container textarea,
+    .test-container select {
+      background: #1A0A35 !important;
+      border: 1px solid #444 !important;
+      color: var(--nav) !important;
+      font-weight: 600;
+    }
+
+    /* Инпуты в тестах: синий фон как у навигационной панели, текст белый */
+    .test-container input,
+    .test-container textarea,
+    .test-container select {
+      background: var(--nav) !important;
+      border: 1.5px solid #1565c0 !important;
+      color: #fff !important;
+      font-weight: 600;
+    }
+
+    /* Инпуты в тестах: синий фон как у навигационной панели, текст белый, слегка скругленные углы */
+    .test-container input,
+    .test-container textarea,
+    .test-container select {
+      background: var(--nav) !important;
+      border: 1.5px solid #1565c0 !important;
+      color: #fff !important;
+      font-weight: 600;
+      border-radius: 8px !important; /* как у .anagram */
+    }
+
+    /* Сделать материал и карточку полностью фиолетовыми */
+    .material-container,
+    .word-card {
+      background: var(--card) !important;
+      color: var(--text) !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+
+    /* Drag & Drop: делаем слова жёлтыми и текст тёмным */
+    .match-word {
+      background: var(--button) !important;
+      color: var(--button-text) !important;
+      border: none !important;
+    }
+
+    /* Drag & Drop: зона для перетаскивания жёлтая, текст внутри — тёмный */
+    .match-dropzone {
+      background: var(--button) !important;
+      color: var(--button-text) !important;
+      border: none !important;
+    }
+
+    /* Перевод (тот, что справа от зоны) — жёлтый фон, тёмный текст */
+    .match-row > span {
+      background: var(--button) !important;
+      color: var(--button-text) !important;
+      border-radius: 6px;
+      padding: 6px 12px;
+      margin-left: 12px;
+      display: inline-block;
+    }
+
+    /* Явно делаем summary жёлтым и текст тёмным */
+    .tree-view summary {
+      background: var(--button) !important;
+      color: var(--button-text) !important;
+    }
+
+    /* Активные ссылки и кнопки — жёлтые */
+    .tree-view li a.active {
+      background: var(--button);
+      color: var(--button-text) !important;
+    }
+
+    button, .next-word, .test-container button {
+      background: var(--button) !important;
+      color: var(--button-text) !important;
+      border: none;
+    }
+
+    /* Кнопки: прямоугольные с полукруглыми боками */
+    button,
+    .next-word,
+    .test-container button,
+    .navbar .nav-left button {
+      border-radius: 999px !important; /* максимальный радиус для полукруглых боков */
+      padding-left: 32px !important;
+      padding-right: 32px !important;
+      min-width: 120px;
+      height: 44px;
+      font-size: 1.1em;
+      font-weight: 600;
+      /* ...existing background/color rules... */
+    }
+
+    /* Кнопки: чуть короче и ниже */
+    button,
+    .next-word,
+    .test-container button,
+    .navbar .nav-left button {
+      border-radius: 999px !important;
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+      min-width: 80px;
+      height: 38px;
+      font-size: 1em;
+      font-weight: 600;
+      /* ...existing background/color rules... */
+    }
+
+    /* Исправление цвета текста в карточках и тестах */
+    .word-header h2,
+    .word-content h3,
+    .test-container h2,
+    .question h3,
+    .final-score h3 {
+      color: var(--text) !important;
+    }
+
+    /* Для кнопок и заголовков тоже используем этот шрифт */
+    button,
+    .next-word,
+    .test-container button,
+    .navbar .nav-left button,
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Nunito', 'Segoe UI', 'Verdana', 'Tahoma', sans-serif;
+    }
+
+    /* Кнопка озвучки: маленькая, круглая, и иконка по центру */
+    .speak-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      margin-left: 8px;
+      border-radius: 50%;
+      font-size: 1.2em;
+      background: var(--button) !important;
+      color: var(--button-text) !important;
+      border: none;
+      cursor: pointer;
+      vertical-align: middle;
+      transition: background 0.2s;
+    }
+
+    .speak-btn:hover {
+      background: #bfe4ff !important;
+      color: #1976D2 !important;
+    }
+
+    /* Кнопка озвучки: маленькая, круглая, и иконка по центру, смайлик меньше */
+    .speak-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      margin-left: 8px;
+      border-radius: 50%;
+      font-size: 1em;
+      background: var(--button) !important;
+      color: var(--button-text) !important;
+      border: none;
+      cursor: pointer;
+      vertical-align: middle;
+      transition: background 0.2s;
+    }
+
+    .speak-btn:hover {
+      background: #bfe4ff !important;
+      color: #1976D2 !important;
+    }
+
+    /* Кнопка озвучки: маленькая, круглая, и иконка по центру, смайлик очень маленький */
+    .speak-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      margin-left: 8px;
+      border-radius: 50%;
+      font-size: 0.9em; /* уменьшили размер смайлика */
+      background: var(--button) !important;
+      color: var(--button-text) !important;
+      border: none;
+      cursor: pointer;
+      vertical-align: middle;
+      transition: background 0.2s;
+      line-height: 1;
+    }
+
+    .speak-btn:hover {
+      background: #bfe4ff !important;
+      color: #1976D2 !important;
+    }
+
+    /* Главная страница использует тот же фон, что и сайдбар */
+    .main-content {
+      background: var(--sidebar) !important;
+      color: var(--text) !important;
+      min-height: 100vh;
+      margin: 0;
+      padding-top: 60px;
+      box-sizing: border-box;
+    }
+
+    /* Premium Features Styles */
+    #premium-features {
+      margin-top: 40px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      text-align: left;
+    }
+
+    #premium-features h2 {
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    #premium-features ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    #premium-features li {
+      margin: 10px 0;
+      font-size: 16px;
+      color: var(--text);
+    }
+
+    .premium-button {
+      background: var(--button) !important;
+      color: var(--button-text) !important;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 24px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+
+
+    /* Authentication Styles */
+    .auth-container {
+        max-width: 400px;
+        margin: 40px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .auth-tabs {
+        display: flex;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #e0e0e0;
+    }
+
+    .auth-tab {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        background: none;
+        font-size: 16px;
+        cursor: pointer;
+        color: #666;
+    }
+
+    .auth-tab.active {
+        color: #4caf50;
+        border-bottom: 2px solid #4caf50;
+        margin-bottom: -2px;
+    }
+
+    /* Auth Form Styles */
+    .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+    }
+
+    .form-row {
+        position: relative;
+        width: 100%;
+    }
+
+    .auth-form input:not([type="radio"]) {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: none;
+        background: none;
+        cursor: pointer;
+        color: #666;
+        padding: 0;
+        width: 12px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+    }
+
+    .gender-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 0;
+    }
+
+    .radio-group {
+        display: flex;
+        gap: 12px;
+    }
+
+    .radio-group label {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    /* Telephone Input Styles */
+    .iti {
+        width: 100% !important;
+    }
+
+    .phone-row {
+        position: relative;
+        width: 100%;
+    }
+
+    .phone-row input {
+        width: 100% !important;
+        padding-left: 90px !important;
+    }
+
+    /* Profile Sidebar */    .profile-sidebar {
+    position: fixed;
+    top: 0;
+    right: -440px; /* увеличил отступ на размер паддинга */
+    width: 400px;
+        height: 100vh;
+        background: white;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        z-index: 1001;
+        padding: 20px;
+    }
+
+    .profile-sidebar.active {
+        right: 0;
+    }
+
+    .profile-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .avatar {
+        width: 60px;
+        height: 60px;
+        background: #1976D2;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        color: white;
+    }
+
+    .progress-section {
+        margin: 20px 0;
+    }
+
+    .progress-bar {
+        height: 8px;
+        background: #eee;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .progress {
+        height: 100%;
+        background: #1976D2;
+        transition: width 0.3s;
+    }
+
+    .progress-stats {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 5px;
+        font-size: 12px;
+        color: #666;
+    }
+
+    .profile-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin: 20px 0;
+    }
+
+    .stat-item {
+        text-align: center;
+        padding: 15px 10px;
+        background: #f5f5f5;
+        border-radius: 8px;
+    }
+
+    .stat-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: #1976D2;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        font-size: 12px;
+        color: #666;
+        line-height: 1.2;
+    }
+
+    .profile-actions {
+        margin-top: 30px;
+    }
+
+    .action-button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px;
+        margin-bottom: 10px;
+        background: #f5f5f5;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.2s;
+    }
+
+    .action-button:hover {
+        background: #e0e0e0;
+    }
+
+    .logout-icon {
+        background: none;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+        color: #ff4444;
+        border-radius: 50%;
+        transition: background 0.2s;
+    }
+
+    .logout-icon:hover {
+        background: rgba(255,68,68,0.1);
+    }
+
+    .profile-sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(2px);
+        display: none;
+        z-index: 1000;
+    }
+
+    .profile-sidebar-overlay.active {
+        display: block;
+    }
+
+    .association-text {
+        padding: 15px;
+        background: #f5f5f5;
+        border-radius: 8px;
+        line-height: 1.5;
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .examples {
+        margin-top: 20px;
+    }
+
+    .examples ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .examples li {
+        padding: 10px 15px;
+        background: #f5f5f5;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        font-size: 15px;
+        line-height: 1.4;
+    }    .navigation-buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 40px;
+        box-sizing: border-box;
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+    }
+
+    .prev-word,
+    .next-word {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--button);
+        color: var(--button-text);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        transition: all 0.2s ease;
+    }
+
+    .prev-word:hover,
+    .next-word:hover {
+        background: #1565c0;
+        transform: scale(1.1);
+    }
+
+/* Индикатор силы пароля */
+.password-strength-indicator {
+    width: 100%;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    margin-top: -10px; /* Регулировка, чтобы индикатор находился прямо под полем ввода пароля */
+    margin-bottom: 10px;
+    overflow: hidden;
+    display: none; /* Изначально скрыт, показывается с помощью JavaScript */
+}
+
+.password-strength-indicator .strength-bar {
+    height: 100%;
+    width: 0;
+    background: transparent;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
