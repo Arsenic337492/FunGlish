@@ -130,7 +130,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Отображаем соответствующий контент
             if (contentById[contentId]) {
-                lessonContent.innerHTML = contentById[contentId];
+                const content = typeof contentById[contentId] === 'function' ? contentById[contentId]() : contentById[contentId];
+                lessonContent.innerHTML = content;
             }
         });
     });
@@ -554,11 +555,94 @@ const animalWords = [
     }
 ];
 
+// Массив слов для раздела "Еда"
+const foodWords = [
+    {
+        english: 'Beetroot',
+        russian: 'Свекла',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/beetrot-%D0%B1%D0%B8%D1%82%D0%B0.jpg?raw=true',
+        audio: '#',
+        association: 'Представьте свеклу как корень от слова "БИТ" (BEET-root). Свекла - это корень, который "бьет" по вкусу.',
+        examples: [
+            'I like beetroot salad - Мне нравится салат из свеклы',
+            'Beetroot is very healthy - Свекла очень полезная'
+        ]
+    },
+    {
+        english: 'Cucumber',
+        russian: 'Огурец',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/cucumber-%D0%BA%D1%80%D1%8E%D0%BA.png?raw=true',
+        audio: '#',
+        association: 'Представьте огурец изогнутый как КРЮК (CUcumber ≈ крюк). Огурец висит на крючке.',
+        examples: [
+            'Fresh cucumber in salad - Свежий огурец в салате',
+            'Cucumber is very crispy - Огурец очень хрустящий'
+        ]
+    },
+    {
+        english: 'Plum',
+        russian: 'Слива',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/plum-%D0%BF%D0%BB%D0%B0%D0%BC%D1%8F(%D1%81%D0%BB%D0%B8%D0%B2%D0%B0%20%D0%B3%D0%BE%D1%80%D0%B8%D1%82).jpg?raw=true',
+        audio: '#',
+        association: 'Представьте сливу, которая горит ПЛАМЕНЕМ (PLUM ≈ пламя). Слива красная как пламя.',
+        examples: [
+            'Sweet purple plum - Сладкая фиолетовая слива',
+            'Plum tree in garden - Сливовое дерево в саду'
+        ]
+    },
+    {
+        english: 'Porridge',
+        russian: 'Каша',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/porridge-%D0%BF%D0%B0%D1%80%D0%B8%D0%B6.jpg?raw=true',
+        audio: '#',
+        association: 'Представьте кашу, которую едят в ПАРИЖЕ (PORridge ≈ Париж). В Париже подают изысканную кашу.',
+        examples: [
+            'Hot porridge for breakfast - Горячая каша на завтрак',
+            'Oatmeal porridge is healthy - Овсяная каша полезная'
+        ]
+    },
+    {
+        english: 'Sausage',
+        russian: 'Колбаса',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/sausage-%D1%81%D0%BE%D1%81%D0%B8%D1%81%D0%BA%D0%B0%20%D1%81%20%D1%81%D0%BE%D1%81%D0%BA%D0%BE%D0%B9.jpg?raw=true',
+        audio: '#',
+        association: 'Представьте СОСИСКУ с СОСКОЙ (SAUSage ≈ сосиска). Созвучие поможет запомнить слово.',
+        examples: [
+            'Grilled sausage for dinner - Жареная колбаса на ужин',
+            'German sausage is famous - Немецкая колбаса знаменита'
+        ]
+    },
+    {
+        english: 'Seed',
+        russian: 'Семя/Семечко',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/seed-%D1%81%D0%B8%D0%B4%D0%B8%D1%82.jpg?raw=true',
+        audio: '#',
+        association: 'Представьте семечко, которое СИДИТ (SEED ≈ сидит) в земле. Семя сидит и прорастает.',
+        examples: [
+            'Plant the seed in soil - Посади семя в землю',
+            'Sunflower seeds are tasty - Семечки подсолнуха вкусные'
+        ]
+    },
+    {
+        english: 'Soda',
+        russian: 'Газировка',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/soda-%D0%B3%D0%B0%D0%B7%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B2%20%D1%81%D0%BE%D0%B4%D0%B5.jpg?raw=true',
+        audio: '#',
+        association: 'Представьте газировку В СОДЕ (SODA = сода). Газировка содержит соду для шипения.',
+        examples: [
+            'Cold soda on hot day - Холодная газировка в жаркий день',
+            'Orange soda is sweet - Апельсиновая газировка сладкая'
+        ]
+    }
+];
+
 let currentWordIndex = 0;
+let currentCategory = 'animals'; // 'animals' или 'food'
 
 // Функция для отображения текущего слова
 function showCurrentWord() {
-    const word = animalWords[currentWordIndex];
+    const words = currentCategory === 'animals' ? animalWords : foodWords;
+    const word = words[currentWordIndex];
     return `
         <div class="word-card">
             <div class="word-header">
@@ -583,7 +667,7 @@ function showCurrentWord() {
             <div class="navigation-buttons">
                 ${currentWordIndex > 0 ? 
                 '<button class="prev-word" onclick="showPreviousWord()" title="Предыдущее слово">←</button>' : ''}
-                ${currentWordIndex < animalWords.length - 1 ? 
+                ${currentWordIndex < words.length - 1 ? 
                 '<button class="next-word" onclick="showNextWord()" title="Следующее слово">→</button>' : ''}
             </div>
         </div>
@@ -591,7 +675,8 @@ function showCurrentWord() {
 }
 
 function showNextWord() {
-    if (currentWordIndex < animalWords.length - 1) {
+    const words = currentCategory === 'animals' ? animalWords : foodWords;
+    if (currentWordIndex < words.length - 1) {
         currentWordIndex++;
         document.getElementById('lesson-content').innerHTML = showCurrentWord();
     }
@@ -658,9 +743,16 @@ document.addEventListener('click', function(event) {
     }
 });
 
+// Функция для переключения категории
+function switchCategory(category) {
+    currentCategory = category;
+    currentWordIndex = 0;
+    return showCurrentWord();
+}
+
 // Контент для разных разделов
 const contentById = {
-    'animals-material': showCurrentWord(),
+    'animals-material': () => switchCategory('animals'),
     'animals-test': `
         <div class="test-container">
             <h2>Тестирование: Животные</h2>
@@ -676,24 +768,7 @@ const contentById = {
             </div>
         </div>
     `,
-    'food-material': `
-        <div class="word-card">
-            <div class="word-header">
-                <h2>Apple / Яблоко</h2>
-            </div>
-            <div class="word-image">
-                <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6" alt="Apple">
-            </div>
-            <div class="word-content">
-                <h3>Ассоциации:</h3>
-                <ul>
-                    <li>APPLE - ЭППЛ (компания Apple)</li>
-                    <li>Яблоко в логотипе Apple</li>
-                </ul>
-                <button class="next-word">Следующее слово →</button>
-            </div>
-        </div>
-    `,
+    'food-material': () => switchCategory('food'),
     'food-test': `
         <div class="test-container">
             <h2>Тестирование: Еда</h2>
