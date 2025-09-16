@@ -206,8 +206,8 @@ document.addEventListener('DOMContentLoaded', function() {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const submitButton = loginForm.querySelector('button.button-submit');
-            const emailInput = loginForm.querySelector('.inputForm input[type="email"]');
-            const passwordInput = loginForm.querySelector('.inputForm input[type="password"]');
+            const emailInput = loginForm.querySelector('input[type="email"]');
+            const passwordInput = loginForm.querySelector('input[type="password"]');
             if (submitButton) submitButton.disabled = true;
             // Удаляем старые ошибки
             let errorBlock = loginForm.querySelector('.form-errors');
@@ -500,8 +500,8 @@ const animalWords = [
     {
         english: 'Bull',
         russian: 'Бык',
-        image: 'животные/bull.jpg',
-        audio: 'audio/bull-audio.mp3',
+        image: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=400&h=300&fit=crop',
+        audio: '#',
         association: 'Представьте, как большой бык ест аппетитную БУЛКУ (BULl). Созвучие слов поможет запомнить английское слово.',
         examples: [
             'The bull is very strong - Бык очень сильный',
@@ -511,8 +511,8 @@ const animalWords = [
     {
         english: 'Bear',
         russian: 'Медведь',
-        image: 'животные/bear.jpg',
-        audio: 'audio/bear-audio.mp3',
+        image: 'https://images.unsplash.com/photo-1589656966895-2f33e7653819?w=400&h=300&fit=crop',
+        audio: '#',
         association: 'Представьте, как медведь БЕРёт (BEARёт) мёд из улья. Созвучие глагола "брать/берёт" с "bear" поможет запомнить слово.',
         examples: [
             'The bear loves honey - Медведь любит мёд',
@@ -522,15 +522,36 @@ const animalWords = [
     {
         english: 'Cat',
         russian: 'Кошка',
-        image: 'животные/cat.jpg',
-        audio: 'audio/cat-audio.mp3',
+        image: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=300&fit=crop',
+        audio: '#',
         association: 'Представьте, как КОТ (CAT) лежит на диване. Слово "кот" очень похоже на английское "cat".',
         examples: [
             'The cat is sleeping - Кошка спит',
             'I have a black cat - У меня есть чёрная кошка'
         ]
+    },
+    {
+        english: 'Dog',
+        russian: 'Собака',
+        image: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=300&fit=crop',
+        audio: '#',
+        association: 'Представьте собаку, которая ДОГОНЯЕТ (DOG) мячик. Начало слова "догоняет" созвучно с "dog".',
+        examples: [
+            'The dog is barking - Собака лает',
+            'I walk my dog every day - Я гуляю с собакой каждый день'
+        ]
+    },
+    {
+        english: 'Eagle',
+        russian: 'Орёл',
+        image: 'https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=400&h=300&fit=crop',
+        audio: '#',
+        association: 'Представьте орла, который летит к ИГЛЕ (EAGLE ≈ игла). Орёл летит к игле - запомнить легко!',
+        examples: [
+            'The eagle flies high - Орёл летит высоко',
+            'Eagles have sharp eyes - У орлов острое зрение'
+        ]
     }
-    // Остальные животные будут добавлены аналогично
 ];
 
 let currentWordIndex = 0;
@@ -585,9 +606,57 @@ function showPreviousWord() {
 
 // Функция для воспроизведения аудио
 function playAudio(audioPath) {
+    if (audioPath === '#') {
+        alert('Аудио в разработке');
+        return;
+    }
     const audio = new Audio(audioPath);
-    audio.play();
+    audio.play().catch(e => console.log('Ошибка воспроизведения аудио:', e));
 }
+
+// Функции модальных окон и навигации
+function showLoginModal() {
+    document.getElementById('authModal').classList.add('active');
+    showLoginForm();
+}
+
+function showLoginForm() {
+    document.querySelector('.login-form').style.display = 'flex';
+    document.querySelector('.register-form').style.display = 'none';
+}
+
+function showRegisterForm() {
+    document.querySelector('.login-form').style.display = 'none';
+    document.querySelector('.register-form').style.display = 'flex';
+}
+
+function showHome() {
+    window.location.href = 'index.html';
+}
+
+function togglePassword(button) {
+    const input = button.previousElementSibling;
+    const visible = button.querySelector('.visible');
+    const hidden = button.querySelector('.hidden');
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        visible.style.display = 'inline-block';
+        hidden.style.display = 'none';
+    } else {
+        input.type = 'password';
+        visible.style.display = 'none';
+        hidden.style.display = 'inline-block';
+    }
+}
+
+// Закрытие модального окна при клике вне его
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('authModal');
+    if (event.target === modal) {
+        modal.classList.remove('active');
+    }
+});
 
 // Контент для разных разделов
 const contentById = {
@@ -597,12 +666,12 @@ const contentById = {
             <h2>Тестирование: Животные</h2>
             <div class="progress">Вопрос 1 из 5</div>
             <div class="question">
-                <h3>Как переводится слово "Cat"?</h3>
+                <h3>Как переводится слово "Eagle"?</h3>
                 <div class="answers">
-                    <button onclick="checkAnswer(this)" data-correct="true">Кошка</button>
+                    <button onclick="checkAnswer(this)" data-correct="true">Орёл</button>
+                    <button onclick="checkAnswer(this)">Медведь</button>
+                    <button onclick="checkAnswer(this)">Бык</button>
                     <button onclick="checkAnswer(this)">Собака</button>
-                    <button onclick="checkAnswer(this)">Птица</button>
-                    <button onclick="checkAnswer(this)">Рыба</button>
                 </div>
             </div>
         </div>
