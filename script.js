@@ -496,8 +496,8 @@ function checkAnswer(button) {
     }
 }
 
-// Новый массив животных с детскими ассоциациями
-const newAnimalWords = [
+// Массив слов для раздела "Животные"
+const animalWords = [
     {
         english: 'Ant',
         russian: 'Муравей',
