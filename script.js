@@ -300,22 +300,22 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                         </div>
                         
-                        <div class="profile-stats">
+                        <div class="profile-stats" id="profile-stats">
                             <div class="stat-item">
-                                <span class="stat-value">12</span>
-                                <span class="stat-label">Правильных ответов подряд</span>
+                                <span class="stat-value" id="learned-words">0</span>
+                                <span class="stat-label">Изучено слов</span>
                             </div>
                             <div class="stat-item">
-                                <span class="stat-value">3</span>
+                                <span class="stat-value" id="streak-days">0</span>
                                 <span class="stat-label">Дней подряд</span>
                             </div>
                             <div class="stat-item">
-                                <span class="stat-value">75%</span>
+                                <span class="stat-value" id="accuracy">0%</span>
                                 <span class="stat-label">Точность ответов</span>
                             </div>
                             <div class="stat-item">
-                                <span class="stat-value">2:30</span>
-                                <span class="stat-label">Время обучения</span>
+                                <span class="stat-value" id="total-tests">0</span>
+                                <span class="stat-label">Всего тестов</span>
                             </div>
                         </div>
 
@@ -348,6 +348,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     overlay.classList.remove('active');
                     sidebar.classList.remove('active');
                 };
+                
+                // Загружаем статистику
+                loadUserStats();
             };
         } else {
             // Пользователь не залогинен
@@ -479,6 +482,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // Функция проверки ответа в тестах
 function checkAnswer(button) {
     const buttons = button.parentElement.getElementsByTagName('button');
+    const isCorrect = button.getAttribute('data-correct') === 'true';
+    
     for (let btn of buttons) {
         btn.disabled = true;
         if (btn.getAttribute('data-correct') === 'true') {
@@ -487,13 +492,79 @@ function checkAnswer(button) {
         }
     }
     
-    if (button.getAttribute('data-correct') === 'true') {
+    if (isCorrect) {
         button.insertAdjacentHTML('beforeend', ' ✓');
+        // Сохраняем правильный ответ
+        saveTestResult(true);
     } else {
         button.style.background = '#f44336';
         button.style.color = 'white';
         button.insertAdjacentHTML('beforeend', ' ✗');
+        // Сохраняем неправильный ответ
+        saveTestResult(false);
     }
+}
+
+// Система прогресса пользователя
+function saveWordProgress(wordEnglish, category) {
+    const user = auth.currentUser;
+    if (!user) return;
+    
+    const progressRef = db.collection('userProgress').doc(user.uid);
+    const wordKey = `${category}_${wordEnglish.toLowerCase()}`;
+    
+    progressRef.set({
+        [`learnedWords.${wordKey}`]: {
+            word: wordEnglish,
+            category: category,
+            learnedAt: firebase.firestore.FieldValue.serverTimestamp(),
+            viewCount: firebase.firestore.FieldValue.increment(1)
+        },
+        lastActivity: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+}
+
+function saveTestResult(isCorrect) {
+    const user = auth.currentUser;
+    if (!user) return;
+    
+    const progressRef = db.collection('userProgress').doc(user.uid);
+    
+    progressRef.set({
+        testStats: {
+            totalAnswers: firebase.firestore.FieldValue.increment(1),
+            correctAnswers: firebase.firestore.FieldValue.increment(isCorrect ? 1 : 0),
+            lastTestDate: firebase.firestore.FieldValue.serverTimestamp()
+        },
+        lastActivity: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+}
+
+function updateStreak() {
+    const user = auth.currentUser;
+    if (!user) return;
+    
+    const progressRef = db.collection('userProgress').doc(user.uid);
+    const today = new Date().toDateString();
+    
+    progressRef.get().then((doc) => {
+        const data = doc.data() || {};
+        const lastActivity = data.lastActivityDate;
+        const currentStreak = data.streak || 0;
+        
+        if (lastActivity !== today) {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            
+            const newStreak = lastActivity === yesterday.toDateString() ? currentStreak + 1 : 1;
+            
+            progressRef.set({
+                streak: newStreak,
+                lastActivityDate: today,
+                lastActivity: firebase.firestore.FieldValue.serverTimestamp()
+            }, { merge: true });
+        }
+    });
 }
 
 // Массив слов для раздела "Животные"
@@ -698,6 +769,10 @@ let currentCategory = 'animals'; // 'animals' или 'food'
 function showCurrentWord() {
     const words = currentCategory === 'animals' ? animalWords : foodWords;
     const word = words[currentWordIndex];
+    
+    // Сохраняем прогресс просмотра слова
+    saveWordProgress(word.english, currentCategory);
+    updateStreak();
     return `
         <div class="word-card">
             <div class="word-header">
@@ -772,6 +847,22 @@ function showRegisterForm() {
 
 function showHome() {
     window.location.href = 'index.html';
+}
+
+// Функция восстановления пароля
+function resetPassword() {
+    const email = prompt('Введите ваш email:');
+    if (email && isValidEmail(email)) {
+        auth.sendPasswordResetEmail(email)
+            .then(() => {
+                alert('Ссылка для сброса пароля отправлена на почту!');
+            })
+            .catch((error) => {
+                alert('Ошибка: ' + error.message);
+            });
+    } else if (email) {
+        alert('Пожалуйста, введите корректный email');
+    }
 }
 
 function togglePassword(button) {
