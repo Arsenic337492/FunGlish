@@ -499,55 +499,11 @@ function checkAnswer(button) {
 // Массив слов для раздела "Животные"
 const animalWords = [
     {
-        english: 'Bull',
-        russian: 'Бык',
-        image: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=400&h=300&fit=crop',
-        audio: '#',
-        association: 'Представьте, как большой бык ест аппетитную БУЛКУ (BULl). Созвучие слов поможет запомнить английское слово.',
-        examples: [
-            'The bull is very strong - Бык очень сильный',
-            'There is a bull in the field - На поле есть бык'
-        ]
-    },
-    {
-        english: 'Bear',
-        russian: 'Медведь',
-        image: 'https://images.unsplash.com/photo-1589656966895-2f33e7653819?w=400&h=300&fit=crop',
-        audio: '#',
-        association: 'Представьте, как медведь БЕРёт (BEARёт) мёд из улья. Созвучие глагола "брать/берёт" с "bear" поможет запомнить слово.',
-        examples: [
-            'The bear loves honey - Медведь любит мёд',
-            'A big brown bear - Большой бурый медведь'
-        ]
-    },
-    {
-        english: 'Cat',
-        russian: 'Кошка',
-        image: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=300&fit=crop',
-        audio: '#',
-        association: 'Представьте, как КОТ (CAT) лежит на диване. Слово "кот" очень похоже на английское "cat".',
-        examples: [
-            'The cat is sleeping - Кошка спит',
-            'I have a black cat - У меня есть чёрная кошка'
-        ]
-    },
-    {
-        english: 'Dog',
-        russian: 'Собака',
-        image: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=300&fit=crop',
-        audio: '#',
-        association: 'Представьте собаку, которая ДОГОНЯЕТ (DOG) мячик. Начало слова "догоняет" созвучно с "dog".',
-        examples: [
-            'The dog is barking - Собака лает',
-            'I walk my dog every day - Я гуляю с собакой каждый день'
-        ]
-    },
-    {
         english: 'Eagle',
         russian: 'Орёл',
         image: 'https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=400&h=300&fit=crop',
         audio: '#',
-        association: 'Представьте орла, который летит к ИГЛЕ (EAGLE ≈ игла). Орёл летит к игле - запомнить легко!',
+        association: 'Представьте орла, который смотрит на ИГЛУ (EAGLE ≈ игла).',
         examples: [
             'The eagle flies high - Орёл летит высоко',
             'Eagles have sharp eyes - У орлов острое зрение'
@@ -562,7 +518,7 @@ const foodWords = [
         russian: 'Свекла',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/beetrot-%D0%B1%D0%B8%D1%82%D0%B0.jpg?raw=true',
         audio: '#',
-        association: 'Представьте свеклу как корень от слова "БИТ" (BEET-root). Свекла - это корень, который "бьет" по вкусу.',
+        association: 'Представьте свеклу, держащую в руках биту (BEET-root).',
         examples: [
             'I like beetroot salad - Мне нравится салат из свеклы',
             'Beetroot is very healthy - Свекла очень полезная'
@@ -573,7 +529,7 @@ const foodWords = [
         russian: 'Огурец',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/cucumber-%D0%BA%D1%80%D1%8E%D0%BA.png?raw=true',
         audio: '#',
-        association: 'Представьте огурец изогнутый как КРЮК (CUcumber ≈ крюк). Огурец висит на крючке.',
+        association: 'Представьте огурец с крюком (Cucumber ≈ крюк).',
         examples: [
             'Fresh cucumber in salad - Свежий огурец в салате',
             'Cucumber is very crispy - Огурец очень хрустящий'
@@ -584,7 +540,7 @@ const foodWords = [
         russian: 'Слива',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/plum-%D0%BF%D0%BB%D0%B0%D0%BC%D1%8F(%D1%81%D0%BB%D0%B8%D0%B2%D0%B0%20%D0%B3%D0%BE%D1%80%D0%B8%D1%82).jpg?raw=true',
         audio: '#',
-        association: 'Представьте сливу, которая горит ПЛАМЕНЕМ (PLUM ≈ пламя). Слива красная как пламя.',
+        association: 'Представьте сливу, которая горит ПЛАМЕНЕМ (PLUM ≈ пламя).',
         examples: [
             'Sweet purple plum - Сладкая фиолетовая слива',
             'Plum tree in garden - Сливовое дерево в саду'
@@ -595,7 +551,7 @@ const foodWords = [
         russian: 'Каша',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/porridge-%D0%BF%D0%B0%D1%80%D0%B8%D0%B6.jpg?raw=true',
         audio: '#',
-        association: 'Представьте кашу, которую едят в ПАРИЖЕ (PORridge ≈ Париж). В Париже подают изысканную кашу.',
+        association: 'Представьте кашу в Париже на фоне Эйфелевой башни (Porridge ≈ Париж).',
         examples: [
             'Hot porridge for breakfast - Горячая каша на завтрак',
             'Oatmeal porridge is healthy - Овсяная каша полезная'
@@ -606,7 +562,7 @@ const foodWords = [
         russian: 'Колбаса',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/sausage-%D1%81%D0%BE%D1%81%D0%B8%D1%81%D0%BA%D0%B0%20%D1%81%20%D1%81%D0%BE%D1%81%D0%BA%D0%BE%D0%B9.jpg?raw=true',
         audio: '#',
-        association: 'Представьте СОСИСКУ с СОСКОЙ (SAUSage ≈ сосиска). Созвучие поможет запомнить слово.',
+        association: 'Представьте СОСИСКУ с СОСКОЙ (SAUSage ≈ сосиска).',
         examples: [
             'Grilled sausage for dinner - Жареная колбаса на ужин',
             'German sausage is famous - Немецкая колбаса знаменита'
@@ -617,7 +573,7 @@ const foodWords = [
         russian: 'Семя/Семечко',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/seed-%D1%81%D0%B8%D0%B4%D0%B8%D1%82.jpg?raw=true',
         audio: '#',
-        association: 'Представьте семечко, которое СИДИТ (SEED ≈ сидит) в земле. Семя сидит и прорастает.',
+        association: 'Представьте семечко, которое СИДИТ (SEED ≈ сидит) на стуле.',
         examples: [
             'Plant the seed in soil - Посади семя в землю',
             'Sunflower seeds are tasty - Семечки подсолнуха вкусные'
@@ -628,7 +584,7 @@ const foodWords = [
         russian: 'Газировка',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/soda-%D0%B3%D0%B0%D0%B7%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B2%20%D1%81%D0%BE%D0%B4%D0%B5.jpg?raw=true',
         audio: '#',
-        association: 'Представьте газировку В СОДЕ (SODA = сода). Газировка содержит соду для шипения.',
+        association: 'Представьте газировку, лежащую в пачке СОДЫ (SODA = сода).',
         examples: [
             'Cold soda on hot day - Холодная газировка в жаркий день',
             'Orange soda is sweet - Апельсиновая газировка сладкая'
@@ -785,3 +741,4 @@ const contentById = {
         </div>
     `
 };
+
