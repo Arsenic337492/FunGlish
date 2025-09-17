@@ -207,8 +207,8 @@ document.addEventListener('DOMContentLoaded', function() {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const submitButton = loginForm.querySelector('button.button-submit');
-            const emailInput = loginForm.querySelector('input[type="email"]');
-            const passwordInput = loginForm.querySelector('input[type="password"]');
+            const emailInput = loginForm.querySelector('input[placeholder="Введите email"]');
+            const passwordInput = loginForm.querySelector('input[placeholder="Введите пароль"]');
             if (submitButton) submitButton.disabled = true;
             // Удаляем старые ошибки
             let errorBlock = loginForm.querySelector('.form-errors');
