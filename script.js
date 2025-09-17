@@ -558,7 +558,7 @@ const animalWords = [
         russian: 'Ослик',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/donkey-%D1%82%D0%BE%D0%BD%D0%BA%D0%B8%D0%B9.jpg?raw=true',
         audio: '#',
-        association: 'Смотри на этого ТОНЕНЬКОГО ослика (DONKEY ≈ тонкий)! Он такой стройный и изящный, совсем не толстый.',
+        association: 'Смотри на этого ТОНЕНЬКОГО ослика (DONKEY ≈ тонкий)! Он такой худенький, надо его покормить.',
         examples: [
             'The donkey is grey - Ослик серый',
             'Donkey carries bags - Ослик носит сумки'
@@ -569,7 +569,7 @@ const animalWords = [
         russian: 'Орёл',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/eagle-%D0%B8%D0%B3%D0%BB%D0%B0.jpg?raw=true',
         audio: '#',
-        association: 'Посмотри, как гордый орёл смотрит на снежную ИГЛУ (EAGLE ≈ игла)! Он думает: "Какой красивый ледяной домик построили эскимосы!"',
+        association: 'Посмотри, как гордый орёл смотрит на ИГЛУ (EAGLE ≈ игла)! Он думает: "Какая острая железная игла"',
         examples: [
             'The eagle flies high - Орёл летит высоко',
             'Eagles have sharp eyes - У орлов острое зрение'
@@ -602,7 +602,7 @@ const animalWords = [
         russian: 'Индейка',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/turkey-%D1%82%D1%91%D1%80%D0%BA%D0%B0.jpg?raw=true',
         audio: '#',
-        association: 'Смотри, как забавная индейка трёт морковку на ТЁРКЕ (TURKEY ≈ тёрка)! Она готовит вкусный салатик для своих цыплят.',
+        association: 'Смотри, как забавная индейка трёт сыр на ТЁРКЕ (TURKEY ≈ тёрка)! Она готовит вкусный салатик для своих цыплят.',
         examples: [
             'The turkey is big - Индейка большая',
             'Turkey has colorful feathers - У индейки разноцветные перья'
@@ -672,7 +672,7 @@ const foodWords = [
         russian: 'Семя/Семечко',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/seed-%D1%81%D0%B8%D0%B4%D0%B8%D1%82.jpg?raw=true',
         audio: '#',
-        association: 'Представьте семечко, которое СИДИТ (SEED ≈ сидит) в земле. Семя сидит и прорастает.',
+        association: 'Представьте семечко, которое СИДИТ (SEED ≈ сидит) на стуле.',
         examples: [
             'Plant the seed in soil - Посади семя в землю',
             'Sunflower seeds are tasty - Семечки подсолнуха вкусные'
@@ -683,7 +683,7 @@ const foodWords = [
         russian: 'Газировка',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/soda-%D0%B3%D0%B0%D0%B7%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B2%20%D1%81%D0%BE%D0%B4%D0%B5.jpg?raw=true',
         audio: '#',
-        association: 'Представьте газировку В СОДЕ (SODA = сода). Газировка содержит соду для шипения.',
+        association: 'Представьте газировку в упаковке СОДЫ (SODA = сода).',
         examples: [
             'Cold soda on hot day - Холодная газировка в жаркий день',
             'Orange soda is sweet - Апельсиновая газировка сладкая'
