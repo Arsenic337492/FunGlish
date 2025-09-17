@@ -280,18 +280,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 Профиль
             `;
             loginButton.onclick = () => {
-                let overlay = document.querySelector('.profile-sidebar-overlay');
-                let sidebar = document.querySelector('.profile-sidebar');
+                // Удаляем старые элементы
+                const oldOverlay = document.querySelector('.profile-sidebar-overlay');
+                const oldSidebar = document.querySelector('.profile-sidebar');
+                if (oldOverlay) oldOverlay.remove();
+                if (oldSidebar) oldSidebar.remove();
                 
-                if (!overlay) {
-                    overlay = document.createElement('div');
-                    overlay.className = 'profile-sidebar-overlay';
-                    document.body.appendChild(overlay);
-                }
+                // Создаем новые
+                const overlay = document.createElement('div');
+                overlay.className = 'profile-sidebar-overlay';
+                document.body.appendChild(overlay);
                 
-                if (!sidebar) {
-                    sidebar = document.createElement('div');
-                    sidebar.className = 'profile-sidebar';
+                const sidebar = document.createElement('div');
+                sidebar.className = 'profile-sidebar';
                     sidebar.innerHTML = `
                         <div class="profile-header">
                             <div class="profile-top">
@@ -356,15 +357,22 @@ document.addEventListener('DOMContentLoaded', function() {
                             </button>
                         </div>
                     `;
-                    document.body.appendChild(sidebar);
-                }
+                document.body.appendChild(sidebar);
                 
-                overlay.classList.add('active');
-                sidebar.classList.add('active');
+                // Показываем сайдбар
+                setTimeout(() => {
+                    overlay.classList.add('active');
+                    sidebar.classList.add('active');
+                }, 10);
                 
+                // Обработчик закрытия
                 overlay.onclick = () => {
                     overlay.classList.remove('active');
                     sidebar.classList.remove('active');
+                    setTimeout(() => {
+                        overlay.remove();
+                        sidebar.remove();
+                    }, 300);
                 };
                 
                 // Загружаем статистику
