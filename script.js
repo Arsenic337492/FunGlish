@@ -501,7 +501,7 @@ const animalWords = [
     {
         english: 'Eagle',
         russian: 'Орёл',
-        image: 'https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=400&h=300&fit=crop',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/eagle-%D0%B8%D0%B3%D0%BB%D0%B0.jpg?raw=true',
         audio: '#',
         association: 'Представьте орла, который смотрит на ИГЛУ (EAGLE ≈ игла).',
         examples: [
@@ -741,4 +741,5 @@ const contentById = {
         </div>
     `
 };
+
 
