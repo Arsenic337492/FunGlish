@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 // Показываем сообщение об успехе
-                registerForm.innerHTML = '<div style="color:green;text-align:center;padding:30px;">Регистрация успешна! Пожалуйста, подтвердите ваш email по ссылке, отправленной на почту.<br><br><button type="button" class="button-submit" onclick="showLoginForm()">Войти</button></div>';
+                registerForm.innerHTML = `<div style="color:green;text-align:center;padding:30px;"><h3>Регистрация успешна! 🎉</h3><p>Мы отправили письмо с подтверждением на <strong>${email}</strong></p><p>Проверьте почту и нажмите на ссылку для подтверждения.</p><button type="button" class="button-submit" onclick="resendVerification('${user.uid}')" style="margin: 10px;">Отправить повторно</button><button type="button" class="button-submit" onclick="showLoginForm()">К входу</button></div>`;
             } catch (error) {
                 const errDiv = document.createElement('div');
                 errDiv.className = 'form-errors';
@@ -215,6 +215,24 @@ document.addEventListener('DOMContentLoaded', function() {
             if (errorBlock) errorBlock.remove();
             try {
                 const userCredential = await auth.signInWithEmailAndPassword(emailInput.value, passwordInput.value);
+                const user = userCredential.user;
+                
+                // Проверяем, подтвержден ли email
+                if (!user.emailVerified) {
+                    const errDiv = document.createElement('div');
+                    errDiv.className = 'form-errors';
+                    errDiv.style.color = 'orange';
+                    errDiv.style.marginBottom = '10px';
+                    errDiv.innerHTML = `
+                        <p>Подтвердите ваш email перед входом.</p>
+                        <button type="button" onclick="resendVerification('${user.uid}')" style="background: #ff9800; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+                            Отправить повторно
+                        </button>
+                    `;
+                    loginForm.insertBefore(errDiv, loginForm.firstChild);
+                    await auth.signOut(); // Выходим, если email не подтвержден
+                    return;
+                }
                 
                 // Закрываем модальное окно после успешного входа
                 document.getElementById('authModal').classList.remove('active');
@@ -862,6 +880,50 @@ function resetPassword() {
             });
     } else if (email) {
         alert('Пожалуйста, введите корректный email');
+    }
+}
+
+// Вход через Google
+function signInWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    
+    auth.signInWithPopup(provider)
+        .then(async (result) => {
+            const user = result.user;
+            
+            // Сохраняем данные пользователя в Firestore (если новый)
+            const userDoc = await db.collection('users').doc(user.uid).get();
+            if (!userDoc.exists) {
+                await db.collection('users').doc(user.uid).set({
+                    name: user.displayName || 'Пользователь',
+                    email: user.email,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    loginMethod: 'google'
+                });
+            }
+            
+            // Закрываем модальное окно
+            document.getElementById('authModal').classList.remove('active');
+        })
+        .catch((error) => {
+            console.error('Ошибка входа через Google:', error);
+            alert('Ошибка входа через Google: ' + error.message);
+        });
+}
+
+// Повторная отправка верификации
+function resendVerification(userId) {
+    const currentUser = auth.currentUser;
+    if (currentUser && !currentUser.emailVerified) {
+        currentUser.sendEmailVerification()
+            .then(() => {
+                alert('Письмо с подтверждением отправлено повторно!');
+            })
+            .catch((error) => {
+                alert('Ошибка отправки: ' + error.message);
+            });
+    } else {
+        alert('Пользователь не найден или email уже подтвержден.');
     }
 }
 
