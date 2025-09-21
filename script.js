@@ -935,6 +935,30 @@ function resendVerification(userId) {
     }
 }
 
+// Отправка ссылки для входа по email
+function sendSignInLink() {
+    const email = prompt('Введите ваш email:');
+    if (!email || !isValidEmail(email)) {
+        alert('Пожалуйста, введите корректный email');
+        return;
+    }
+
+    const actionCodeSettings = {
+        url: window.location.origin + '/email-signin.html',
+        handleCodeInApp: true
+    };
+
+    firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
+        .then(() => {
+            window.localStorage.setItem('emailForSignIn', email);
+            alert(`Ссылка для входа отправлена на ${email}!\n\nПроверьте почту и нажмите на ссылку для входа.`);
+        })
+        .catch((error) => {
+            console.error('Ошибка отправки ссылки:', error);
+            alert('Ошибка отправки: ' + error.message);
+        });
+}
+
 function togglePassword(button) {
     const input = button.previousElementSibling;
     const visible = button.querySelector('.visible');
