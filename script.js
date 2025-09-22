@@ -173,8 +173,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const userCredential = await auth.createUserWithEmailAndPassword(email, password);
                 const user = userCredential.user;
 
-                // Отправляем email verification
-                await user.sendEmailVerification();
+                // Отправляем ссылку для подтверждения email
+                const actionCodeSettings = {
+                    url: window.location.origin + '/email-signin.html?mode=verify&email=' + encodeURIComponent(email),
+                    handleCodeInApp: true
+                };
+                await user.sendEmailVerification(actionCodeSettings);
                 
                 // Сохраняем данные пользователя в Firestore
                 await db.collection('users').doc(user.uid).set({
@@ -187,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 // Показываем сообщение об успехе
-                registerForm.innerHTML = `<div style="color:green;text-align:center;padding:30px;"><h3>Регистрация успешна! 🎉</h3><p>Мы отправили письмо с подтверждением на <strong>${email}</strong></p><p>Проверьте почту и нажмите на ссылку для подтверждения.</p><button type="button" class="button-submit" onclick="resendVerification('${user.uid}')" style="margin: 10px;">Отправить повторно</button><button type="button" class="button-submit" onclick="showLoginForm()">К входу</button></div>`;
+                registerForm.innerHTML = `<div style="color:green;text-align:center;padding:30px;"><h3>Регистрация успешна! 🎉</h3><p><strong>На ваш электронный адрес была отправлена ссылка.</strong></p><p>Перейдите по ней, чтобы подтвердить свой электронный адрес.</p><p style="font-size: 14px; color: #666;">После подтверждения вы сможете войти с паролем.</p><button type="button" class="button-submit" onclick="showLoginForm()" style="margin-top: 20px;">Перейти к входу</button></div>`;
             } catch (error) {
                 const errDiv = document.createElement('div');
                 errDiv.className = 'form-errors';
