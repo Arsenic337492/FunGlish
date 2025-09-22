@@ -34,9 +34,34 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="script.js"></script>
     <script>
-        // Обработка входа по ссылке
+        // Обработка входа по ссылке и верификации
         document.addEventListener('DOMContentLoaded', function() {
-            if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const mode = urlParams.get('mode');
+            
+            // Проверяем, это верификация или вход
+            if (mode === 'verify') {
+                // Обработка верификации email
+                firebase.auth().applyActionCode(urlParams.get('oobCode'))
+                    .then(() => {
+                        document.getElementById('signin-status').innerHTML = `
+                            <h1>✅ Email подтвержден!</h1>
+                            <p>Теперь вы можете войти с паролем.</p>
+                            <button onclick="location.href='learning.html'" style="background: #1976D2; color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 18px; cursor: pointer; margin-top: 20px;">
+                                Перейти к входу
+                            </button>
+                        `;
+                    })
+                    .catch((error) => {
+                        document.getElementById('signin-status').innerHTML = `
+                            <h1>❌ Ошибка подтверждения</h1>
+                            <p>Ссылка недействительна или устарела.</p>
+                            <button onclick="location.href='learning.html'" style="background: #1976D2; color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 18px; cursor: pointer; margin-top: 20px;">
+                                Попробовать снова
+                            </button>
+                        `;
+                    });
+            } else if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
                 let email = window.localStorage.getItem('emailForSignIn');
                 if (!email) {
                     email = window.prompt('Пожалуйста, введите ваш email для подтверждения');
