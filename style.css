@@ -783,3 +783,43 @@
       background: var(--button);
       color: var(--button-text);
     }
+
+    /* Уведомления */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 3000;
+      max-width: 400px;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      font-weight: 500;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .notification-success {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .notification-error {
+      background: #f44336;
+      color: white;
+    }
+
+    .notification-info {
+      background: #2196F3;
+      color: white;
+    }
+
+    .notification-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
