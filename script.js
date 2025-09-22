@@ -190,8 +190,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
 
-                // Показываем сообщение об успехе
-                registerForm.innerHTML = `<div style="color:green;text-align:center;padding:30px;"><h3>Регистрация успешна! 🎉</h3><p><strong>На ваш электронный адрес была отправлена ссылка.</strong></p><p>Перейдите по ней, чтобы подтвердить свой электронный адрес.</p><p style="font-size: 14px; color: #666;">После подтверждения вы сможете войти с паролем.</p><button type="button" class="button-submit" onclick="showLoginForm()" style="margin-top: 20px;">Перейти к входу</button></div>`;
+                // Сохраняем данные для подтверждения
+                window.tempUserData = { user, email };
+                
+                // Отправляем код подтверждения
+                await sendEmailVerificationCode(email);
+                
+                // Закрываем форму регистрации и открываем модальное окно подтверждения
+                document.getElementById('authModal').classList.remove('active');
+                document.getElementById('emailVerificationModal').classList.add('active');
             } catch (error) {
                 const errDiv = document.createElement('div');
                 errDiv.className = 'form-errors';
@@ -924,19 +931,80 @@ function signInWithGoogle() {
 }
 
 // Повторная отправка верификации
-function resendVerification(userId) {
-    const currentUser = auth.currentUser;
-    if (currentUser && !currentUser.emailVerified) {
-        currentUser.sendEmailVerification()
-            .then(() => {
-                alert('Письмо с подтверждением отправлено повторно!');
-            })
-            .catch((error) => {
-                alert('Ошибка отправки: ' + error.message);
-            });
-    } else {
-        alert('Пользователь не найден или email уже подтвержден.');
+// Генерация и отправка кода подтверждения
+let verificationCodeData = null;
+
+function generateVerificationCode() {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+}
+
+async function sendEmailVerificationCode(email) {
+    const code = generateVerificationCode();
+    const expiresAt = Date.now() + 10 * 60 * 1000; // 10 минут
+    
+    verificationCodeData = {
+        code: code,
+        email: email,
+        expiresAt: expiresAt
+    };
+    
+    // В реальном приложении здесь бы была отправка email
+    // Пока просто показываем код в консоли для тестирования
+    console.log(`Код подтверждения для ${email}: ${code}`);
+    alert(`Для тестирования: код ${code}`);
+}
+
+function verifyEmailCode() {
+    const inputCode = document.getElementById('verificationCode').value.trim();
+    
+    if (!verificationCodeData) {
+        alert('Код не был отправлен. Попробуйте снова.');
+        return;
     }
+    
+    if (Date.now() > verificationCodeData.expiresAt) {
+        alert('Код устарел. Отправьте новый.');
+        return;
+    }
+    
+    if (inputCode === verificationCodeData.code) {
+        // Код верный - подтверждаем email
+        if (window.tempUserData && window.tempUserData.user) {
+            // Отмечаем email как подтвержденный в базе
+            db.collection('users').doc(window.tempUserData.user.uid).update({
+                emailVerified: true,
+                verifiedAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        }
+        
+        // Закрываем модальное окно
+        document.getElementById('emailVerificationModal').classList.remove('active');
+        
+        // Показываем успех
+        alert('✅ Email успешно подтвержден! Теперь вы можете войти.');
+        
+        // Очищаем данные
+        verificationCodeData = null;
+        window.tempUserData = null;
+        
+        // Показываем форму входа
+        showLoginModal();
+    } else {
+        alert('Неверный код. Попробуйте снова.');
+    }
+}
+
+function resendEmailCode() {
+    if (verificationCodeData && verificationCodeData.email) {
+        sendEmailVerificationCode(verificationCodeData.email);
+        alert('Новый код отправлен!');
+    }
+}
+
+function closeEmailVerificationModal() {
+    document.getElementById('emailVerificationModal').classList.remove('active');
+    verificationCodeData = null;
+    window.tempUserData = null;
 }
 
 // Отправка ссылки для входа по email
