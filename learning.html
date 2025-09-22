@@ -113,13 +113,7 @@
 
             <button class="button-submit">Войти</button>
             
-            <div style="text-align: center; margin: 15px 0;">
-                <span style="color: #666;">или</span>
-            </div>
-            
-            <button type="button" class="button-submit" onclick="sendSignInLink()" style="background: #4CAF50;">
-                📬 Войти по ссылке из почты
-            </button>
+
             
             <div class="social-login" style="margin: 15px 0;">
                 <button type="button" class="google-login-btn" onclick="signInWithGoogle()" style="width: 100%; padding: 12px; border: 1px solid #ddd; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer;">
@@ -221,6 +215,27 @@
             <button type="submit" class="button-submit">Зарегистрироваться</button>
             <p class="p">Уже есть аккаунт? <span class="span" onclick="showLoginForm()">Войти</span></p>
         </form>
+    </div>
+
+    <!-- Модальное окно подтверждения email -->
+    <div class="modal-overlay" id="emailVerificationModal">
+        <div class="form" style="max-width: 400px;">
+            <h2 style="text-align: center; margin-bottom: 20px;">Подтвердите email</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 20px;">
+                Мы отправили 6-значный код на ваш email.
+            </p>
+            <div class="flex-column">
+                <label>Код подтверждения</label>
+                <div class="inputForm">
+                    <input type="text" id="verificationCode" class="input" placeholder="Введите 6-значный код" maxlength="6">
+                </div>
+            </div>
+            <button type="button" class="button-submit" onclick="verifyEmailCode()">Подтвердить</button>
+            <button type="button" class="button-submit" onclick="resendEmailCode()" style="background: #ff9800; margin-top: 10px;">Отправить код повторно</button>
+            <p class="p">
+                <span class="span" onclick="closeEmailVerificationModal()">Отмена</span>
+            </p>
+        </div>
     </div>
 
     <!-- Scripts -->
