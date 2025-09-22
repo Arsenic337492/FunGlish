@@ -12,6 +12,12 @@ const firebaseConfig = {
 let auth;
 let db;
 
+// Инициализация EmailJS (для отправки кодов)
+// Вам нужно будет создать аккаунт на emailjs.com и получить ключи
+if (typeof emailjs !== 'undefined') {
+    emailjs.init('YOUR_PUBLIC_KEY'); // Замените на ваш ключ
+}
+
 function showAvatarMenu(event) {
     event.stopPropagation();
     const menu = event.currentTarget.nextElementSibling;
@@ -228,20 +234,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 const userCredential = await auth.signInWithEmailAndPassword(emailInput.value, passwordInput.value);
                 const user = userCredential.user;
                 
-                // Проверяем, подтвержден ли email
-                if (!user.emailVerified) {
+                // Проверяем нашу систему подтверждения
+                const userDoc = await db.collection('users').doc(user.uid).get();
+                if (userDoc.exists && !userDoc.data().emailVerified) {
                     const errDiv = document.createElement('div');
                     errDiv.className = 'form-errors';
                     errDiv.style.color = 'orange';
                     errDiv.style.marginBottom = '10px';
                     errDiv.innerHTML = `
                         <p>Подтвердите ваш email перед входом.</p>
-                        <button type="button" onclick="resendVerification('${user.uid}')" style="background: #ff9800; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
-                            Отправить повторно
+                        <button type="button" onclick="sendNewVerificationCode('${user.email}')" style="background: #ff9800; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+                            Отправить код
                         </button>
                     `;
                     loginForm.insertBefore(errDiv, loginForm.firstChild);
-                    await auth.signOut(); // Выходим, если email не подтвержден
+                    await auth.signOut();
                     return;
                 }
                 
@@ -949,21 +956,31 @@ async function sendEmailVerificationCode(email) {
     };
     
     // В реальном приложении здесь бы была отправка email
-    // Пока просто показываем код в консоли для тестирования
-    console.log(`Код подтверждения для ${email}: ${code}`);
-    alert(`Для тестирования: код ${code}`);
+    // Отправляем реальный email через EmailJS
+    try {
+        await emailjs.send('service_gmail', 'template_verification', {
+            to_email: email,
+            verification_code: code,
+            to_name: 'Пользователь'
+        });
+        showNotification('Код отправлен на ваш email!', 'success');
+    } catch (error) {
+        console.log('Ошибка отправки email:', error);
+        // Для тестирования показываем код
+        showNotification(`Для теста: код ${code}`, 'info');
+    }
 }
 
 function verifyEmailCode() {
     const inputCode = document.getElementById('verificationCode').value.trim();
     
     if (!verificationCodeData) {
-        alert('Код не был отправлен. Попробуйте снова.');
+        showNotification('Код не был отправлен. Попробуйте снова.', 'error');
         return;
     }
     
     if (Date.now() > verificationCodeData.expiresAt) {
-        alert('Код устарел. Отправьте новый.');
+        showNotification('Код устарел. Отправьте новый.', 'error');
         return;
     }
     
@@ -981,7 +998,7 @@ function verifyEmailCode() {
         document.getElementById('emailVerificationModal').classList.remove('active');
         
         // Показываем успех
-        alert('✅ Email успешно подтвержден! Теперь вы можете войти.');
+        showNotification('✅ Email успешно подтвержден! Теперь вы можете войти.', 'success');
         
         // Очищаем данные
         verificationCodeData = null;
@@ -990,21 +1007,54 @@ function verifyEmailCode() {
         // Показываем форму входа
         showLoginModal();
     } else {
-        alert('Неверный код. Попробуйте снова.');
+        showNotification('Неверный код. Попробуйте снова.', 'error');
     }
 }
 
 function resendEmailCode() {
     if (verificationCodeData && verificationCodeData.email) {
         sendEmailVerificationCode(verificationCodeData.email);
-        alert('Новый код отправлен!');
+        showNotification('Новый код отправлен!', 'success');
     }
+}
+
+function sendNewVerificationCode(email) {
+    window.tempUserData = { email };
+    sendEmailVerificationCode(email);
+    document.getElementById('emailVerificationModal').classList.add('active');
 }
 
 function closeEmailVerificationModal() {
     document.getElementById('emailVerificationModal').classList.remove('active');
     verificationCodeData = null;
     window.tempUserData = null;
+}
+
+// Система уведомлений
+function showNotification(message, type = 'info') {
+    // Удаляем старые уведомления
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(n => n.remove());
+    
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <span>${message}</span>
+            <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: inherit; font-size: 18px; cursor: pointer; margin-left: 10px;">×</button>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Показываем с анимацией
+    setTimeout(() => notification.classList.add('show'), 100);
+    
+    // Автоудаление через 5 секунд
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+    }, 5000);
 }
 
 // Отправка ссылки для входа по email
