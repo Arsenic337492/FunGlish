@@ -229,6 +229,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const submitButton = loginForm.querySelector('button.button-submit');
             const emailInput = loginForm.querySelector('input[type="text"]') || loginForm.querySelector('input[type="email"]');
             const passwordInput = loginForm.querySelector('input[type="password"]');
+            
+            if (!emailInput || !passwordInput) {
+                console.error('Не найдены поля email или пароля');
+                return;
+            }
             if (submitButton) submitButton.disabled = true;
             // Удаляем старые ошибки
             let errorBlock = loginForm.querySelector('.form-errors');
