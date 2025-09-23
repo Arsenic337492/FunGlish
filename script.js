@@ -1099,7 +1099,7 @@ function selectLanguage(lang) {
     }
     
     showNotification(
-        lang === 'ru' ? 'Язык изменен на русский' : 'Тіл қазақ тіліне өзгертілді', 
+        t(lang === 'ru' ? 'language_changed_ru' : 'language_changed_kz'), 
         'success'
     );
 }
@@ -1121,10 +1121,29 @@ function updateLanguageInterface() {
     // Обновляем отображение текущего языка в профиле
     const currentLangElement = document.getElementById('current-language');
     if (currentLangElement) {
-        currentLangElement.textContent = currentLanguage === 'ru' ? 'Русский' : 'Қазақ тілі';
+        currentLangElement.textContent = t('kazakh');
     }
     
-    // Здесь можно добавить перевод всего интерфейса
+    // Переводим все элементы с data-translate
+    document.querySelectorAll('[data-translate]').forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (element.tagName === 'INPUT' && (element.type === 'text' || element.type === 'email' || element.type === 'password')) {
+            element.placeholder = t(key);
+        } else {
+            element.textContent = t(key);
+        }
+    });
+    
+    // Переводим заголовки страниц
+    const welcomeTitle = document.querySelector('.welcome-message h1');
+    if (welcomeTitle) {
+        welcomeTitle.textContent = t('welcome_title');
+    }
+    
+    const welcomeSubtitle = document.querySelector('.welcome-message p');
+    if (welcomeSubtitle) {
+        welcomeSubtitle.textContent = t('welcome_subtitle');
+    }
 }
 
 function checkLanguageOnLoad() {
