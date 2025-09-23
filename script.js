@@ -1364,9 +1364,9 @@ function showTestQuestion() {
         const scrambled = scrambleWord(question.word.english);
         questionHTML = `
             <div class="question">
-                <h3>Разгадайте слово: <span class="anagram">${scrambled}</span></h3>
+                <h3>Расставьте буквы правильно: <span class="anagram">${scrambled}</span></h3>
                 <div class="anagram-input">
-                    <input type="text" id="anagramAnswer" placeholder="Введите русский перевод" style="padding: 10px; font-size: 16px; margin: 10px; border-radius: 5px; border: 2px solid #ddd;">
+                    <input type="text" id="anagramAnswer" placeholder="Введите правильное слово" style="padding: 10px; font-size: 16px; margin: 10px; border-radius: 5px; border: 2px solid #ddd;">
                     <button onclick="checkAnagramAnswer()" style="padding: 10px 20px; font-size: 16px; background: #1976D2; color: white; border: none; border-radius: 5px; cursor: pointer;">Проверить</button>
                 </div>
             </div>
@@ -1384,6 +1384,7 @@ function showTestQuestion() {
 
 function checkTestAnswer(button, isCorrect) {
     const buttons = button.parentElement.querySelectorAll('button');
+    const question = currentTest.questions[currentTest.currentQuestion];
     
     buttons.forEach(btn => {
         btn.disabled = true;
@@ -1396,23 +1397,64 @@ function checkTestAnswer(button, isCorrect) {
     if (isCorrect) {
         currentTest.correctAnswers++;
         button.insertAdjacentHTML('beforeend', ' ✓');
+        showDetailedFeedback(true, question.word.english, question.word.russian);
         saveTestResult(true);
     } else {
         button.style.background = '#f44336';
         button.style.color = 'white';
         button.insertAdjacentHTML('beforeend', ' ✗');
+        showDetailedFeedback(false, question.word.english, question.word.russian);
         saveTestResult(false);
     }
     
     setTimeout(() => {
         nextTestQuestion();
-    }, 1500);
+    }, 3000);
+}
+
+function showDetailedFeedback(isCorrect, englishWord, russianWord) {
+    const feedbackDiv = document.createElement('div');
+    feedbackDiv.className = 'detailed-feedback';
+    feedbackDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        z-index: 1000;
+        text-align: center;
+        max-width: 400px;
+    `;
+    
+    if (isCorrect) {
+        feedbackDiv.innerHTML = `
+            <h3 style="color: #4caf50; margin-bottom: 15px;">Правильно! ✓</h3>
+            <p><strong>${englishWord}</strong> = <strong>${russianWord}</strong></p>
+            <p style="color: #666; font-size: 14px;">Отлично знаете это слово!</p>
+        `;
+    } else {
+        feedbackDiv.innerHTML = `
+            <h3 style="color: #f44336; margin-bottom: 15px;">Неправильно ✗</h3>
+            <p><strong>Правильный ответ:</strong></p>
+            <p style="font-size: 18px;"><strong>${englishWord}</strong> = <strong>${russianWord}</strong></p>
+            <p style="color: #666; font-size: 14px;">Запомните это слово!</p>
+        `;
+    }
+    
+    document.body.appendChild(feedbackDiv);
+    
+    setTimeout(() => {
+        feedbackDiv.remove();
+    }, 2500);
 }
 
 function checkAnagramAnswer() {
     const input = document.getElementById('anagramAnswer');
     const userAnswer = input.value.trim().toLowerCase();
-    const correctAnswer = currentTest.questions[currentTest.currentQuestion].word.russian.toLowerCase();
+    const correctAnswer = currentTest.questions[currentTest.currentQuestion].word.english.toLowerCase();
     
     const isCorrect = userAnswer === correctAnswer;
     
@@ -1420,11 +1462,13 @@ function checkAnagramAnswer() {
         currentTest.correctAnswers++;
         input.style.background = '#4caf50';
         input.style.color = 'white';
+        showDetailedFeedback(true, correctAnswer, currentTest.questions[currentTest.currentQuestion].word.russian);
         saveTestResult(true);
     } else {
         input.style.background = '#f44336';
         input.style.color = 'white';
-        input.value = `Правильно: ${currentTest.questions[currentTest.currentQuestion].word.russian}`;
+        input.value = `Правильно: ${correctAnswer}`;
+        showDetailedFeedback(false, correctAnswer, currentTest.questions[currentTest.currentQuestion].word.russian);
         saveTestResult(false);
     }
     
@@ -1433,7 +1477,7 @@ function checkAnagramAnswer() {
     
     setTimeout(() => {
         nextTestQuestion();
-    }, 2000);
+    }, 3000);
 }
 
 function nextTestQuestion() {
@@ -1471,7 +1515,7 @@ function showTestResults() {
                 <h3 style="color: ${resultColor}">${resultMessage}</h3>
                 <p>Правильных ответов: ${currentTest.correctAnswers} из ${currentTest.totalQuestions}</p>
                 <p>Точность: ${percentage}%</p>
-                <button onclick="startTest('${currentTest.category}')" style="background: #1976D2; color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 16px; cursor: pointer; margin: 10px;">
+                <button onclick="document.getElementById('lesson-content').innerHTML = startTest('${currentTest.category}')" style="background: #1976D2; color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 16px; cursor: pointer; margin: 10px;">
                     Повторить тест
                 </button>
                 <button onclick="location.reload()" style="background: #4CAF50; color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 16px; cursor: pointer; margin: 10px;">
