@@ -238,6 +238,23 @@
         </div>
     </div>
 
+    <!-- Модальное окно выбора языка -->
+    <div class="modal-overlay" id="languageModal">
+        <div class="form" style="max-width: 350px; text-align: center;">
+            <h2 style="margin-bottom: 30px;">Выберите язык</h2>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <button class="button-submit" onclick="selectLanguage('ru')" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <span style="font-size: 24px;">🇷🇺</span>
+                    Русский
+                </button>
+                <button class="button-submit" onclick="selectLanguage('kz')" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: #00AFCA;">
+                    <span style="font-size: 24px;">🇰🇿</span>
+                    Қазақ тілі
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
