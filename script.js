@@ -116,6 +116,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     auth = firebase.auth();
     db = firebase.firestore();
+    
+    // Проверяем язык
+    checkLanguageOnLoad();
 
     // Инициализация обработчиков для сайдбара
     const sidebarLinks = document.querySelectorAll('.tree-view a');
@@ -288,6 +291,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const userDoc = await db.collection('users').doc(user.uid).get();
             const userData = userDoc.exists ? userDoc.data() : { name: 'Пользователь', surname: '' };
             const displayName = userData.name || 'Пользователь';
+            
+            // Загружаем язык пользователя
+            if (userData.language) {
+                currentLanguage = userData.language;
+                localStorage.setItem('selectedLanguage', userData.language);
+                updateLanguageInterface();
+            }
 
             // Обновляем кнопку входа
             loginButton.innerHTML = `
@@ -357,6 +367,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
 
                         <div class="profile-actions">    
+                            <button class="action-button language-btn" onclick="showLanguageSettings()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M5 8l6 6"></path>
+                                    <path d="M4 14l6-6 2-3"></path>
+                                    <path d="M2 5h12"></path>
+                                    <path d="M7 2h1l8 22"></path>
+                                    <path d="M22 9h-7"></path>
+                                </svg>
+                                Язык: <span id="current-language">Русский</span>
+                            </button>
                             <button class="action-button achievements-btn" onclick="showAchievements()">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                     <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
@@ -1055,6 +1075,72 @@ function showNotification(message, type = 'info') {
         notification.classList.remove('show');
         setTimeout(() => notification.remove(), 300);
     }, 5000);
+}
+
+// Система языков
+let currentLanguage = 'ru'; // по умолчанию русский
+
+function selectLanguage(lang) {
+    currentLanguage = lang;
+    localStorage.setItem('selectedLanguage', lang);
+    
+    // Закрываем модальное окно
+    document.getElementById('languageModal').classList.remove('active');
+    
+    // Обновляем интерфейс
+    updateLanguageInterface();
+    
+    // Сохраняем в профиль пользователя (если авторизован)
+    const user = auth.currentUser;
+    if (user) {
+        db.collection('users').doc(user.uid).update({
+            language: lang
+        });
+    }
+    
+    showNotification(
+        lang === 'ru' ? 'Язык изменен на русский' : 'Тіл қазақ тіліне өзгертілді', 
+        'success'
+    );
+}
+
+function showLanguageSettings() {
+    // Закрываем сайдбар
+    const overlay = document.querySelector('.profile-sidebar-overlay');
+    const sidebar = document.querySelector('.profile-sidebar');
+    if (overlay && sidebar) {
+        overlay.classList.remove('active');
+        sidebar.classList.remove('active');
+    }
+    
+    // Открываем модальное окно выбора языка
+    document.getElementById('languageModal').classList.add('active');
+}
+
+function updateLanguageInterface() {
+    // Обновляем отображение текущего языка в профиле
+    const currentLangElement = document.getElementById('current-language');
+    if (currentLangElement) {
+        currentLangElement.textContent = currentLanguage === 'ru' ? 'Русский' : 'Қазақ тілі';
+    }
+    
+    // Здесь можно добавить перевод всего интерфейса
+}
+
+function checkLanguageOnLoad() {
+    // Проверяем сохраненный язык
+    const savedLanguage = localStorage.getItem('selectedLanguage');
+    if (savedLanguage) {
+        currentLanguage = savedLanguage;
+        updateLanguageInterface();
+    } else {
+        // Если язык не выбран и пользователь не авторизован
+        setTimeout(() => {
+            if (!auth.currentUser) {
+                document.getElementById('languageModal').classList.add('active');
+            }
+        }, 1000); // Показываем через секунду
+    }
 }
 
 // Отправка ссылки для входа по email
