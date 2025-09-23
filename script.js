@@ -305,8 +305,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
-                Профиль
+                <span data-translate="profile">Профиль</span>
             `;
+            // Обновляем перевод
+            updateLanguageInterface();
             loginButton.onclick = () => {
                 // Удаляем старые элементы
                 const oldOverlay = document.querySelector('.profile-sidebar-overlay');
@@ -424,8 +426,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     <path d="M10 17L15 12L10 7"/>
                     <path d="M15 12H3"/>
                 </svg>
-                Вход
+                <span data-translate="login">Вход</span>
             `;
+            // Обновляем перевод
+            updateLanguageInterface();
             loginButton.onclick = showLoginModal;
         }
     });
@@ -1153,12 +1157,10 @@ function checkLanguageOnLoad() {
         currentLanguage = savedLanguage;
         updateLanguageInterface();
     } else {
-        // Если язык не выбран и пользователь не авторизован
+        // Если язык не выбран - показываем модальное окно
         setTimeout(() => {
-            if (!auth.currentUser) {
-                document.getElementById('languageModal').classList.add('active');
-            }
-        }, 1000); // Показываем через секунду
+            document.getElementById('languageModal').classList.add('active');
+        }, 500);
     }
 }
 
