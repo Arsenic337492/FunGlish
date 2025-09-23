@@ -541,10 +541,9 @@
     /* Навигационные кнопки */
     .navigation-buttons {
       display: flex;
-      justify-content: center;
-      gap: 20px;
+      justify-content: space-between;
       margin-top: 30px;
-      padding: 20px 0;
+      padding: 20px 40px;
     }
 
     .prev-word, .next-word {
