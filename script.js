@@ -869,9 +869,9 @@ function showCurrentWord() {
             </div>
             <div class="navigation-buttons">
                 ${currentWordIndex > 0 ? 
-                '<button class="prev-word" onclick="showPreviousWord()" title="Предыдущее слово">←</button>' : ''}
+                '<button class="prev-word" onclick="showPreviousWord()" title="Предыдущее слово">←</button>' : '<div></div>'}
                 ${currentWordIndex < words.length - 1 ? 
-                '<button class="next-word" onclick="showNextWord()" title="Следующее слово">→</button>' : ''}
+                '<button class="next-word" onclick="showNextWord()" title="Следующее слово">→</button>' : '<div></div>'}
             </div>
         </div>
     `;
