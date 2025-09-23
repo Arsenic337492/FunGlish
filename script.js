@@ -646,7 +646,7 @@ const animalWords = [
         english: 'Ant',
         russian: 'Муравей',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/ant-%D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D0%B0.jpg?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/ant.mp3',
         association: 'Представь маленького муравьишку, который держит в лапках большую АНТЕННУ (ANT ≈ антенна)! Муравей хочет поговорить по рации со своими друзьями в муравейнике.',
         examples: [
             'The ant is very small - Муравей очень маленький',
@@ -657,7 +657,7 @@ const animalWords = [
         english: 'Bear',
         russian: 'Медведь',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/bear-%D0%B1%D0%B8%D1%80%D0%BA%D0%B0.jpg?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/bear.mp3',
         association: 'Посмотри на мишку с яркой БИРКОЙ в ушке (BEAR ≈ бирка)! Как в магазине игрушек - у каждого плюшевого мишки есть бирочка с именем.',
         examples: [
             'The bear loves honey - Медведь любит мёд',
@@ -668,8 +668,8 @@ const animalWords = [
         english: 'Beetle',
         russian: 'Жук',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/beetle-%D0%B1%D0%B8%D1%82%D0%B0.jpg?raw=true',
-        audio: '#',
-        association: 'Смотри, какой сильный жучок держит в лапках БИТУ (BEETLE ≈ бита)! Он собирается играть в бейсбол со своими друзьями-насекомыми.',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/beetle.mp3',
+        association: 'Смотри, какой сильный жучок держит в лапках БИТУ (BEETLE ≈ бита)!' Он собирается играть в бейсбол со своими друзьями-насекомыми.',
         examples: [
             'The beetle is black - Жук чёрный',
             'Beetles can fly - Жуки умеют летать'
@@ -679,8 +679,8 @@ const animalWords = [
         english: 'Bull',
         russian: 'Бык',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/bull-%D0%B1%D1%83%D0%BB%D0%BA%D0%B0.jpg?raw=true',
-        audio: '#',
-        association: 'Посмотри, как большой добрый бычок кушает вкусную БУЛОЧКУ (BULL ≈ булка)! Он очень любит хлебобулочные изделия на завтрак.',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/bull.mp3',
+        association: 'Посмотри, как большой добрый бычок кушает вкусную БУЛОЧКУ (BULL ≈ булка)!' Он очень любит хлебобулочные изделия на завтрак.',
         examples: [
             'The bull is very strong - Бык очень сильный',
             'There is a bull in the field - На поле есть бык'
@@ -690,8 +690,8 @@ const animalWords = [
         english: 'Bunny',
         russian: 'Кролик',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/bunny-%D0%B1%D0%B0%D0%BD%D1%8F.jpg?raw=true',
-        audio: '#',
-        association: 'Какой чистенький зайчик моется в БАНЬКЕ (BUNNY ≈ баня)! Он трёт спинку мочалкой и поёт весёлые песенки.',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/bunny.mp3',
+        association: 'Какой чистенький зайчик моется в БАНЬКЕ (BUNNY ≈ баня)!' Он трёт спинку мочалкой и поёт весёлые песенки.',
         examples: [
             'The bunny is white - Кролик белый',
             'Bunny likes carrots - Кролик любит морковку'
@@ -701,8 +701,8 @@ const animalWords = [
         english: 'Donkey',
         russian: 'Ослик',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/donkey-%D1%82%D0%BE%D0%BD%D0%BA%D0%B8%D0%B9.jpg?raw=true',
-        audio: '#',
-        association: 'Смотри на этого ТОНЕНЬКОГО ослика (DONKEY ≈ тонкий)! Он такой худенький, надо его покормить.',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/donkey.mp3',
+        association: 'Смотри на этого ТОНЕНЬКОГО ослика (DONKEY ≈ тонкий)!' Он такой худенький, надо его покормить.',
         examples: [
             'The donkey is grey - Ослик серый',
             'Donkey carries bags - Ослик носит сумки'
@@ -712,8 +712,8 @@ const animalWords = [
         english: 'Eagle',
         russian: 'Орёл',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/eagle-%D0%B8%D0%B3%D0%BB%D0%B0.jpg?raw=true',
-        audio: '#',
-        association: 'Посмотри, как гордый орёл смотрит на ИГЛУ (EAGLE ≈ игла)! Он думает: "Какая острая железная игла"',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/eagle.mp3',
+        association: 'Посмотри, как гордый орёл смотрит на ИГЛУ (EAGLE ≈ игла)!' Он думает: "Какая острая железная игла"',
         examples: [
             'The eagle flies high - Орёл летит высоко',
             'Eagles have sharp eyes - У орлов острое зрение'
@@ -723,8 +723,8 @@ const animalWords = [
         english: 'Gopher',
         russian: 'Суслик',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/gopher-%D0%B3%D0%BE%D0%BB%D1%8C%D1%84.jpg?raw=true',
-        audio: '#',
-        association: 'Какой умный суслик играет в ГОЛЬФ (GOPHER ≈ гольф)! Он держит клюшку и целится в лунку, как настоящий спортсмен.',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/gopher.mp3',
+        association: 'Какой умный суслик играет в ГОЛЬФ (GOPHER ≈ гольф)!' Он держит клюшку и целится в лунку, как настоящий спортсмен.',
         examples: [
             'The gopher lives underground - Суслик живёт под землёй',
             'Gopher has small eyes - У суслика маленькие глазки'
@@ -734,8 +734,8 @@ const animalWords = [
         english: 'Seal',
         russian: 'Тюлень',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/seal-%D1%81%D0%B8%D0%BB%D0%B0.png?raw=true',
-        audio: '#',
-        association: 'Посмотри, какой СИЛЬНЫЙ тюлень (SEAL ≈ сила)! Он показывает свои мускулы и гордится своей силой, как настоящий богатырь.',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/seal.mp3',
+        association: 'Посмотри, какой СИЛЬНЫЙ тюлень (SEAL ≈ сила)!' Он показывает свои мускулы и гордится своей силой, как настоящий богатырь.',
         examples: [
             'The seal swims fast - Тюлень быстро плавает',
             'Seals live in cold water - Тюлени живут в холодной воде'
@@ -745,8 +745,8 @@ const animalWords = [
         english: 'Turkey',
         russian: 'Индейка',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/turkey-%D1%82%D1%91%D1%80%D0%BA%D0%B0.jpg?raw=true',
-        audio: '#',
-        association: 'Смотри, как забавная индейка трёт сыр на ТЁРКЕ (TURKEY ≈ тёрка)! Она готовит вкусный салатик для своих цыплят.',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/turkey.mp3',
+        association: 'Смотри, как забавная индейка трёт сыр на ТЁРКЕ (TURKEY ≈ тёрка)!' Она готовит вкусный салатик для своих цыплят.',
         examples: [
             'The turkey is big - Индейка большая',
             'Turkey has colorful feathers - У индейки разноцветные перья'
@@ -760,7 +760,7 @@ const foodWords = [
         english: 'Beetroot',
         russian: 'Свекла',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/beetrot-%D0%B1%D0%B8%D1%82%D0%B0.jpg?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/beetroot.mp3',
         association: 'Представьте свеклу с битой. BEET-root.',
         examples: [
             'I like beetroot salad - Мне нравится салат из свеклы',
@@ -771,7 +771,7 @@ const foodWords = [
         english: 'Cucumber',
         russian: 'Огурец',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/cucumber-%D0%BA%D1%80%D1%8E%D0%BA.png?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/cucumber.mp3',
         association: 'Представьте огурец, держащий в руке КРЮК (Cucumber ≈ крюк).',
         examples: [
             'Fresh cucumber in salad - Свежий огурец в салате',
@@ -782,7 +782,7 @@ const foodWords = [
         english: 'Plum',
         russian: 'Слива',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/plum-%D0%BF%D0%BB%D0%B0%D0%BC%D1%8F(%D1%81%D0%BB%D0%B8%D0%B2%D0%B0%20%D0%B3%D0%BE%D1%80%D0%B8%D1%82).jpg?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/plum.mp3',
         association: 'Представьте сливу, которая горит ярким ПЛАМЕНЕМ (PLUM ≈ пламя).',
         examples: [
             'Sweet purple plum - Сладкая фиолетовая слива',
@@ -793,7 +793,7 @@ const foodWords = [
         english: 'Porridge',
         russian: 'Каша',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/porridge-%D0%BF%D0%B0%D1%80%D0%B8%D0%B6.jpg?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/porridge.mp3',
         association: 'Представьте кашу в Париже, на фоне Эйфелевой башни (Porridge ≈ Париж).',
         examples: [
             'Hot porridge for breakfast - Горячая каша на завтрак',
@@ -804,7 +804,7 @@ const foodWords = [
         english: 'Sausage',
         russian: 'Сосиска',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/sausage-%D1%81%D0%BE%D1%81%D0%B8%D1%81%D0%BA%D0%B0%20%D1%81%20%D1%81%D0%BE%D1%81%D0%BA%D0%BE%D0%B9.jpg?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/sausage.mp3',
         association: 'Представьте СОСИСКУ с СОСКОЙ (SAUSage ≈ сосиска). Созвучие поможет запомнить слово.',
         examples: [
             'Grilled sausage for dinner - Жареная колбаса на ужин',
@@ -815,7 +815,7 @@ const foodWords = [
         english: 'Seed',
         russian: 'Семя/Семечко',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/seed-%D1%81%D0%B8%D0%B4%D0%B8%D1%82.jpg?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/seed.mp3',
         association: 'Представьте семечко, которое СИДИТ (SEED ≈ сидит) на стуле.',
         examples: [
             'Plant the seed in soil - Посади семя в землю',
@@ -826,7 +826,7 @@ const foodWords = [
         english: 'Soda',
         russian: 'Газировка',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/soda-%D0%B3%D0%B0%D0%B7%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B2%20%D1%81%D0%BE%D0%B4%D0%B5.jpg?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/soda.mp3',
         association: 'Представьте газировку в упаковке СОДЫ (SODA = сода).',
         examples: [
             'Cold soda on hot day - Холодная газировка в жаркий день',
@@ -1088,6 +1088,16 @@ function showNotification(message, type = 'info') {
         notification.classList.remove('show');
         setTimeout(() => notification.remove(), 300);
     }, 5000);
+}
+
+// Функция воспроизведения аудио
+function playAudio(audioUrl) {
+    if (audioUrl && audioUrl !== '#') {
+        const audio = new Audio(audioUrl);
+        audio.play().catch(error => {
+            console.log('Ошибка воспроизведения аудио:', error);
+        });
+    }
 }
 
 // Система языков
