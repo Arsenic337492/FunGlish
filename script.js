@@ -896,15 +896,7 @@ function showPreviousWord() {
     }
 }
 
-// Функция для воспроизведения аудио
-function playAudio(audioPath) {
-    if (audioPath === '#') {
-        alert('Аудио в разработке');
-        return;
-    }
-    const audio = new Audio(audioPath);
-    audio.play().catch(e => console.log('Ошибка воспроизведения аудио:', e));
-}
+
 
 // Функции модальных окон и навигации
 function showLoginModal() {
