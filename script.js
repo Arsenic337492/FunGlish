@@ -1236,35 +1236,248 @@ function switchCategory(category) {
 // Контент для разных разделов
 const contentById = {
     'animals-material': () => switchCategory('animals'),
-    'animals-test': `
-        <div class="test-container">
-            <h2>Тестирование: Животные</h2>
-            <div class="progress">Вопрос 1 из 5</div>
-            <div class="question">
-                <h3>Как переводится слово "Eagle"?</h3>
-                <div class="answers">
-                    <button onclick="checkAnswer(this)" data-correct="true">Орёл</button>
-                    <button onclick="checkAnswer(this)">Медведь</button>
-                    <button onclick="checkAnswer(this)">Бык</button>
-                    <button onclick="checkAnswer(this)">Собака</button>
-                </div>
-            </div>
-        </div>
-    `,
+    'animals-test': () => startTest('animals'),
     'food-material': () => switchCategory('food'),
-    'food-test': `
-        <div class="test-container">
-            <h2>Тестирование: Еда</h2>
-            <div class="progress">Вопрос 1 из 5</div>
+    'food-test': () => startTest('food')
+};
+
+// Система тестирования
+let currentTest = {
+    category: '',
+    questions: [],
+    currentQuestion: 0,
+    correctAnswers: 0,
+    totalQuestions: 5
+};
+
+function startTest(category) {
+    currentTest.category = category;
+    currentTest.currentQuestion = 0;
+    currentTest.correctAnswers = 0;
+    currentTest.questions = generateTestQuestions(category);
+    
+    return showTestQuestion();
+}
+
+function generateTestQuestions(category) {
+    const words = category === 'animals' ? animalWords : foodWords;
+    const questions = [];
+    const usedWords = new Set();
+    
+    // Генерируем 5 вопросов
+    for (let i = 0; i < currentTest.totalQuestions; i++) {
+        let randomWord;
+        do {
+            randomWord = words[Math.floor(Math.random() * words.length)];
+        } while (usedWords.has(randomWord.english));
+        
+        usedWords.add(randomWord.english);
+        
+        // Случайный тип вопроса
+        const questionTypes = ['translate-to-russian', 'translate-to-english', 'anagram'];
+        const questionType = questionTypes[Math.floor(Math.random() * questionTypes.length)];
+        
+        questions.push({
+            type: questionType,
+            word: randomWord,
+            options: generateOptions(randomWord, words, questionType)
+        });
+    }
+    
+    return questions;
+}
+
+function generateOptions(correctWord, allWords, questionType) {
+    const options = [];
+    const usedOptions = new Set();
+    
+    if (questionType === 'translate-to-russian') {
+        options.push({ text: correctWord.russian, correct: true });
+        usedOptions.add(correctWord.russian);
+        
+        while (options.length < 4) {
+            const randomWord = allWords[Math.floor(Math.random() * allWords.length)];
+            if (!usedOptions.has(randomWord.russian)) {
+                options.push({ text: randomWord.russian, correct: false });
+                usedOptions.add(randomWord.russian);
+            }
+        }
+    } else if (questionType === 'translate-to-english') {
+        options.push({ text: correctWord.english, correct: true });
+        usedOptions.add(correctWord.english);
+        
+        while (options.length < 4) {
+            const randomWord = allWords[Math.floor(Math.random() * allWords.length)];
+            if (!usedOptions.has(randomWord.english)) {
+                options.push({ text: randomWord.english, correct: false });
+                usedOptions.add(randomWord.english);
+            }
+        }
+    }
+    
+    return shuffleArray(options);
+}
+
+function shuffleArray(array) {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+}
+
+function scrambleWord(word) {
+    const letters = word.split('');
+    return shuffleArray(letters).join('');
+}
+
+function showTestQuestion() {
+    const question = currentTest.questions[currentTest.currentQuestion];
+    const categoryName = currentTest.category === 'animals' ? 'Животные' : 'Еда';
+    
+    let questionHTML = '';
+    
+    if (question.type === 'translate-to-russian') {
+        questionHTML = `
             <div class="question">
-                <h3>Как переводится слово "Apple"?</h3>
+                <h3>Как переводится слово "${question.word.english}"?</h3>
                 <div class="answers">
-                    <button onclick="checkAnswer(this)" data-correct="true">Яблоко</button>
-                    <button onclick="checkAnswer(this)">Банан</button>
-                    <button onclick="checkAnswer(this)">Апельсин</button>
-                    <button onclick="checkAnswer(this)">Груша</button>
+                    ${question.options.map(option => 
+                        `<button onclick="checkTestAnswer(this, ${option.correct})">${option.text}</button>`
+                    ).join('')}
                 </div>
             </div>
+        `;
+    } else if (question.type === 'translate-to-english') {
+        questionHTML = `
+            <div class="question">
+                <h3>Как по-английски будет "${question.word.russian}"?</h3>
+                <div class="answers">
+                    ${question.options.map(option => 
+                        `<button onclick="checkTestAnswer(this, ${option.correct})">${option.text}</button>`
+                    ).join('')}
+                </div>
+            </div>
+        `;
+    } else if (question.type === 'anagram') {
+        const scrambled = scrambleWord(question.word.english);
+        questionHTML = `
+            <div class="question">
+                <h3>Разгадайте слово: <span class="anagram">${scrambled}</span></h3>
+                <div class="anagram-input">
+                    <input type="text" id="anagramAnswer" placeholder="Введите русский перевод" style="padding: 10px; font-size: 16px; margin: 10px; border-radius: 5px; border: 2px solid #ddd;">
+                    <button onclick="checkAnagramAnswer()" style="padding: 10px 20px; font-size: 16px; background: #1976D2; color: white; border: none; border-radius: 5px; cursor: pointer;">Проверить</button>
+                </div>
+            </div>
+        `;
+    }
+    
+    return `
+        <div class="test-container">
+            <h2>Тестирование: ${categoryName}</h2>
+            <div class="progress">Вопрос ${currentTest.currentQuestion + 1} из ${currentTest.totalQuestions}</div>
+            ${questionHTML}
         </div>
-    `
-};
+    `;
+}
+
+function checkTestAnswer(button, isCorrect) {
+    const buttons = button.parentElement.querySelectorAll('button');
+    
+    buttons.forEach(btn => {
+        btn.disabled = true;
+        if (btn.onclick.toString().includes('true')) {
+            btn.style.background = '#4caf50';
+            btn.style.color = 'white';
+        }
+    });
+    
+    if (isCorrect) {
+        currentTest.correctAnswers++;
+        button.insertAdjacentHTML('beforeend', ' ✓');
+        saveTestResult(true);
+    } else {
+        button.style.background = '#f44336';
+        button.style.color = 'white';
+        button.insertAdjacentHTML('beforeend', ' ✗');
+        saveTestResult(false);
+    }
+    
+    setTimeout(() => {
+        nextTestQuestion();
+    }, 1500);
+}
+
+function checkAnagramAnswer() {
+    const input = document.getElementById('anagramAnswer');
+    const userAnswer = input.value.trim().toLowerCase();
+    const correctAnswer = currentTest.questions[currentTest.currentQuestion].word.russian.toLowerCase();
+    
+    const isCorrect = userAnswer === correctAnswer;
+    
+    if (isCorrect) {
+        currentTest.correctAnswers++;
+        input.style.background = '#4caf50';
+        input.style.color = 'white';
+        saveTestResult(true);
+    } else {
+        input.style.background = '#f44336';
+        input.style.color = 'white';
+        input.value = `Правильно: ${currentTest.questions[currentTest.currentQuestion].word.russian}`;
+        saveTestResult(false);
+    }
+    
+    input.disabled = true;
+    document.querySelector('.anagram-input button').disabled = true;
+    
+    setTimeout(() => {
+        nextTestQuestion();
+    }, 2000);
+}
+
+function nextTestQuestion() {
+    currentTest.currentQuestion++;
+    
+    if (currentTest.currentQuestion >= currentTest.totalQuestions) {
+        showTestResults();
+    } else {
+        document.getElementById('lesson-content').innerHTML = showTestQuestion();
+    }
+}
+
+function showTestResults() {
+    const percentage = Math.round((currentTest.correctAnswers / currentTest.totalQuestions) * 100);
+    const categoryName = currentTest.category === 'animals' ? 'Животные' : 'Еда';
+    
+    let resultMessage = '';
+    let resultColor = '';
+    
+    if (percentage >= 80) {
+        resultMessage = 'Отлично! 🎉';
+        resultColor = '#4caf50';
+    } else if (percentage >= 60) {
+        resultMessage = 'Хорошо! 😊';
+        resultColor = '#ff9800';
+    } else {
+        resultMessage = 'Нужно повторить 💪';
+        resultColor = '#f44336';
+    }
+    
+    document.getElementById('lesson-content').innerHTML = `
+        <div class="test-container">
+            <h2>Результаты теста: ${categoryName}</h2>
+            <div class="final-score">
+                <h3 style="color: ${resultColor}">${resultMessage}</h3>
+                <p>Правильных ответов: ${currentTest.correctAnswers} из ${currentTest.totalQuestions}</p>
+                <p>Точность: ${percentage}%</p>
+                <button onclick="startTest('${currentTest.category}')" style="background: #1976D2; color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 16px; cursor: pointer; margin: 10px;">
+                    Повторить тест
+                </button>
+                <button onclick="location.reload()" style="background: #4CAF50; color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 16px; cursor: pointer; margin: 10px;">
+                    К обучению
+                </button>
+            </div>
+        </div>
+    `;
+}
