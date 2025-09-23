@@ -640,8 +640,8 @@ function updateStreak() {
     });
 }
 
-// Массив слов для раздела "Животные"
-const animalWords = [
+// Массивы слов для разных языков
+const animalWordsRu = [
     {
         english: 'Ant',
         russian: 'Муравей',
@@ -837,6 +837,87 @@ const animalWords = [
     }
 ];
 
+// Казахские животные
+const animalWordsKz = [
+    {
+        english: 'Camel',
+        russian: 'Верблюд',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/camel-%D2%9B%D0%B0%D0%BC%D0%B0%D0%BB.jpg?raw=true',
+        audio: '#',
+        association: 'Посмотри на верблюда - түйе ҚАМАЛдың қасында тұр (CAMEL ≈ қамал)! Он стоит рядом с крепостью и охраняет её.',
+        examples: [
+            'The camel walks in desert - Верблюд идёт по пустыне',
+            'Camels have humps - У верблюдов есть горбы'
+        ]
+    },
+    {
+        english: 'Duck',
+        russian: 'Утка',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/duck-%D0%B4%D0%B0%D0%BA.jpg?raw=true',
+        audio: '#',
+        association: 'Смотри на утку - үйрек ДАҚқа қарап тұр (DUCK ≈ дақ)! Она смотрит на пятно и удивляется.',
+        examples: [
+            'The duck swims in pond - Утка плавает в пруду',
+            'Ducks can fly and swim - Утки умеют летать и плавать'
+        ]
+    },
+    {
+        english: 'Goose',
+        russian: 'Гусь',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/goose-%D2%9B%D2%B1%D1%81.jpg?raw=true',
+        audio: '#',
+        association: 'Посмотри на гуся - қаз ҚҰСтарға жатады (GOOSE ≈ құс)! Он относится к птицам и гордится этим.',
+        examples: [
+            'The goose is white - Гусь белый',
+            'Geese fly in formation - Гуси летают строем'
+        ]
+    },
+    {
+        english: 'Owl',
+        russian: 'Сова',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/owl-%D0%B0%D1%83%D1%8B%D0%BB.jpg?raw=true',
+        audio: '#',
+        association: 'Смотри на сову - үкі АУЫЛдың үстінде ұшады (OWL ≈ ауыл)! Она летает над деревней и всё видит.',
+        examples: [
+            'The owl hunts at night - Сова охотится ночью',
+            'Owls have big eyes - У сов большие глаза'
+        ]
+    },
+    {
+        english: 'Bee',
+        russian: 'Пчела',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/bee-%D0%B1%D0%B8.jpg?raw=true',
+        audio: '#',
+        association: 'Посмотри на пчелу - ара БИ билеп тұр (BEE ≈ би)! Она танцует и показывает другим пчёлам дорогу к цветам.',
+        examples: [
+            'The bee makes honey - Пчела делает мёд',
+            'Bees pollinate flowers - Пчёлы опыляют цветы'
+        ]
+    },
+    {
+        english: 'Horse',
+        russian: 'Лошадь',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/horse-%D0%BE%D1%80%D1%8B%D1%81.jpg?raw=true',
+        audio: '#',
+        association: 'Смотри на лошадь - ат ОРЫС киымын киып тұр (HORSE ≈ орыс)! Она одета в русскую одежду и выглядит элегантно.',
+        examples: [
+            'The horse runs fast - Лошадь быстро бежит',
+            'Horses eat grass - Лошади едят траву'
+        ]
+    },
+    {
+        english: 'Sheep',
+        russian: 'Овца',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/sheep-%D1%88%D0%B8%D0%BF%D0%B0.jpg?raw=true',
+        audio: '#',
+        association: 'Посмотри на овцу - қойдың қолында ШИПА бар (SHEEP ≈ шипа)! У неё в руках шипы, и она ими защищается.',
+        examples: [
+            'The sheep gives wool - Овца даёт шерсть',
+            'Sheep live in flocks - Овцы живут стадами'
+        ]
+    }
+];
+
 // Массив слов для раздела "Еда"
 const foodWords = [
     {
@@ -921,9 +1002,19 @@ const foodWords = [
 let currentWordIndex = 0;
 let currentCategory = 'animals'; // 'animals' или 'food'
 
+// Функция получения правильного массива слов
+function getWords(category) {
+    if (category === 'animals') {
+        return currentLanguage === 'kz' ? animalWordsKz : animalWordsRu;
+    } else if (category === 'food') {
+        return foodWords; // Пока один массив для еды
+    }
+    return [];
+}
+
 // Функция для отображения текущего слова
 function showCurrentWord() {
-    const words = currentCategory === 'animals' ? animalWords : foodWords;
+    const words = getWords(currentCategory);
     const word = words[currentWordIndex];
     
     // Сохраняем прогресс просмотра слова
@@ -965,7 +1056,7 @@ function showCurrentWord() {
 }
 
 function showNextWord() {
-    const words = currentCategory === 'animals' ? animalWords : foodWords;
+    const words = getWords(currentCategory);
     if (currentWordIndex < words.length - 1) {
         currentWordIndex++;
         document.getElementById('lesson-content').innerHTML = showCurrentWord();
@@ -1243,14 +1334,11 @@ function updateLanguageInterface() {
         welcomeSubtitle.textContent = t('welcome_subtitle');
     }
     
-    // Обновляем ассоциации в карточке слова
-    const associationText = document.querySelector('.association-text');
-    if (associationText) {
-        const words = currentCategory === 'animals' ? animalWords : foodWords;
-        const word = words[currentWordIndex];
-        if (word && word.associations) {
-            associationText.textContent = word.associations[currentLanguage] || word.associations.ru;
-        }
+    // Перезагружаем контент с новыми словами
+    const lessonContent = document.getElementById('lesson-content');
+    if (lessonContent && lessonContent.querySelector('.word-card')) {
+        currentWordIndex = 0; // Сбрасываем на первое слово
+        lessonContent.innerHTML = showCurrentWord();
     }
 }
 
@@ -1353,7 +1441,7 @@ function startTest(category) {
 }
 
 function generateTestQuestions(category) {
-    const words = category === 'animals' ? animalWords : foodWords;
+    const words = getWords(category);
     const questions = [];
     const usedWords = new Set();
     
