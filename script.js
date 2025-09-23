@@ -669,7 +669,7 @@ const animalWords = [
         russian: 'Жук',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/beetle-%D0%B1%D0%B8%D1%82%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/beetle.mp3',
-        association: 'Смотри, какой сильный жучок держит в лапках БИТУ (BEETLE ≈ бита)!' Он собирается играть в бейсбол со своими друзьями-насекомыми.',
+        association: 'Смотри, какой сильный жучок держит в лапках БИТУ (BEETLE ≈ бита)! Он собирается играть в бейсбол со своими друзьями-насекомыми.',
         examples: [
             'The beetle is black - Жук чёрный',
             'Beetles can fly - Жуки умеют летать'
@@ -680,7 +680,7 @@ const animalWords = [
         russian: 'Бык',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/bull-%D0%B1%D1%83%D0%BB%D0%BA%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/bull.mp3',
-        association: 'Посмотри, как большой добрый бычок кушает вкусную БУЛОЧКУ (BULL ≈ булка)!' Он очень любит хлебобулочные изделия на завтрак.',
+        association: 'Посмотри, как большой добрый бычок кушает вкусную БУЛОЧКУ (BULL ≈ булка)! Он очень любит хлебобулочные изделия на завтрак.',
         examples: [
             'The bull is very strong - Бык очень сильный',
             'There is a bull in the field - На поле есть бык'
@@ -691,7 +691,7 @@ const animalWords = [
         russian: 'Кролик',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/bunny-%D0%B1%D0%B0%D0%BD%D1%8F.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/bunny.mp3',
-        association: 'Какой чистенький зайчик моется в БАНЬКЕ (BUNNY ≈ баня)!' Он трёт спинку мочалкой и поёт весёлые песенки.',
+        association: 'Какой чистенький зайчик моется в БАНЬКЕ (BUNNY ≈ баня)! Он трёт спинку мочалкой и поёт весёлые песенки.',
         examples: [
             'The bunny is white - Кролик белый',
             'Bunny likes carrots - Кролик любит морковку'
@@ -702,7 +702,7 @@ const animalWords = [
         russian: 'Ослик',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/donkey-%D1%82%D0%BE%D0%BD%D0%BA%D0%B8%D0%B9.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/donkey.mp3',
-        association: 'Смотри на этого ТОНЕНЬКОГО ослика (DONKEY ≈ тонкий)!' Он такой худенький, надо его покормить.',
+        association: 'Смотри на этого ТОНЕНЬКОГО ослика (DONKEY ≈ тонкий)! Он такой худенький, надо его покормить.',
         examples: [
             'The donkey is grey - Ослик серый',
             'Donkey carries bags - Ослик носит сумки'
@@ -713,7 +713,7 @@ const animalWords = [
         russian: 'Орёл',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/eagle-%D0%B8%D0%B3%D0%BB%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/eagle.mp3',
-        association: 'Посмотри, как гордый орёл смотрит на ИГЛУ (EAGLE ≈ игла)!' Он думает: "Какая острая железная игла"',
+        association: 'Посмотри, как гордый орёл смотрит на ИГЛУ (EAGLE ≈ игла)! Он думает: "Какая острая железная игла"',
         examples: [
             'The eagle flies high - Орёл летит высоко',
             'Eagles have sharp eyes - У орлов острое зрение'
@@ -724,7 +724,7 @@ const animalWords = [
         russian: 'Суслик',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/gopher-%D0%B3%D0%BE%D0%BB%D1%8C%D1%84.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/gopher.mp3',
-        association: 'Какой умный суслик играет в ГОЛЬФ (GOPHER ≈ гольф)!' Он держит клюшку и целится в лунку, как настоящий спортсмен.',
+        association: 'Какой умный суслик играет в ГОЛЬФ (GOPHER ≈ гольф)! Он держит клюшку и целится в лунку, как настоящий спортсмен.',
         examples: [
             'The gopher lives underground - Суслик живёт под землёй',
             'Gopher has small eyes - У суслика маленькие глазки'
@@ -735,7 +735,7 @@ const animalWords = [
         russian: 'Тюлень',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/seal-%D1%81%D0%B8%D0%BB%D0%B0.png?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/seal.mp3',
-        association: 'Посмотри, какой СИЛЬНЫЙ тюлень (SEAL ≈ сила)!' Он показывает свои мускулы и гордится своей силой, как настоящий богатырь.',
+        association: 'Посмотри, какой СИЛЬНЫЙ тюлень (SEAL ≈ сила)! Он показывает свои мускулы и гордится своей силой, как настоящий богатырь.',
         examples: [
             'The seal swims fast - Тюлень быстро плавает',
             'Seals live in cold water - Тюлени живут в холодной воде'
@@ -746,7 +746,7 @@ const animalWords = [
         russian: 'Индейка',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/turkey-%D1%82%D1%91%D1%80%D0%BA%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/turkey.mp3',
-        association: 'Смотри, как забавная индейка трёт сыр на ТЁРКЕ (TURKEY ≈ тёрка)!' Она готовит вкусный салатик для своих цыплят.',
+        association: 'Смотри, как забавная индейка трёт сыр на ТЁРКЕ (TURKEY ≈ тёрка)! Она готовит вкусный салатик для своих цыплят.',
         examples: [
             'The turkey is big - Индейка большая',
             'Turkey has colorful feathers - У индейки разноцветные перья'
