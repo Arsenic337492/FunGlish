@@ -1164,7 +1164,10 @@ function checkLanguageOnLoad() {
     } else {
         // Если язык не выбран - показываем модальное окно
         setTimeout(() => {
-            document.getElementById('languageModal').classList.add('active');
+            const languageModal = document.getElementById('languageModal');
+            if (languageModal) {
+                languageModal.classList.add('active');
+            }
         }, 500);
     }
 }
