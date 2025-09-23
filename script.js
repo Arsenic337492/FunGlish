@@ -647,7 +647,10 @@ const animalWords = [
         russian: 'Муравей',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/ant-%D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/ant.mp3',
-        association: 'Представь маленького муравьишку, который держит в лапках большую АНТЕННУ (ANT ≈ антенна)! Муравей хочет поговорить по рации со своими друзьями в муравейнике.',
+        associations: {
+            ru: 'Представь маленького муравьишку, который держит в лапках большую АНТЕННУ (ANT ≈ антенна)! Муравей хочет поговорить по рации со своими друзьями в муравейнике.',
+            kz: 'Кішкентай құмырсқаны елестетіңіз, ол үлкен АНТЕННАны ұстап тұр (ANT ≈ антенна)! Құмырсқа өз достарымен радио арқылы сөйлескісі келеді.'
+        },
         examples: [
             'The ant is very small - Муравей очень маленький',
             'Ants work together - Муравьи работают вместе'
@@ -658,7 +661,10 @@ const animalWords = [
         russian: 'Медведь',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/bear-%D0%B1%D0%B8%D1%80%D0%BA%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/bear.mp3',
-        association: 'Посмотри на мишку с яркой БИРКОЙ в ушке (BEAR ≈ бирка)! Как в магазине игрушек - у каждого плюшевого мишки есть бирочка с именем.',
+        associations: {
+            ru: 'Посмотри на мишку с яркой БИРКОЙ в ушке (BEAR ≈ бирка)! Как в магазине игрушек - у каждого плюшевого мишки есть бирочка с именем.',
+            kz: 'Аюға қараңыз, арыстан құлағында жарқын БИРКА бар (BEAR ≈ бирка)! Ойыншық дүкеніндегідей - әр жұмсақ аюдың аты жазылған биркасы бар.'
+        },
         examples: [
             'The bear loves honey - Медведь любит мёд',
             'A big brown bear - Большой бурый медведь'
@@ -935,8 +941,8 @@ function showCurrentWord() {
                 <img src="${word.image}" alt="${word.english}">
             </div>
             <div class="word-content">
-                <h3>Ассоциация:</h3>
-                <p class="association-text">${word.association}</p>
+                <h3 data-translate="association">Ассоциация:</h3>
+                <p class="association-text">${word.associations ? word.associations[currentLanguage] || word.associations.ru : word.association || ''}</p>
                 <div class="examples">
                     <h3>Примеры использования:</h3>
                     <ul>
@@ -1235,6 +1241,16 @@ function updateLanguageInterface() {
     const welcomeSubtitle = document.querySelector('.welcome-message p');
     if (welcomeSubtitle) {
         welcomeSubtitle.textContent = t('welcome_subtitle');
+    }
+    
+    // Обновляем ассоциации в карточке слова
+    const associationText = document.querySelector('.association-text');
+    if (associationText) {
+        const words = currentCategory === 'animals' ? animalWords : foodWords;
+        const word = words[currentWordIndex];
+        if (word && word.associations) {
+            associationText.textContent = word.associations[currentLanguage] || word.associations.ru;
+        }
     }
 }
 
