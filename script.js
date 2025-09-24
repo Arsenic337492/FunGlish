@@ -291,6 +291,11 @@ document.addEventListener('DOMContentLoaded', function() {
             premiumFeatures.style.display = user ? 'none' : 'block';
         }
 
+        // Проверяем язык для неавторизованных пользователей
+        if (!user) {
+            checkLanguageForGuest();
+        }
+
         if (user) {
             // Пользователь залогинен
             const userDoc = await db.collection('users').doc(user.uid).get();
@@ -1564,11 +1569,25 @@ function selectLanguage(lang) {
         });
     }
     
-    // Перенаправляем на соответствующую страницу
-    if (lang === 'kz') {
-        window.location.href = 'learning-kz.html';
-    } else {
-        window.location.href = 'learning.html';
+    // Закрываем модальное окно
+    const languageModal = document.getElementById('languageModal');
+    if (languageModal) {
+        languageModal.classList.remove('active');
+    }
+    
+    // Обновляем интерфейс
+    updateLanguageInterface();
+    
+    // Показываем уведомление
+    const message = lang === 'kz' ? t('language_changed_kz') : t('language_changed_ru');
+    showNotification(message, 'success');
+    
+    // Перенаправляем на соответствующую страницу (только если на неправильной)
+    const currentPage = window.location.pathname;
+    if (lang === 'kz' && !currentPage.includes('learning-kz.html')) {
+        setTimeout(() => window.location.href = 'learning-kz.html', 1000);
+    } else if (lang === 'ru' && currentPage.includes('learning-kz.html')) {
+        setTimeout(() => window.location.href = 'learning.html', 1000);
     }
 }
 
@@ -1627,14 +1646,20 @@ function checkLanguageOnLoad() {
     if (savedLanguage) {
         currentLanguage = savedLanguage;
         updateLanguageInterface();
-    } else {
+    }
+}
+
+// Отдельная функция для неавторизованных пользователей
+function checkLanguageForGuest() {
+    const savedLanguage = localStorage.getItem('selectedLanguage');
+    if (!savedLanguage) {
         // Если язык не выбран - показываем модальное окно
         setTimeout(() => {
             const languageModal = document.getElementById('languageModal');
             if (languageModal) {
                 languageModal.classList.add('active');
             }
-        }, 500);
+        }, 1000); // Увеличиваем задержку для лучшего UX
     }
 }
 
@@ -1680,9 +1705,16 @@ function togglePassword(button) {
 
 // Закрытие модального окна при клике вне его
 document.addEventListener('click', function(event) {
-    const modal = document.getElementById('authModal');
-    if (event.target === modal) {
-        modal.classList.remove('active');
+    const authModal = document.getElementById('authModal');
+    const languageModal = document.getElementById('languageModal');
+    
+    if (event.target === authModal) {
+        authModal.classList.remove('active');
+    }
+    
+    // Не позволяем закрыть модальное окно выбора языка для неавторизованных пользователей
+    if (event.target === languageModal && auth.currentUser) {
+        languageModal.classList.remove('active');
     }
 });
 
