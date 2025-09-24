@@ -1703,14 +1703,16 @@ function generateOptions(correctWord, allWords, questionType) {
     const usedOptions = new Set();
     
     if (questionType === 'translate-to-russian') {
-        options.push({ text: correctWord.russian, correct: true });
-        usedOptions.add(correctWord.russian);
+        const correctTranslation = currentLanguage === 'kz' ? correctWord.kazakh : correctWord.russian;
+        options.push({ text: correctTranslation, correct: true });
+        usedOptions.add(correctTranslation);
         
         while (options.length < 4) {
             const randomWord = allWords[Math.floor(Math.random() * allWords.length)];
-            if (!usedOptions.has(randomWord.russian)) {
-                options.push({ text: randomWord.russian, correct: false });
-                usedOptions.add(randomWord.russian);
+            const randomTranslation = currentLanguage === 'kz' ? randomWord.kazakh : randomWord.russian;
+            if (!usedOptions.has(randomTranslation)) {
+                options.push({ text: randomTranslation, correct: false });
+                usedOptions.add(randomTranslation);
             }
         }
     } else if (questionType === 'translate-to-english') {
@@ -1769,9 +1771,10 @@ function showTestQuestion() {
             </div>
         `;
     } else if (question.type === 'translate-to-english') {
+        const wordToTranslate = currentLanguage === 'kz' ? question.word.kazakh : question.word.russian;
         const questionText = currentLanguage === 'kz' ? 
-            `"${question.word.russian}" ағылшынша қалай болады?` : 
-            `Как по-английски будет "${question.word.russian}"?`;
+            `"${wordToTranslate}" ағылшынша қалай болады?` : 
+            `Как по-английски будет "${wordToTranslate}"?`;
         questionHTML = `
             <div class="question">
                 <h3>${questionText}</h3>
@@ -1831,13 +1834,15 @@ function checkTestAnswer(button, isCorrect) {
     if (isCorrect) {
         currentTest.correctAnswers++;
         button.insertAdjacentHTML('beforeend', ' ✓');
-        showDetailedFeedback(true, question.word.english, question.word.russian);
+        const translation = currentLanguage === 'kz' ? question.word.kazakh : question.word.russian;
+        showDetailedFeedback(true, question.word.english, translation);
         saveTestResult(true);
     } else {
         button.style.background = '#f44336';
         button.style.color = 'white';
         button.insertAdjacentHTML('beforeend', ' ✗');
-        showDetailedFeedback(false, question.word.english, question.word.russian);
+        const translation = currentLanguage === 'kz' ? question.word.kazakh : question.word.russian;
+        showDetailedFeedback(false, question.word.english, translation);
         saveTestResult(false);
     }
     
@@ -1896,13 +1901,15 @@ function checkAnagramAnswer() {
         currentTest.correctAnswers++;
         input.style.background = '#4caf50';
         input.style.color = 'white';
-        showDetailedFeedback(true, correctAnswer, currentTest.questions[currentTest.currentQuestion].word.russian);
+        const translation = currentLanguage === 'kz' ? currentTest.questions[currentTest.currentQuestion].word.kazakh : currentTest.questions[currentTest.currentQuestion].word.russian;
+        showDetailedFeedback(true, correctAnswer, translation);
         saveTestResult(true);
     } else {
         input.style.background = '#f44336';
         input.style.color = 'white';
         input.value = `Правильно: ${correctAnswer}`;
-        showDetailedFeedback(false, correctAnswer, currentTest.questions[currentTest.currentQuestion].word.russian);
+        const translation = currentLanguage === 'kz' ? currentTest.questions[currentTest.currentQuestion].word.kazakh : currentTest.questions[currentTest.currentQuestion].word.russian;
+        showDetailedFeedback(false, correctAnswer, translation);
         saveTestResult(false);
     }
     
