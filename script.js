@@ -651,10 +651,16 @@ const animalWordsRu = [
             ru: 'Представь маленького муравьишку, который держит в лапках большую АНТЕННУ (ANT ≈ антенна)! Муравей хочет поговорить по рации со своими друзьями в муравейнике.',
             kz: 'Кішкентай құмырсқаны елестетіңіз, ол үлкен АНТЕННАны ұстап тұр (ANT ≈ антенна)! Құмырсқа өз достарымен радио арқылы сөйлескісі келеді.'
         },
-        examples: [
-            'The ant is very small - Муравей очень маленький',
-            'Ants work together - Муравьи работают вместе'
-        ]
+        examples: {
+            ru: [
+                'The ant is very small - Муравей очень маленький',
+                'Ants work together - Муравьи работают вместе'
+            ],
+            kz: [
+                'The ant is very small - Құмырсқа өте кішкентай',
+                'Ants work together - Құмырсқалар бірге жұмыс істейді'
+            ]
+        }
     },
     {
         english: 'Bear',
@@ -665,10 +671,16 @@ const animalWordsRu = [
             ru: 'Посмотри на мишку с яркой БИРКОЙ в ушке (BEAR ≈ бирка)! Как в магазине игрушек - у каждого плюшевого мишки есть бирочка с именем.',
             kz: 'Аюға қараңыз, арыстан құлағында жарқын БИРКА бар (BEAR ≈ бирка)! Ойыншық дүкеніндегідей - әр жұмсақ аюдың аты жазылған биркасы бар.'
         },
-        examples: [
-            'The bear loves honey - Медведь любит мёд',
-            'A big brown bear - Большой бурый медведь'
-        ]
+        examples: {
+            ru: [
+                'The bear loves honey - Медведь любит мёд',
+                'A big brown bear - Большой бурый медведь'
+            ],
+            kz: [
+                'The bear loves honey - Аю балды жақсы көреді',
+                'A big brown bear - Үлкен қоңыр аю'
+            ]
+        }
     },
     {
         english: 'Beetle',
@@ -679,10 +691,16 @@ const animalWordsRu = [
             ru: 'Смотри, какой сильный жучок держит в лапках БИТУ (BEETLE ≈ бита)! Он собирается играть в бейсбол со своими друзьями-насекомыми.',
             kz: 'Мықты қоңызға қараңыз, ол қолында БИТА устап тұр (BEETLE ≈ бита)! Ол өзінің жәндік-достарымен бейсбол ойнағысы келеді.'
         },
-        examples: [
-            'The beetle is black - Жук чёрный',
-            'Beetles can fly - Жуки умеют летать'
-        ]
+        examples: {
+            ru: [
+                'The beetle is black - Жук чёрный',
+                'Beetles can fly - Жуки умеют летать'
+            ],
+            kz: [
+                'The beetle is black - Қоңыз қара түсті',
+                'Beetles can fly - Қоңыздар ұша алады'
+            ]
+        }
     },
     {
         english: 'Bull',
@@ -693,10 +711,16 @@ const animalWordsRu = [
             ru: 'Посмотри, как большой добрый бычок кушает вкусную БУЛОЧКУ (BULL ≈ булка)! Он очень любит хлебобулочные изделия на завтрак.',
             kz: 'Үлкен мейірімді бұқаға қараңыз, ол дәмді НАН жеп тұр (BULL ≈ булка)! Ол таңғы асында нан өнімдерін өте жақсы көреді.'
         },
-        examples: [
-            'The bull is very strong - Бык очень сильный',
-            'There is a bull in the field - На поле есть бык'
-        ]
+        examples: {
+            ru: [
+                'The bull is very strong - Бык очень сильный',
+                'There is a bull in the field - На поле есть бык'
+            ],
+            kz: [
+                'The bull is very strong - Бұқа өте күшті',
+                'There is a bull in the field - Далада бұқа бар'
+            ]
+        }
     },
     {
         english: 'Bunny',
@@ -707,10 +731,16 @@ const animalWordsRu = [
             ru: 'Какой чистенький зайчик моется в БАНЬКЕ (BUNNY ≈ баня)! Он трёт спинку мочалкой и поёт весёлые песенки.',
             kz: 'Қандай таза қоян МОНШАда жуынып тұр (BUNNY ≈ монша)! Ол арқасын сүртіп қуанышты әндер салады.'
         },
-        examples: [
-            'The bunny is white - Кролик белый',
-            'Bunny likes carrots - Кролик любит морковку'
-        ]
+        examples: {
+            ru: [
+                'The bunny is white - Кролик белый',
+                'Bunny likes carrots - Кролик любит морковку'
+            ],
+            kz: [
+                'The bunny is white - Қоян ақ түсті',
+                'Bunny likes carrots - Қоян сәбізді жақсы көреді'
+            ]
+        }
     },
     {
         english: 'Donkey',
@@ -721,10 +751,16 @@ const animalWordsRu = [
             ru: 'Смотри на этого ТОНЕНЬКОГО ослика (DONKEY ≈ тонкий)! Он такой худенький, надо его покормить.',
             kz: 'Мына ЖІҢІШКЕ ешкіге қараңыз (DONKEY ≈ жіңішке)! Ол өте арық, оны азықтандыру керек.'
         },
-        examples: [
-            'The donkey is grey - Ослик серый',
-            'Donkey carries bags - Ослик носит сумки'
-        ]
+        examples: {
+            ru: [
+                'The donkey is grey - Ослик серый',
+                'Donkey carries bags - Ослик носит сумки'
+            ],
+            kz: [
+                'The donkey is grey - Ешкі сұр түсті',
+                'Donkey carries bags - Ешкі қапшықтарды көтереді'
+            ]
+        }
     },
     {
         english: 'Eagle',
@@ -735,10 +771,16 @@ const animalWordsRu = [
             ru: 'Посмотри, как гордый орёл смотрит на ИГЛУ (EAGLE ≈ игла)! Он думает: "Какая острая железная игла"',
             kz: 'Мақтанышты бүркітке қараңыз, ол ИНЕге қарап тұр (EAGLE ≈ ине)! Ол ойлайды: "Қандай өткір темір ине"'
         },
-        examples: [
-            'The eagle flies high - Орёл летит высоко',
-            'Eagles have sharp eyes - У орлов острое зрение'
-        ]
+        examples: {
+            ru: [
+                'The eagle flies high - Орёл летит высоко',
+                'Eagles have sharp eyes - У орлов острое зрение'
+            ],
+            kz: [
+                'The eagle flies high - Бүркіт биік ұшады',
+                'Eagles have sharp eyes - Бүркіттердің өткір көзі бар'
+            ]
+        }
     },
     {
         english: 'Gopher',
@@ -749,10 +791,16 @@ const animalWordsRu = [
             ru: 'Какой умный суслик играет в ГОЛЬФ (GOPHER ≈ гольф)! Он держит клюшку и целится в лунку, как настоящий спортсмен.',
             kz: 'Қандай ақылды саршымақ ГОЛЬФ ойнап тұр (GOPHER ≈ гольф)! Ол таяқшаны ұстап тесікке нишан алады, нағыз спортшыдай.'
         },
-        examples: [
-            'The gopher lives underground - Суслик живёт под землёй',
-            'Gopher has small eyes - У суслика маленькие глазки'
-        ]
+        examples: {
+            ru: [
+                'The gopher lives underground - Суслик живёт под землёй',
+                'Gopher has small eyes - У суслика маленькие глазки'
+            ],
+            kz: [
+                'The gopher lives underground - Саршымақ жер астында өмір сүреді',
+                'Gopher has small eyes - Саршымақтың кішкентай көздері бар'
+            ]
+        }
     },
     {
         english: 'Seal',
@@ -763,10 +811,16 @@ const animalWordsRu = [
             ru: 'Посмотри, какой СИЛЬНЫЙ тюлень (SEAL ≈ сила)! Он показывает свои мускулы и гордится своей силой, как настоящий богатырь.',
             kz: 'Қандай КҮШТІ итбалыққа қараңыз (SEAL ≈ күш)! Ол өзінің булшықеттерін көрсетіп өзінің күшімен мақтанады, нағыз батырдай.'
         },
-        examples: [
-            'The seal swims fast - Тюлень быстро плавает',
-            'Seals live in cold water - Тюлени живут в холодной воде'
-        ]
+        examples: {
+            ru: [
+                'The seal swims fast - Тюлень быстро плавает',
+                'Seals live in cold water - Тюлени живут в холодной воде'
+            ],
+            kz: [
+                'The seal swims fast - Итбалық жылдам жүзеді',
+                'Seals live in cold water - Итбалықтар суық суда өмір сүреді'
+            ]
+        }
     },
     {
         english: 'Turkey',
@@ -777,10 +831,16 @@ const animalWordsRu = [
             ru: 'Смотри, как забавная индейка трёт сыр на ТЁРКЕ (TURKEY ≈ тёрка)! Она готовит вкусный салатик для своих цыплят.',
             kz: 'Қызықты күркеге қараңыз, ол ирімшікті ТАРАКта үгітіп тұр (TURKEY ≈ тарақ)! Ол өзінің балапандарына дәмді салат даярлап тұр.'
         },
-        examples: [
-            'The turkey is big - Индейка большая',
-            'Turkey has colorful feathers - У индейки разноцветные перья'
-        ]
+        examples: {
+            ru: [
+                'The turkey is big - Индейка большая',
+                'Turkey has colorful feathers - У индейки разноцветные перья'
+            ],
+            kz: [
+                'The turkey is big - Күрке үлкен',
+                'Turkey has colorful feathers - Күркенің түрлі-түсті қауырсындары бар'
+            ]
+        }
     }
 ];
 
@@ -795,10 +855,16 @@ const animalWordsKz = [
             ru: 'Посмотри на верблюда - он стоит рядом с КАМНЕМ (CAMEL ≈ камень)! Он охраняет каменную крепость.',
             kz: 'Түйеге қараңыз - ол ҚАМАЛдың қасында тұр (CAMEL ≈ қамал)! Ол қамалды қорғайды және оны қорғайды.'
         },
-        examples: [
-            'The camel walks in desert - Верблюд идёт по пустыне',
-            'Camels have humps - У верблюдов есть горбы'
-        ]
+        examples: {
+            ru: [
+                'The camel walks in desert - Верблюд идёт по пустыне',
+                'Camels have humps - У верблюдов есть горбы'
+            ],
+            kz: [
+                'The camel walks in desert - Түйе шөлде жүреді',
+                'Camels have humps - Түйелердің өркеші бар'
+            ]
+        }
     },
     {
         english: 'Duck',
@@ -809,10 +875,16 @@ const animalWordsKz = [
             ru: 'Посмотри на утку - она смотрит на ДОМ (DUCK ≈ дом)! Она удивляется, глядя на красивый дом.',
             kz: 'Үйрекке қараңыз - ол ДАҚқа қарап тұр (DUCK ≈ дақ)! Ол даққа қарап таңғалады.'
         },
-        examples: [
-            'The duck swims in pond - Утка плавает в пруду',
-            'Ducks can fly and swim - Утки умеют летать и плавать'
-        ]
+        examples: {
+            ru: [
+                'The duck swims in pond - Утка плавает в пруду',
+                'Ducks can fly and swim - Утки умеют летать и плавать'
+            ],
+            kz: [
+                'The duck swims in pond - Үйрек тоғанда жүзеді',
+                'Ducks can fly and swim - Үйректер ұшып және жүзе алады'
+            ]
+        }
     },
     {
         english: 'Goose',
@@ -823,10 +895,16 @@ const animalWordsKz = [
             ru: 'Посмотри на гуся - он относится к ПТИЦАМ (GOOSE ≈ птица)! Он принадлежит к виду птиц и гордится этим.',
             kz: 'Қазға қараңыз - ол ҚҰСтарға жатады (GOOSE ≈ құс)! Ол құстар түріне жатады және онымен мақтанады.'
         },
-        examples: [
-            'The goose is white - Гусь белый',
-            'Geese fly in formation - Гуси летают строем'
-        ]
+        examples: {
+            ru: [
+                'The goose is white - Гусь белый',
+                'Geese fly in formation - Гуси летают строем'
+            ],
+            kz: [
+                'The goose is white - Қаз ақ түсті',
+                'Geese fly in formation - Қаздар тізіліп ұшады'
+            ]
+        }
     },
     {
         english: 'Owl',
@@ -837,10 +915,16 @@ const animalWordsKz = [
             ru: 'Посмотри на сову - она летает над ДЕРЕВНЕЙ (OWL ≈ ол)! Она летает над деревней и всё видит.',
             kz: 'Үкіге қараңыз - ол АУЫЛдың үстінде ұшады (OWL ≈ ауыл)! Ол ауылдың үстінде ұшып бәрін көреді.'
         },
-        examples: [
-            'The owl hunts at night - Сова охотится ночью',
-            'Owls have big eyes - У сов большие глаза'
-        ]
+        examples: {
+            ru: [
+                'The owl hunts at night - Сова охотится ночью',
+                'Owls have big eyes - У сов большие глаза'
+            ],
+            kz: [
+                'The owl hunts at night - Үкі түнде аңшылық жасайды',
+                'Owls have big eyes - Үкілердің үлкен көздері бар'
+            ]
+        }
     },
     {
         english: 'Bee',
@@ -851,10 +935,16 @@ const animalWordsKz = [
             ru: 'Посмотри на пчелу - она танцует БАЛЕТ (BEE ≈ балет)! Она танцует балет, показывая другим пчёлам путь к цветам.',
             kz: 'Араға қараңыз - ол БИ билеп тұр (BEE ≈ би)! Ол би билеп басқа араларға гүлдерге баратын жолды көрсетеді.'
         },
-        examples: [
-            'The bee makes honey - Пчела делает мёд',
-            'Bees pollinate flowers - Пчёлы опыляют цветы'
-        ]
+        examples: {
+            ru: [
+                'The bee makes honey - Пчела делает мёд',
+                'Bees pollinate flowers - Пчёлы опыляют цветы'
+            ],
+            kz: [
+                'The bee makes honey - Ара бал жасайды',
+                'Bees pollinate flowers - Аралар гүлдерді тозаңдатады'
+            ]
+        }
     },
     {
         english: 'Horse',
@@ -865,10 +955,16 @@ const animalWordsKz = [
             ru: 'Посмотри на лошадь - она носит КОРОНУ (HORSE ≈ корона)! Она носит корону и выглядит красиво.',
             kz: 'Атқа қараңыз - ол ОРЫС киімін киіп тұр (HORSE ≈ орыс)! Ол орыс киімін киіп әдемі көрінеді.'
         },
-        examples: [
-            'The horse runs fast - Лошадь быстро бежит',
-            'Horses eat grass - Лошади едят траву'
-        ]
+        examples: {
+            ru: [
+                'The horse runs fast - Лошадь быстро бежит',
+                'Horses eat grass - Лошади едят траву'
+            ],
+            kz: [
+                'The horse runs fast - Ат жылдам жүгіреді',
+                'Horses eat grass - Аттар шөп жейді'
+            ]
+        }
     },
     {
         english: 'Sheep',
@@ -879,10 +975,16 @@ const animalWordsKz = [
             ru: 'Посмотри на овцу - у неё в руках ШИПЫ (SHEEP ≈ шипы)! У неё в руках шипы, она защищается ими.',
             kz: 'Қойға қараңыз - оның қолында ШИПА бар (SHEEP ≈ шипа)! Оның қолында шипалар бар, ол олармен өзін қорғайды.'
         },
-        examples: [
-            'The sheep gives wool - Овца даёт шерсть',
-            'Sheep live in flocks - Овцы живут стадами'
-        ]
+        examples: {
+            ru: [
+                'The sheep gives wool - Овца даёт шерсть',
+                'Sheep live in flocks - Овцы живут стадами'
+            ],
+            kz: [
+                'The sheep gives wool - Қой жүн береді',
+                'Sheep live in flocks - Қойлар топпен өмір сүреді'
+            ]
+        }
     }
 ];
 
@@ -899,10 +1001,16 @@ const foodWords = [
             ru: 'Представьте свеклу с битой. BEET-root.',
             kz: 'Қызылшаны битамен елестетіңіз. BEET-root.'
         },
-        examples: [
-            'I like beetroot salad - Мне нравится салат из свеклы',
-            'Beetroot is very healthy - Свекла очень полезная'
-        ]
+        examples: {
+            ru: [
+                'I like beetroot salad - Мне нравится салат из свеклы',
+                'Beetroot is very healthy - Свекла очень полезная'
+            ],
+            kz: [
+                'I like beetroot salad - Маған қызылша салатын жақсы көремін',
+                'Beetroot is very healthy - Қызылша өте пайдалы'
+            ]
+        }
     },
     {
         english: 'Cucumber',
@@ -913,10 +1021,16 @@ const foodWords = [
             ru: 'Представьте огурец, держащий в руке КРЮК (Cucumber ≈ крюк).',
             kz: 'Қиярды елестетіңіз, ол қолында ИЛМЕК ұстап тұр (Cucumber ≈ илмек).'
         },
-        examples: [
-            'Fresh cucumber in salad - Свежий огурец в салате',
-            'Cucumber is very crispy - Огурец очень хрустящий'
-        ]
+        examples: {
+            ru: [
+                'Fresh cucumber in salad - Свежий огурец в салате',
+                'Cucumber is very crispy - Огурец очень хрустящий'
+            ],
+            kz: [
+                'Fresh cucumber in salad - Салаттағы жаңа қияр',
+                'Cucumber is very crispy - Қияр өте қытымды'
+            ]
+        }
     },
     {
         english: 'Plum',
@@ -927,10 +1041,16 @@ const foodWords = [
             ru: 'Представьте сливу, которая горит ярким ПЛАМЕНЕМ (PLUM ≈ пламя).',
             kz: 'Алханы елестетіңіз, ол жарқын ОТпен жанып тұр (PLUM ≈ от).'
         },
-        examples: [
-            'Sweet purple plum - Сладкая фиолетовая слива',
-            'Plum tree in garden - Сливовое дерево в саду'
-        ]
+        examples: {
+            ru: [
+                'Sweet purple plum - Сладкая фиолетовая слива',
+                'Plum tree in garden - Сливовое дерево в саду'
+            ],
+            kz: [
+                'Sweet purple plum - Тәтті күлгін алханы',
+                'Plum tree in garden - Бақшадағы алханы ағашы'
+            ]
+        }
     },
     {
         english: 'Porridge',
@@ -941,10 +1061,16 @@ const foodWords = [
             ru: 'Представьте кашу в Париже, на фоне Эйфелевой башни (Porridge ≈ Париж).',
             kz: 'Ботқаны Парижде елестетіңіз, Эйфель мұнарасының фонында (Porridge ≈ Париж).'
         },
-        examples: [
-            'Hot porridge for breakfast - Горячая каша на завтрак',
-            'Oatmeal porridge is healthy - Овсяная каша полезная'
-        ]
+        examples: {
+            ru: [
+                'Hot porridge for breakfast - Горячая каша на завтрак',
+                'Oatmeal porridge is healthy - Овсяная каша полезная'
+            ],
+            kz: [
+                'Hot porridge for breakfast - Таңғы асында ыстық ботқа',
+                'Oatmeal porridge is healthy - Сұлы ботқасы пайдалы'
+            ]
+        }
     },
     {
         english: 'Sausage',
@@ -955,10 +1081,16 @@ const foodWords = [
             ru: 'Представьте СОСИСКУ с СОСКОЙ (SAUSage ≈ сосиска). Созвучие поможет запомнить слово.',
             kz: 'Шұжықты СҮТпен елестетіңіз (SAUSage ≈ сүт). Ұқсастық сөзді есте сақтауға көмектеседі.'
         },
-        examples: [
-            'Grilled sausage for dinner - Жареная колбаса на ужин',
-            'German sausage is famous - Немецкая колбаса знаменита'
-        ]
+        examples: {
+            ru: [
+                'Grilled sausage for dinner - Жареная колбаса на ужин',
+                'German sausage is famous - Немецкая колбаса знаменита'
+            ],
+            kz: [
+                'Grilled sausage for dinner - Кешкі асқа қуырылған шұжық',
+                'German sausage is famous - Неміс шұжығы әйгілі'
+            ]
+        }
     },
     {
         english: 'Seed',
@@ -969,10 +1101,16 @@ const foodWords = [
             ru: 'Представьте семечко, которое СИДИТ (SEED ≈ сидит) на стуле.',
             kz: 'Тұқымды елестетіңіз, ол ОРЫНдықта ОТЫР (SEED ≈ отыр).'
         },
-        examples: [
-            'Plant the seed in soil - Посади семя в землю',
-            'Sunflower seeds are tasty - Семечки подсолнуха вкусные'
-        ]
+        examples: {
+            ru: [
+                'Plant the seed in soil - Посади семя в землю',
+                'Sunflower seeds are tasty - Семечки подсолнуха вкусные'
+            ],
+            kz: [
+                'Plant the seed in soil - Тұқымды топыраққа егіңіз',
+                'Sunflower seeds are tasty - Күнбағыс тұқымдары дәмді'
+            ]
+        }
     },
     {
         english: 'Soda',
@@ -983,10 +1121,16 @@ const foodWords = [
             ru: 'Представьте газировку в упаковке СОДЫ (SODA = сода).',
             kz: 'Газды суды СОДА қаптамасында елестетіңіз (SODA = сода).'
         },
-        examples: [
-            'Cold soda on hot day - Холодная газировка в жаркий день',
-            'Orange soda is sweet - Апельсиновая газировка сладкая'
-        ]
+        examples: {
+            ru: [
+                'Cold soda on hot day - Холодная газировка в жаркий день',
+                'Orange soda is sweet - Апельсиновая газировка сладкая'
+            ],
+            kz: [
+                'Cold soda on hot day - Иссық күні суық газды су',
+                'Orange soda is sweet - Апельсин газды суы тәтті'
+            ]
+        }
     }
 ];
 
@@ -1032,7 +1176,7 @@ function showCurrentWord() {
                 <div class="examples">
                     <h3>${t('examples')}</h3>
                     <ul>
-                        ${word.examples.map(example => `<li>${example}</li>`).join('')}
+                        ${(word.examples[currentLanguage] || word.examples.ru || word.examples).map(example => `<li>${example}</li>`).join('')}
                     </ul>
                 </div>
             </div>
