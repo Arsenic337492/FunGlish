@@ -25,15 +25,15 @@ function showAvatarMenu(event) {
 }
 
 function viewAvatar() {
-    alert('Просмотр аватара - в разработке');
+    alert(t('avatar_view_dev'));
 }
 
 function changeAvatar() {
-    alert('Изменение аватара - в разработке');
+    alert(t('avatar_change_dev'));
 }
 
 function deleteAvatar() {
-    alert('Удаление аватара - в разработке');
+    alert(t('avatar_delete_dev'));
 }
 
 function showAchievements() {
@@ -51,7 +51,7 @@ function showAchievements() {
     
     const modal = document.createElement('div');
     modal.className = 'achievements-modal';
-    modal.innerHTML = '<h2>Достижения</h2>';
+    modal.innerHTML = `<h2>${t('achievements')}</h2>`;
     
     modalOverlay.appendChild(modal);
     document.body.appendChild(modalOverlay);
@@ -83,7 +83,7 @@ function showSettings() {
     
     const modal = document.createElement('div');
     modal.className = 'settings-modal';
-    modal.innerHTML = '<h2>Настройки</h2>';
+    modal.innerHTML = `<h2>${t('settings')}</h2>`;
     
     modalOverlay.appendChild(modal);
     document.body.appendChild(modalOverlay);
@@ -250,9 +250,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     errDiv.style.color = 'orange';
                     errDiv.style.marginBottom = '10px';
                     errDiv.innerHTML = `
-                        <p>Подтвердите ваш email перед входом.</p>
+                        <p>${t('verify_email_first')}</p>
                         <button type="button" onclick="sendNewVerificationCode('${user.email}')" style="background: #ff9800; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
-                            Отправить код
+                            ${t('send_code')}
                         </button>
                     `;
                     loginForm.insertBefore(errDiv, loginForm.firstChild);
@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 errDiv.style.color = 'red';
                 errDiv.style.marginBottom = '10px';
                 if (error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
-                    errDiv.innerHTML = 'Неверный email или пароль.';
+                    errDiv.innerHTML = t('invalid_credentials');
                 } else {
                     errDiv.innerHTML = error.message;
                 }
@@ -294,8 +294,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (user) {
             // Пользователь залогинен
             const userDoc = await db.collection('users').doc(user.uid).get();
-            const userData = userDoc.exists ? userDoc.data() : { name: 'Пользователь', surname: '' };
-            const displayName = userData.name || 'Пользователь';
+            const userData = userDoc.exists ? userDoc.data() : { name: t('user'), surname: '' };
+            const displayName = userData.name || t('user');
             
             // Загружаем язык пользователя
             if (userData.language) {
@@ -348,8 +348,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <div class="progress" style="width: 45%"></div>
                                 </div>
                                 <div class="progress-stats">
-                                    <span>45% пройдено</span>
-                                    <span>55% осталось</span>
+                                    <span>45% ${t('completed')}</span>
+                                    <span>55% ${t('remaining')}</span>
                                 </div>
                             </div>
                         </div>
@@ -357,19 +357,19 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="profile-stats" id="profile-stats">
                             <div class="stat-item">
                                 <span class="stat-value" id="learned-words">0</span>
-                                <span class="stat-label">Изучено слов</span>
+                                <span class="stat-label">${t('learned_words')}</span>
                             </div>
                             <div class="stat-item">
                                 <span class="stat-value" id="streak-days">0</span>
-                                <span class="stat-label">Дней подряд</span>
+                                <span class="stat-label">${t('streak_days')}</span>
                             </div>
                             <div class="stat-item">
                                 <span class="stat-value" id="accuracy">0%</span>
-                                <span class="stat-label">Точность ответов</span>
+                                <span class="stat-label">${t('accuracy')}</span>
                             </div>
                             <div class="stat-item">
                                 <span class="stat-value" id="total-tests">0</span>
-                                <span class="stat-label">Всего тестов</span>
+                                <span class="stat-label">${t('total_tests')}</span>
                             </div>
                         </div>
 
@@ -382,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <path d="M7 2h1l8 22"></path>
                                     <path d="M22 9h-7"></path>
                                 </svg>
-                                Язык: <span id="current-language">Русский</span>
+                                ${t('language')}: <span id="current-language">${t('russian')}</span>
                             </button>
                             <button class="action-button achievements-btn" onclick="showAchievements()">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -391,14 +391,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <path d="M5 15V9"></path>
                                     <path d="M19.8 9c0-1-.8-1.9-1.8-1.9H6c-1 0-1.8.9-1.8 1.9m15.6 0c0 4.4-3.6 8-8 8s-8-3.6-8-8"></path>
                                 </svg>
-                                Достижения
+                                ${t('achievements')}
                             </button>
                             <button class="action-button settings-btn" onclick="showSettings()">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                     <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
                                     <circle cx="12" cy="12" r="3"></circle>
                                 </svg>
-                                Настройки
+                                ${t('settings')}
                             </button>
                         </div>
                     `;
@@ -477,14 +477,14 @@ function validateRegisterForm(form) {
     const password = form.querySelector('input#password');
     const confirmPassword = form.querySelector('input#confirmPassword');
     let errors = [];
-    if (!name.value.trim()) errors.push('Имя обязательно');
-    if (!surname.value.trim()) errors.push('Фамилия обязательна');
-    if (!birth.value) errors.push('Дата рождения обязательна');
-    if (!gender) errors.push('Пол обязателен');
-    if (!email.value.trim() || !isValidEmail(email.value)) errors.push('Введите корректный email');
-    if (!password.value) errors.push('Пароль обязателен');
-    else if (!isStrongPassword(password.value)) errors.push('Пароль должен содержать минимум 8 символов, заглавную и строчную буквы, цифру и спецсимвол.');
-    if (password.value !== confirmPassword.value) errors.push('Пароли не совпадают');
+    if (!name.value.trim()) errors.push(t('name_required'));
+    if (!surname.value.trim()) errors.push(t('surname_required'));
+    if (!birth.value) errors.push(t('birth_required'));
+    if (!gender) errors.push(t('gender_required'));
+    if (!email.value.trim() || !isValidEmail(email.value)) errors.push(t('email_invalid'));
+    if (!password.value) errors.push(t('password_required'));
+    else if (!isStrongPassword(password.value)) errors.push(t('password_weak'));
+    if (password.value !== confirmPassword.value) errors.push(t('passwords_mismatch'));
     return errors;
 }
 
@@ -675,7 +675,10 @@ const animalWordsRu = [
         russian: 'Жук',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/beetle-%D0%B1%D0%B8%D1%82%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/beetle.mp3',
-        association: 'Смотри, какой сильный жучок держит в лапках БИТУ (BEETLE ≈ бита)! Он собирается играть в бейсбол со своими друзьями-насекомыми.',
+        associations: {
+            ru: 'Смотри, какой сильный жучок держит в лапках БИТУ (BEETLE ≈ бита)! Он собирается играть в бейсбол со своими друзьями-насекомыми.',
+            kz: 'Мықты қоңызға қараңыз, ол қолында БИТА устап тұр (BEETLE ≈ бита)! Ол өзінің жәндік-достарымен бейсбол ойнағысы келеді.'
+        },
         examples: [
             'The beetle is black - Жук чёрный',
             'Beetles can fly - Жуки умеют летать'
@@ -686,7 +689,10 @@ const animalWordsRu = [
         russian: 'Бык',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/bull-%D0%B1%D1%83%D0%BB%D0%BA%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/bull.mp3',
-        association: 'Посмотри, как большой добрый бычок кушает вкусную БУЛОЧКУ (BULL ≈ булка)! Он очень любит хлебобулочные изделия на завтрак.',
+        associations: {
+            ru: 'Посмотри, как большой добрый бычок кушает вкусную БУЛОЧКУ (BULL ≈ булка)! Он очень любит хлебобулочные изделия на завтрак.',
+            kz: 'Үлкен мейірімді бұқаға қараңыз, ол дәмді НАН жеп тұр (BULL ≈ булка)! Ол таңғы асында нан өнімдерін өте жақсы көреді.'
+        },
         examples: [
             'The bull is very strong - Бык очень сильный',
             'There is a bull in the field - На поле есть бык'
@@ -697,7 +703,10 @@ const animalWordsRu = [
         russian: 'Кролик',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/bunny-%D0%B1%D0%B0%D0%BD%D1%8F.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/bunny.mp3',
-        association: 'Какой чистенький зайчик моется в БАНЬКЕ (BUNNY ≈ баня)! Он трёт спинку мочалкой и поёт весёлые песенки.',
+        associations: {
+            ru: 'Какой чистенький зайчик моется в БАНЬКЕ (BUNNY ≈ баня)! Он трёт спинку мочалкой и поёт весёлые песенки.',
+            kz: 'Қандай таза қоян МОНШАда жуынып тұр (BUNNY ≈ монша)! Ол арқасын сүртіп қуанышты әндер салады.'
+        },
         examples: [
             'The bunny is white - Кролик белый',
             'Bunny likes carrots - Кролик любит морковку'
@@ -708,7 +717,10 @@ const animalWordsRu = [
         russian: 'Ослик',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/donkey-%D1%82%D0%BE%D0%BD%D0%BA%D0%B8%D0%B9.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/donkey.mp3',
-        association: 'Смотри на этого ТОНЕНЬКОГО ослика (DONKEY ≈ тонкий)! Он такой худенький, надо его покормить.',
+        associations: {
+            ru: 'Смотри на этого ТОНЕНЬКОГО ослика (DONKEY ≈ тонкий)! Он такой худенький, надо его покормить.',
+            kz: 'Мына ЖІҢІШКЕ ешкіге қараңыз (DONKEY ≈ жіңішке)! Ол өте арық, оны азықтандыру керек.'
+        },
         examples: [
             'The donkey is grey - Ослик серый',
             'Donkey carries bags - Ослик носит сумки'
@@ -719,7 +731,10 @@ const animalWordsRu = [
         russian: 'Орёл',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/eagle-%D0%B8%D0%B3%D0%BB%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/eagle.mp3',
-        association: 'Посмотри, как гордый орёл смотрит на ИГЛУ (EAGLE ≈ игла)! Он думает: "Какая острая железная игла"',
+        associations: {
+            ru: 'Посмотри, как гордый орёл смотрит на ИГЛУ (EAGLE ≈ игла)! Он думает: "Какая острая железная игла"',
+            kz: 'Мақтанышты бүркітке қараңыз, ол ИНЕге қарап тұр (EAGLE ≈ ине)! Ол ойлайды: "Қандай өткір темір ине"'
+        },
         examples: [
             'The eagle flies high - Орёл летит высоко',
             'Eagles have sharp eyes - У орлов острое зрение'
@@ -730,7 +745,10 @@ const animalWordsRu = [
         russian: 'Суслик',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/gopher-%D0%B3%D0%BE%D0%BB%D1%8C%D1%84.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/gopher.mp3',
-        association: 'Какой умный суслик играет в ГОЛЬФ (GOPHER ≈ гольф)! Он держит клюшку и целится в лунку, как настоящий спортсмен.',
+        associations: {
+            ru: 'Какой умный суслик играет в ГОЛЬФ (GOPHER ≈ гольф)! Он держит клюшку и целится в лунку, как настоящий спортсмен.',
+            kz: 'Қандай ақылды саршымақ ГОЛЬФ ойнап тұр (GOPHER ≈ гольф)! Ол таяқшаны ұстап тесікке нишан алады, нағыз спортшыдай.'
+        },
         examples: [
             'The gopher lives underground - Суслик живёт под землёй',
             'Gopher has small eyes - У суслика маленькие глазки'
@@ -741,7 +759,10 @@ const animalWordsRu = [
         russian: 'Тюлень',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/seal-%D1%81%D0%B8%D0%BB%D0%B0.png?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/seal.mp3',
-        association: 'Посмотри, какой СИЛЬНЫЙ тюлень (SEAL ≈ сила)! Он показывает свои мускулы и гордится своей силой, как настоящий богатырь.',
+        associations: {
+            ru: 'Посмотри, какой СИЛЬНЫЙ тюлень (SEAL ≈ сила)! Он показывает свои мускулы и гордится своей силой, как настоящий богатырь.',
+            kz: 'Қандай КҮШТІ итбалыққа қараңыз (SEAL ≈ күш)! Ол өзінің булшықеттерін көрсетіп өзінің күшімен мақтанады, нағыз батырдай.'
+        },
         examples: [
             'The seal swims fast - Тюлень быстро плавает',
             'Seals live in cold water - Тюлени живут в холодной воде'
@@ -752,7 +773,10 @@ const animalWordsRu = [
         russian: 'Индейка',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/turkey-%D1%82%D1%91%D1%80%D0%BA%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/turkey.mp3',
-        association: 'Смотри, как забавная индейка трёт сыр на ТЁРКЕ (TURKEY ≈ тёрка)! Она готовит вкусный салатик для своих цыплят.',
+        associations: {
+            ru: 'Смотри, как забавная индейка трёт сыр на ТЁРКЕ (TURKEY ≈ тёрка)! Она готовит вкусный салатик для своих цыплят.',
+            kz: 'Қызықты күркеге қараңыз, ол ирімшікті ТАРАКта үгітіп тұр (TURKEY ≈ тарақ)! Ол өзінің балапандарына дәмді салат даярлап тұр.'
+        },
         examples: [
             'The turkey is big - Индейка большая',
             'Turkey has colorful feathers - У индейки разноцветные перья'
@@ -767,7 +791,10 @@ const animalWordsKz = [
         russian: 'Верблюд',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/camel-%D2%9B%D0%B0%D0%BC%D0%B0%D0%BB.jpg?raw=true',
         audio: '#',
-        association: 'Түйеге қараңыз - ол ҚАМАЛдың қасында тұр (CAMEL ≈ қамал)! Ол қамалды қорғайды және оны қорғайды.',
+        associations: {
+            ru: 'Посмотри на верблюда - он стоит рядом с КАМНЕМ (CAMEL ≈ камень)! Он охраняет каменную крепость.',
+            kz: 'Түйеге қараңыз - ол ҚАМАЛдың қасында тұр (CAMEL ≈ қамал)! Ол қамалды қорғайды және оны қорғайды.'
+        },
         examples: [
             'The camel walks in desert - Верблюд идёт по пустыне',
             'Camels have humps - У верблюдов есть горбы'
@@ -778,7 +805,10 @@ const animalWordsKz = [
         russian: 'Утка',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/duck-%D0%B4%D0%B0%D0%BA.jpg?raw=true',
         audio: '#',
-        association: 'Үйрекке қараңыз - ол ДАҚқа қарап тұр (DUCK ≈ дақ)! Ол даққа қарап таңғалады.',
+        associations: {
+            ru: 'Посмотри на утку - она смотрит на ДОМ (DUCK ≈ дом)! Она удивляется, глядя на красивый дом.',
+            kz: 'Үйрекке қараңыз - ол ДАҚқа қарап тұр (DUCK ≈ дақ)! Ол даққа қарап таңғалады.'
+        },
         examples: [
             'The duck swims in pond - Утка плавает в пруду',
             'Ducks can fly and swim - Утки умеют летать и плавать'
@@ -789,7 +819,10 @@ const animalWordsKz = [
         russian: 'Гусь',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/goose-%D2%9B%D2%B1%D1%81.jpg?raw=true',
         audio: '#',
-        association: 'Қазға қараңыз - ол ҚҰСтарға жатады (GOOSE ≈ құс)! Ол құстар түріне жатады және онымен мақтанады.',
+        associations: {
+            ru: 'Посмотри на гуся - он относится к ПТИЦАМ (GOOSE ≈ птица)! Он принадлежит к виду птиц и гордится этим.',
+            kz: 'Қазға қараңыз - ол ҚҰСтарға жатады (GOOSE ≈ құс)! Ол құстар түріне жатады және онымен мақтанады.'
+        },
         examples: [
             'The goose is white - Гусь белый',
             'Geese fly in formation - Гуси летают строем'
@@ -800,7 +833,10 @@ const animalWordsKz = [
         russian: 'Сова',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/owl-%D0%B0%D1%83%D1%8B%D0%BB.jpg?raw=true',
         audio: '#',
-        association: 'Үкіге қараңыз - ол АУЫЛдың үстінде ұшады (OWL ≈ ауыл)! Ол ауылдың үстінде ұшып бәрін көреді.',
+        associations: {
+            ru: 'Посмотри на сову - она летает над ДЕРЕВНЕЙ (OWL ≈ ол)! Она летает над деревней и всё видит.',
+            kz: 'Үкіге қараңыз - ол АУЫЛдың үстінде ұшады (OWL ≈ ауыл)! Ол ауылдың үстінде ұшып бәрін көреді.'
+        },
         examples: [
             'The owl hunts at night - Сова охотится ночью',
             'Owls have big eyes - У сов большие глаза'
@@ -811,7 +847,10 @@ const animalWordsKz = [
         russian: 'Пчела',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/bee-%D0%B1%D0%B8.jpg?raw=true',
         audio: '#',
-        association: 'Араға қараңыз - ол БИ билеп тұр (BEE ≈ би)! Ол би билеп басқа араларға гүлдерге баратын жолды көрсетеді.',
+        associations: {
+            ru: 'Посмотри на пчелу - она танцует БАЛЕТ (BEE ≈ балет)! Она танцует балет, показывая другим пчёлам путь к цветам.',
+            kz: 'Араға қараңыз - ол БИ билеп тұр (BEE ≈ би)! Ол би билеп басқа араларға гүлдерге баратын жолды көрсетеді.'
+        },
         examples: [
             'The bee makes honey - Пчела делает мёд',
             'Bees pollinate flowers - Пчёлы опыляют цветы'
@@ -822,7 +861,10 @@ const animalWordsKz = [
         russian: 'Лошадь',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/horse-%D0%BE%D1%80%D1%8B%D1%81.jpg?raw=true',
         audio: '#',
-        association: 'Атқа қараңыз - ол ОРЫС киімін киіп тұр (HORSE ≈ орыс)! Ол орыс киімін киіп әдемі көрінеді.',
+        associations: {
+            ru: 'Посмотри на лошадь - она носит КОРОНУ (HORSE ≈ корона)! Она носит корону и выглядит красиво.',
+            kz: 'Атқа қараңыз - ол ОРЫС киімін киіп тұр (HORSE ≈ орыс)! Ол орыс киімін киіп әдемі көрінеді.'
+        },
         examples: [
             'The horse runs fast - Лошадь быстро бежит',
             'Horses eat grass - Лошади едят траву'
@@ -833,7 +875,10 @@ const animalWordsKz = [
         russian: 'Овца',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/sheep-%D1%88%D0%B8%D0%BF%D0%B0.jpg?raw=true',
         audio: '#',
-        association: 'Қойға қараңыз - оның қолында ШИПА бар (SHEEP ≈ шипа)! Оның қолында шипалар бар, ол олармен өзін қорғайды.',
+        associations: {
+            ru: 'Посмотри на овцу - у неё в руках ШИПЫ (SHEEP ≈ шипы)! У неё в руках шипы, она защищается ими.',
+            kz: 'Қойға қараңыз - оның қолында ШИПА бар (SHEEP ≈ шипа)! Оның қолында шипалар бар, ол олармен өзін қорғайды.'
+        },
         examples: [
             'The sheep gives wool - Овца даёт шерсть',
             'Sheep live in flocks - Овцы живут стадами'
@@ -850,7 +895,10 @@ const foodWords = [
         russian: 'Свекла',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/beetrot-%D0%B1%D0%B8%D1%82%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/beetroot.mp3',
-        association: 'Представьте свеклу с битой. BEET-root.',
+        associations: {
+            ru: 'Представьте свеклу с битой. BEET-root.',
+            kz: 'Қызылшаны битамен елестетіңіз. BEET-root.'
+        },
         examples: [
             'I like beetroot salad - Мне нравится салат из свеклы',
             'Beetroot is very healthy - Свекла очень полезная'
@@ -861,7 +909,10 @@ const foodWords = [
         russian: 'Огурец',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/cucumber-%D0%BA%D1%80%D1%8E%D0%BA.png?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/cucumber.mp3',
-        association: 'Представьте огурец, держащий в руке КРЮК (Cucumber ≈ крюк).',
+        associations: {
+            ru: 'Представьте огурец, держащий в руке КРЮК (Cucumber ≈ крюк).',
+            kz: 'Қиярды елестетіңіз, ол қолында ИЛМЕК ұстап тұр (Cucumber ≈ илмек).'
+        },
         examples: [
             'Fresh cucumber in salad - Свежий огурец в салате',
             'Cucumber is very crispy - Огурец очень хрустящий'
@@ -872,7 +923,10 @@ const foodWords = [
         russian: 'Слива',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/plum-%D0%BF%D0%BB%D0%B0%D0%BC%D1%8F(%D1%81%D0%BB%D0%B8%D0%B2%D0%B0%20%D0%B3%D0%BE%D1%80%D0%B8%D1%82).jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/plum.mp3',
-        association: 'Представьте сливу, которая горит ярким ПЛАМЕНЕМ (PLUM ≈ пламя).',
+        associations: {
+            ru: 'Представьте сливу, которая горит ярким ПЛАМЕНЕМ (PLUM ≈ пламя).',
+            kz: 'Алханы елестетіңіз, ол жарқын ОТпен жанып тұр (PLUM ≈ от).'
+        },
         examples: [
             'Sweet purple plum - Сладкая фиолетовая слива',
             'Plum tree in garden - Сливовое дерево в саду'
@@ -883,7 +937,10 @@ const foodWords = [
         russian: 'Каша',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/porridge-%D0%BF%D0%B0%D1%80%D0%B8%D0%B6.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/porridge.mp3',
-        association: 'Представьте кашу в Париже, на фоне Эйфелевой башни (Porridge ≈ Париж).',
+        associations: {
+            ru: 'Представьте кашу в Париже, на фоне Эйфелевой башни (Porridge ≈ Париж).',
+            kz: 'Ботқаны Парижде елестетіңіз, Эйфель мұнарасының фонында (Porridge ≈ Париж).'
+        },
         examples: [
             'Hot porridge for breakfast - Горячая каша на завтрак',
             'Oatmeal porridge is healthy - Овсяная каша полезная'
@@ -894,7 +951,10 @@ const foodWords = [
         russian: 'Сосиска',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/sausage-%D1%81%D0%BE%D1%81%D0%B8%D1%81%D0%BA%D0%B0%20%D1%81%20%D1%81%D0%BE%D1%81%D0%BA%D0%BE%D0%B9.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/sausage.mp3',
-        association: 'Представьте СОСИСКУ с СОСКОЙ (SAUSage ≈ сосиска). Созвучие поможет запомнить слово.',
+        associations: {
+            ru: 'Представьте СОСИСКУ с СОСКОЙ (SAUSage ≈ сосиска). Созвучие поможет запомнить слово.',
+            kz: 'Шұжықты СҮТпен елестетіңіз (SAUSage ≈ сүт). Ұқсастық сөзді есте сақтауға көмектеседі.'
+        },
         examples: [
             'Grilled sausage for dinner - Жареная колбаса на ужин',
             'German sausage is famous - Немецкая колбаса знаменита'
@@ -905,7 +965,10 @@ const foodWords = [
         russian: 'Семя/Семечко',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/seed-%D1%81%D0%B8%D0%B4%D0%B8%D1%82.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/seed.mp3',
-        association: 'Представьте семечко, которое СИДИТ (SEED ≈ сидит) на стуле.',
+        associations: {
+            ru: 'Представьте семечко, которое СИДИТ (SEED ≈ сидит) на стуле.',
+            kz: 'Тұқымды елестетіңіз, ол ОРЫНдықта ОТЫР (SEED ≈ отыр).'
+        },
         examples: [
             'Plant the seed in soil - Посади семя в землю',
             'Sunflower seeds are tasty - Семечки подсолнуха вкусные'
@@ -916,7 +979,10 @@ const foodWords = [
         russian: 'Газировка',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/soda-%D0%B3%D0%B0%D0%B7%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B2%20%D1%81%D0%BE%D0%B4%D0%B5.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/soda.mp3',
-        association: 'Представьте газировку в упаковке СОДЫ (SODA = сода).',
+        associations: {
+            ru: 'Представьте газировку в упаковке СОДЫ (SODA = сода).',
+            kz: 'Газды суды СОДА қаптамасында елестетіңіз (SODA = сода).'
+        },
         examples: [
             'Cold soda on hot day - Холодная газировка в жаркий день',
             'Orange soda is sweet - Апельсиновая газировка сладкая'
@@ -961,10 +1027,10 @@ function showCurrentWord() {
                 <img src="${word.image}" alt="${word.english}">
             </div>
             <div class="word-content">
-                <h3 data-translate="association">Ассоциация:</h3>
+                <h3>${t('association')}</h3>
                 <p class="association-text">${word.associations ? word.associations[currentLanguage] || word.associations.ru : word.association || ''}</p>
                 <div class="examples">
-                    <h3>Примеры использования:</h3>
+                    <h3>${t('examples')}</h3>
                     <ul>
                         ${word.examples.map(example => `<li>${example}</li>`).join('')}
                     </ul>
@@ -1023,17 +1089,17 @@ function showHome() {
 
 // Функция восстановления пароля
 function resetPassword() {
-    const email = prompt('Введите ваш email:');
+    const email = prompt(t('enter_your_email'));
     if (email && isValidEmail(email)) {
         auth.sendPasswordResetEmail(email)
             .then(() => {
-                alert('Ссылка для сброса пароля отправлена на почту!');
+                alert(t('reset_link_sent'));
             })
             .catch((error) => {
-                alert('Ошибка: ' + error.message);
+                alert(t('error') + ': ' + error.message);
             });
     } else if (email) {
-        alert('Пожалуйста, введите корректный email');
+        alert(t('enter_valid_email'));
     }
 }
 
@@ -1049,7 +1115,7 @@ function signInWithGoogle() {
             const userDoc = await db.collection('users').doc(user.uid).get();
             if (!userDoc.exists) {
                 await db.collection('users').doc(user.uid).set({
-                    name: user.displayName || 'Пользователь',
+                    name: user.displayName || t('user'),
                     email: user.email,
                     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                     loginMethod: 'google'
@@ -1060,8 +1126,8 @@ function signInWithGoogle() {
             document.getElementById('authModal').classList.remove('active');
         })
         .catch((error) => {
-            console.error('Ошибка входа через Google:', error);
-            alert('Ошибка входа через Google: ' + error.message);
+            console.error('Google login error:', error);
+            alert(t('google_login_error') + ': ' + error.message);
         });
 }
 
@@ -1091,11 +1157,11 @@ async function sendEmailVerificationCode(email) {
             verification_code: code,
             to_name: 'Пользователь'
         });
-        showNotification('Код отправлен на ваш email!', 'success');
+        showNotification(t('code_sent'), 'success');
     } catch (error) {
-        console.log('Ошибка отправки email:', error);
-        // Для тестирования показываем код
-        showNotification(`Для теста: код ${code}`, 'info');
+        console.log('Email sending error:', error);
+        // For testing purposes, show the code
+        showNotification(`${t('test_code')}: ${code}`, 'info');
     }
 }
 
@@ -1103,12 +1169,12 @@ function verifyEmailCode() {
     const inputCode = document.getElementById('verificationCode').value.trim();
     
     if (!verificationCodeData) {
-        showNotification('Код не был отправлен. Попробуйте снова.', 'error');
+        showNotification(t('code_not_sent'), 'error');
         return;
     }
     
     if (Date.now() > verificationCodeData.expiresAt) {
-        showNotification('Код устарел. Отправьте новый.', 'error');
+        showNotification(t('code_expired'), 'error');
         return;
     }
     
@@ -1126,7 +1192,7 @@ function verifyEmailCode() {
         document.getElementById('emailVerificationModal').classList.remove('active');
         
         // Показываем успех
-        showNotification('✅ Email успешно подтвержден! Теперь вы можете войти.', 'success');
+        showNotification(t('email_verified'), 'success');
         
         // Очищаем данные
         verificationCodeData = null;
@@ -1135,14 +1201,14 @@ function verifyEmailCode() {
         // Показываем форму входа
         showLoginModal();
     } else {
-        showNotification('Неверный код. Попробуйте снова.', 'error');
+        showNotification(t('invalid_code'), 'error');
     }
 }
 
 function resendEmailCode() {
     if (verificationCodeData && verificationCodeData.email) {
         sendEmailVerificationCode(verificationCodeData.email);
-        showNotification('Новый код отправлен!', 'success');
+        showNotification(t('new_code_sent'), 'success');
     }
 }
 
@@ -1190,7 +1256,7 @@ function playAudio(audioUrl) {
     if (audioUrl && audioUrl !== '#') {
         const audio = new Audio(audioUrl);
         audio.play().catch(error => {
-            console.log('Ошибка воспроизведения аудио:', error);
+            console.log('Audio playback error:', error);
         });
     }
 }
@@ -1286,9 +1352,9 @@ function checkLanguageOnLoad() {
 
 // Отправка ссылки для входа по email
 function sendSignInLink() {
-    const email = prompt('Введите ваш email:');
+    const email = prompt(t('enter_your_email'));
     if (!email || !isValidEmail(email)) {
-        alert('Пожалуйста, введите корректный email');
+        alert(t('enter_valid_email'));
         return;
     }
 
@@ -1300,11 +1366,11 @@ function sendSignInLink() {
     firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
         .then(() => {
             window.localStorage.setItem('emailForSignIn', email);
-            alert(`Ссылка для входа отправлена на ${email}!\n\nПроверьте почту и нажмите на ссылку для входа.`);
+            alert(t('signin_link_sent', {email: email}));
         })
         .catch((error) => {
-            console.error('Ошибка отправки ссылки:', error);
-            alert('Ошибка отправки: ' + error.message);
+            console.error('Link sending error:', error);
+            alert(t('sending_error') + ': ' + error.message);
         });
 }
 
@@ -1625,36 +1691,15 @@ function nextTestQuestion() {
 function showTestResults() {
     const percentage = Math.round((currentTest.correctAnswers / currentTest.totalQuestions) * 100);
     
-    let categoryName, resultMessage, correctText, accuracyText, repeatText, backText;
+    const categoryName = currentTest.category === 'animals' ? t('animals') : t('food');
     
-    if (currentLanguage === 'kz') {
-        categoryName = currentTest.category === 'animals' ? 'Жануарлар' : 'Тамақ';
-        correctText = `Дұрыс жауаптар: ${currentTest.correctAnswers} / ${currentTest.totalQuestions}`;
-        accuracyText = `Дәлдік: ${percentage}%`;
-        repeatText = 'Тестті қайталау';
-        backText = 'Оқуға қайту';
-        
-        if (percentage >= 80) {
-            resultMessage = 'Өте жақсы! 🎉';
-        } else if (percentage >= 60) {
-            resultMessage = 'Жақсы! 😊';
-        } else {
-            resultMessage = 'Қайталау керек 💪';
-        }
+    let resultMessage;
+    if (percentage >= 80) {
+        resultMessage = t('excellent_result');
+    } else if (percentage >= 60) {
+        resultMessage = t('good_result');
     } else {
-        categoryName = currentTest.category === 'animals' ? 'Животные' : 'Еда';
-        correctText = `Правильных ответов: ${currentTest.correctAnswers} из ${currentTest.totalQuestions}`;
-        accuracyText = `Точность: ${percentage}%`;
-        repeatText = 'Повторить тест';
-        backText = 'К обучению';
-        
-        if (percentage >= 80) {
-            resultMessage = 'Отлично! 🎉';
-        } else if (percentage >= 60) {
-            resultMessage = 'Хорошо! 😊';
-        } else {
-            resultMessage = 'Нужно повторить 💪';
-        }
+        resultMessage = t('need_repeat');
     }
     
     let resultColor = '';
@@ -1668,16 +1713,16 @@ function showTestResults() {
     
     document.getElementById('lesson-content').innerHTML = `
         <div class="test-container">
-            <h2>Результаты теста: ${categoryName}</h2>
+            <h2>${t('test_results')}: ${categoryName}</h2>
             <div class="final-score">
                 <h3 style="color: ${resultColor}">${resultMessage}</h3>
-                <p>Правильных ответов: ${currentTest.correctAnswers} из ${currentTest.totalQuestions}</p>
-                <p>Точность: ${percentage}%</p>
+                <p>${t('correct_answers')}: ${currentTest.correctAnswers} ${t('out_of')} ${currentTest.totalQuestions}</p>
+                <p>${t('accuracy')}: ${percentage}%</p>
                 <button onclick="document.getElementById('lesson-content').innerHTML = startTest('${currentTest.category}')" style="background: #1976D2; color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 16px; cursor: pointer; margin: 10px;">
-                    Повторить тест
+                    ${t('repeat_test')}
                 </button>
                 <button onclick="location.reload()" style="background: #4CAF50; color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 16px; cursor: pointer; margin: 10px;">
-                    К обучению
+                    ${t('back_to_learning')}
                 </button>
             </div>
         </div>
