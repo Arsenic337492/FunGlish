@@ -918,8 +918,7 @@ const animalWordsKz = [
     }
 ];
 
-// Общая переменная для обратной совместимости
-const animalWords = currentLanguage === 'kz' ? animalWordsKz : animalWordsRu;
+
 
 // Массив слов для раздела "Еда"
 const foodWords = [
@@ -1008,16 +1007,13 @@ let currentCategory = 'animals'; // 'animals' или 'food'
 // Функция получения правильного массива слов
 function getWords(category) {
     if (category === 'animals') {
-        // Проверяем какой массив существует
-        if (typeof animalWordsKz !== 'undefined' && currentLanguage === 'kz') {
+        if (currentLanguage === 'kz') {
             return animalWordsKz;
-        } else if (typeof animalWordsRu !== 'undefined') {
+        } else {
             return animalWordsRu;
-        } else if (typeof animalWords !== 'undefined') {
-            return animalWords; // Старое название
         }
     } else if (category === 'food') {
-        return foodWords || [];
+        return foodWords;
     }
     return [];
 }
@@ -1277,7 +1273,7 @@ function playAudio(audioUrl) {
 }
 
 // Система языков
-let currentLanguage = 'ru'; // по умолчанию русский
+let currentLanguage = window.currentLanguage || 'ru'; // Используем установленный язык или русский по умолчанию
 
 function selectLanguage(lang) {
     currentLanguage = lang;
@@ -1413,18 +1409,21 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// Функция для переключения категории
-function switchCategory(category) {
-    currentCategory = category;
-    currentWordIndex = 0;
-    return showCurrentWord();
-}
+
 
 // Контент для разных разделов
 const contentById = {
-    'animals-material': () => switchCategory('animals'),
+    'animals-material': () => {
+        currentCategory = 'animals';
+        currentWordIndex = 0;
+        return showCurrentWord();
+    },
     'animals-test': () => startTest('animals'),
-    'food-material': () => switchCategory('food'),
+    'food-material': () => {
+        currentCategory = 'food';
+        currentWordIndex = 0;
+        return showCurrentWord();
+    },
     'food-test': () => startTest('food')
 };
 
