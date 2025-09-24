@@ -1007,6 +1007,70 @@ const animalWordsKz = [
 
 
 
+// Казахская еда
+const foodWordsKz = [
+    {
+        english: 'Butter',
+        kazakh: 'Сары май',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/butter-%D0%B1%D0%B0%D1%82%D1%8B%D1%80.jpg?raw=true',
+        audio: '#',
+        associations: {
+            kz: 'БАТЫР майды ұстап тұр (BUTTER ≈ батыр)! Ол батыр сияқты күшті және майды қорғайды.'
+        },
+        examples: {
+            kz: [
+                'The butter is yellow - Сары май сары түсті',
+                'I spread butter on bread - Мен нанға сары май жағамын'
+            ]
+        }
+    },
+    {
+        english: 'Carrot',
+        kazakh: 'Сәбіз',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/carrot-%D2%9B%D0%B0%D1%80%D1%8B.png?raw=true',
+        audio: '#',
+        associations: {
+            kz: 'ҚАРЫ адам сәбіз жеп тұр (CARROT ≈ қары)! Қарт адам денсаулығы үшін сәбіз жейді.'
+        },
+        examples: {
+            kz: [
+                'The carrot is orange - Сәбіз қызғылт сары түсті',
+                'Rabbits love carrots - Қояндар сәбізді жақсы көреді'
+            ]
+        }
+    },
+    {
+        english: 'Honey',
+        kazakh: 'Бал',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/honey-%D1%85%D0%B0%D0%BD.png?raw=true',
+        audio: '#',
+        associations: {
+            kz: 'ХАН балды ұстап тұр (HONEY ≈ хан)! Қазақ ханы ең дәмді балды ішеді.'
+        },
+        examples: {
+            kz: [
+                'The honey is sweet - Бал тәтті',
+                'Bees make honey - Аралар бал жасайды'
+            ]
+        }
+    },
+    {
+        english: 'Salt',
+        kazakh: 'Тұз',
+        image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/salt-%D1%81%D0%B0%D0%BB%D1%82.png?raw=true',
+        audio: '#',
+        associations: {
+            kz: 'САЛТ - қазақтың дәстүрі (SALT ≈ салт)! Тұз қосу да бір салт, дәстүр.'
+        },
+        examples: {
+            kz: [
+                'The salt is white - Тұз ақ түсті',
+                'Add salt to soup - Сорпаға тұз қос'
+            ]
+        }
+    }
+];
+
 // Массив слов для раздела "Еда"
 const foodWords = [
     {
@@ -1170,7 +1234,11 @@ function getWords(category) {
             return animalWordsRu;
         }
     } else if (category === 'food') {
-        return foodWords;
+        if (currentLanguage === 'kz') {
+            return foodWordsKz;
+        } else {
+            return foodWords;
+        }
     }
     return [];
 }
