@@ -645,6 +645,7 @@ const animalWordsRu = [
     {
         english: 'Ant',
         russian: 'Муравей',
+        kazakh: 'Құмырсқа',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/ant-%D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/ant.mp3',
         associations: {
@@ -665,6 +666,7 @@ const animalWordsRu = [
     {
         english: 'Bear',
         russian: 'Медведь',
+        kazakh: 'Аю',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/bear-%D0%B1%D0%B8%D1%80%D0%BA%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/bear.mp3',
         associations: {
@@ -685,6 +687,7 @@ const animalWordsRu = [
     {
         english: 'Beetle',
         russian: 'Жук',
+        kazakh: 'Қоңыз',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/beetle-%D0%B1%D0%B8%D1%82%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/beetle.mp3',
         associations: {
@@ -705,6 +708,7 @@ const animalWordsRu = [
     {
         english: 'Bull',
         russian: 'Бык',
+        kazakh: 'Бұқа',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/bull-%D0%B1%D1%83%D0%BB%D0%BA%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/bull.mp3',
         associations: {
@@ -725,6 +729,7 @@ const animalWordsRu = [
     {
         english: 'Bunny',
         russian: 'Кролик',
+        kazakh: 'Қоян',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/bunny-%D0%B1%D0%B0%D0%BD%D1%8F.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/bunny.mp3',
         associations: {
@@ -745,6 +750,7 @@ const animalWordsRu = [
     {
         english: 'Donkey',
         russian: 'Ослик',
+        kazakh: 'Ешкі',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/donkey-%D1%82%D0%BE%D0%BD%D0%BA%D0%B8%D0%B9.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/donkey.mp3',
         associations: {
@@ -765,6 +771,7 @@ const animalWordsRu = [
     {
         english: 'Eagle',
         russian: 'Орёл',
+        kazakh: 'Бүркіт',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/eagle-%D0%B8%D0%B3%D0%BB%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/eagle.mp3',
         associations: {
@@ -785,6 +792,7 @@ const animalWordsRu = [
     {
         english: 'Gopher',
         russian: 'Суслик',
+        kazakh: 'Саршымақ',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/gopher-%D0%B3%D0%BE%D0%BB%D1%8C%D1%84.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/gopher.mp3',
         associations: {
@@ -805,6 +813,7 @@ const animalWordsRu = [
     {
         english: 'Seal',
         russian: 'Тюлень',
+        kazakh: 'Итбалық',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/seal-%D1%81%D0%B8%D0%BB%D0%B0.png?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/seal.mp3',
         associations: {
@@ -825,6 +834,7 @@ const animalWordsRu = [
     {
         english: 'Turkey',
         russian: 'Индейка',
+        kazakh: 'Күрке',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/turkey-%D1%82%D1%91%D1%80%D0%BA%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/turkey.mp3',
         associations: {
@@ -849,6 +859,7 @@ const animalWordsKz = [
     {
         english: 'Camel',
         russian: 'Верблюд',
+        kazakh: 'Түйе',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/camel-%D2%9B%D0%B0%D0%BC%D0%B0%D0%BB.jpg?raw=true',
         audio: '#',
         associations: {
@@ -869,6 +880,7 @@ const animalWordsKz = [
     {
         english: 'Duck',
         russian: 'Утка',
+        kazakh: 'Үйрек',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/duck-%D0%B4%D0%B0%D0%BA.jpg?raw=true',
         audio: '#',
         associations: {
@@ -889,6 +901,7 @@ const animalWordsKz = [
     {
         english: 'Goose',
         russian: 'Гусь',
+        kazakh: 'Қаз',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/goose-%D2%9B%D2%B1%D1%81.jpg?raw=true',
         audio: '#',
         associations: {
@@ -909,6 +922,7 @@ const animalWordsKz = [
     {
         english: 'Owl',
         russian: 'Сова',
+        kazakh: 'Үкі',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/owl-%D0%B0%D1%83%D1%8B%D0%BB.jpg?raw=true',
         audio: '#',
         associations: {
@@ -929,6 +943,7 @@ const animalWordsKz = [
     {
         english: 'Bee',
         russian: 'Пчела',
+        kazakh: 'Ара',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/bee-%D0%B1%D0%B8.jpg?raw=true',
         audio: '#',
         associations: {
@@ -949,6 +964,7 @@ const animalWordsKz = [
     {
         english: 'Horse',
         russian: 'Лошадь',
+        kazakh: 'Ат',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/horse-%D0%BE%D1%80%D1%8B%D1%81.jpg?raw=true',
         audio: '#',
         associations: {
@@ -969,6 +985,7 @@ const animalWordsKz = [
     {
         english: 'Sheep',
         russian: 'Овца',
+        kazakh: 'Қой',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/sheep-%D1%88%D0%B8%D0%BF%D0%B0.jpg?raw=true',
         audio: '#',
         associations: {
@@ -995,6 +1012,7 @@ const foodWords = [
     {
         english: 'Beetroot',
         russian: 'Свекла',
+        kazakh: 'Қызылша',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/beetrot-%D0%B1%D0%B8%D1%82%D0%B0.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/beetroot.mp3',
         associations: {
@@ -1015,6 +1033,7 @@ const foodWords = [
     {
         english: 'Cucumber',
         russian: 'Огурец',
+        kazakh: 'Қияр',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/cucumber-%D0%BA%D1%80%D1%8E%D0%BA.png?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/cucumber.mp3',
         associations: {
@@ -1035,6 +1054,7 @@ const foodWords = [
     {
         english: 'Plum',
         russian: 'Слива',
+        kazakh: 'Алханы',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/plum-%D0%BF%D0%BB%D0%B0%D0%BC%D1%8F(%D1%81%D0%BB%D0%B8%D0%B2%D0%B0%20%D0%B3%D0%BE%D1%80%D0%B8%D1%82).jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/plum.mp3',
         associations: {
@@ -1055,6 +1075,7 @@ const foodWords = [
     {
         english: 'Porridge',
         russian: 'Каша',
+        kazakh: 'Ботқа',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/porridge-%D0%BF%D0%B0%D1%80%D0%B8%D0%B6.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/porridge.mp3',
         associations: {
@@ -1075,6 +1096,7 @@ const foodWords = [
     {
         english: 'Sausage',
         russian: 'Сосиска',
+        kazakh: 'Шұжық',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/sausage-%D1%81%D0%BE%D1%81%D0%B8%D1%81%D0%BA%D0%B0%20%D1%81%20%D1%81%D0%BE%D1%81%D0%BA%D0%BE%D0%B9.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/sausage.mp3',
         associations: {
@@ -1095,6 +1117,7 @@ const foodWords = [
     {
         english: 'Seed',
         russian: 'Семя/Семечко',
+        kazakh: 'Тұқым',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/seed-%D1%81%D0%B8%D0%B4%D0%B8%D1%82.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/seed.mp3',
         associations: {
@@ -1115,6 +1138,7 @@ const foodWords = [
     {
         english: 'Soda',
         russian: 'Газировка',
+        kazakh: 'Газды су',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/soda-%D0%B3%D0%B0%D0%B7%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B2%20%D1%81%D0%BE%D0%B4%D0%B5.jpg?raw=true',
         audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/soda.mp3',
         associations: {
@@ -1163,7 +1187,7 @@ function showCurrentWord() {
         <div class="word-card">
             <div class="word-header">
                 <h2>
-                    ${word.english} / ${word.russian}
+                    ${word.english} / ${currentLanguage === 'kz' ? (word.kazakh || word.russian) : word.russian}
                     <button class="speak-btn" title="Прослушать произношение" onclick="playAudio('${word.audio}')">🔊</button>
                 </h2>
             </div>
