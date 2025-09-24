@@ -1710,7 +1710,7 @@ function generateOptions(correctWord, allWords, questionType) {
         while (options.length < 4) {
             const randomWord = allWords[Math.floor(Math.random() * allWords.length)];
             const randomTranslation = currentLanguage === 'kz' ? randomWord.kazakh : randomWord.russian;
-            if (!usedOptions.has(randomTranslation)) {
+            if (randomTranslation && !usedOptions.has(randomTranslation)) {
                 options.push({ text: randomTranslation, correct: false });
                 usedOptions.add(randomTranslation);
             }
