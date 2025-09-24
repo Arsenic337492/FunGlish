@@ -2097,16 +2097,16 @@ function showDetailedFeedback(isCorrect, englishWord, russianWord) {
     
     if (isCorrect) {
         feedbackDiv.innerHTML = `
-            <h3 style="color: #4caf50; margin-bottom: 15px;">Правильно! ✓</h3>
+            <h3 style="color: #4caf50; margin-bottom: 15px;">${t('correct')}! ✓</h3>
             <p><strong>${englishWord}</strong> = <strong>${russianWord}</strong></p>
-            <p style="color: #666; font-size: 14px;">Отлично знаете это слово!</p>
+            <p style="color: #666; font-size: 14px;">${t('excellent_word')}</p>
         `;
     } else {
         feedbackDiv.innerHTML = `
-            <h3 style="color: #f44336; margin-bottom: 15px;">Неправильно ✗</h3>
-            <p><strong>Правильный ответ:</strong></p>
+            <h3 style="color: #f44336; margin-bottom: 15px;">${t('incorrect')} ✗</h3>
+            <p><strong>${t('correct_answer')}:</strong></p>
             <p style="font-size: 18px;"><strong>${englishWord}</strong> = <strong>${russianWord}</strong></p>
-            <p style="color: #666; font-size: 14px;">Запомните это слово!</p>
+            <p style="color: #666; font-size: 14px;">${t('remember_word')}</p>
         `;
     }
     
