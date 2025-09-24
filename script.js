@@ -767,7 +767,7 @@ const animalWordsKz = [
         russian: 'Верблюд',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/camel-%D2%9B%D0%B0%D0%BC%D0%B0%D0%BB.jpg?raw=true',
         audio: '#',
-        association: 'Посмотри на верблюда - түйе ҚАМАЛдың қасында тұр (CAMEL ≈ қамал)! Он стоит рядом с крепостью и охраняет её.',
+        association: 'Түйеге қараңыз - ол ҚАМАЛдың қасында тұр (CAMEL ≈ қамал)! Ол қамалды қорғайды және оны қорғайды.',
         examples: [
             'The camel walks in desert - Верблюд идёт по пустыне',
             'Camels have humps - У верблюдов есть горбы'
@@ -778,7 +778,7 @@ const animalWordsKz = [
         russian: 'Утка',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/duck-%D0%B4%D0%B0%D0%BA.jpg?raw=true',
         audio: '#',
-        association: 'Смотри на утку - үйрек ДАҚқа қарап тұр (DUCK ≈ дақ)! Она смотрит на пятно и удивляется.',
+        association: 'Үйрекке қараңыз - ол ДАҚқа қарап тұр (DUCK ≈ дақ)! Ол даққа қарап таңғалады.',
         examples: [
             'The duck swims in pond - Утка плавает в пруду',
             'Ducks can fly and swim - Утки умеют летать и плавать'
@@ -789,7 +789,7 @@ const animalWordsKz = [
         russian: 'Гусь',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/goose-%D2%9B%D2%B1%D1%81.jpg?raw=true',
         audio: '#',
-        association: 'Посмотри на гуся - қаз ҚҰСтарға жатады (GOOSE ≈ құс)! Он относится к птицам и гордится этим.',
+        association: 'Қазға қараңыз - ол ҚҰСтарға жатады (GOOSE ≈ құс)! Ол құстар түріне жатады және онымен мақтанады.',
         examples: [
             'The goose is white - Гусь белый',
             'Geese fly in formation - Гуси летают строем'
@@ -800,7 +800,7 @@ const animalWordsKz = [
         russian: 'Сова',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/owl-%D0%B0%D1%83%D1%8B%D0%BB.jpg?raw=true',
         audio: '#',
-        association: 'Смотри на сову - үкі АУЫЛдың үстінде ұшады (OWL ≈ ауыл)! Она летает над деревней и всё видит.',
+        association: 'Үкіге қараңыз - ол АУЫЛдың үстінде ұшады (OWL ≈ ауыл)! Ол ауылдың үстінде ұшып бәрін көреді.',
         examples: [
             'The owl hunts at night - Сова охотится ночью',
             'Owls have big eyes - У сов большие глаза'
@@ -811,7 +811,7 @@ const animalWordsKz = [
         russian: 'Пчела',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/bee-%D0%B1%D0%B8.jpg?raw=true',
         audio: '#',
-        association: 'Посмотри на пчелу - ара БИ билеп тұр (BEE ≈ би)! Она танцует и показывает другим пчёлам дорогу к цветам.',
+        association: 'Араға қараңыз - ол БИ билеп тұр (BEE ≈ би)! Ол би билеп басқа араларға гүлдерге баратын жолды көрсетеді.',
         examples: [
             'The bee makes honey - Пчела делает мёд',
             'Bees pollinate flowers - Пчёлы опыляют цветы'
@@ -822,7 +822,7 @@ const animalWordsKz = [
         russian: 'Лошадь',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/horse-%D0%BE%D1%80%D1%8B%D1%81.jpg?raw=true',
         audio: '#',
-        association: 'Смотри на лошадь - ат ОРЫС киымын киып тұр (HORSE ≈ орыс)! Она одета в русскую одежду и выглядит элегантно.',
+        association: 'Атқа қараңыз - ол ОРЫС киімін киіп тұр (HORSE ≈ орыс)! Ол орыс киімін киіп әдемі көрінеді.',
         examples: [
             'The horse runs fast - Лошадь быстро бежит',
             'Horses eat grass - Лошади едят траву'
@@ -833,7 +833,7 @@ const animalWordsKz = [
         russian: 'Овца',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/sheep-%D1%88%D0%B8%D0%BF%D0%B0.jpg?raw=true',
         audio: '#',
-        association: 'Посмотри на овцу - қойдың қолында ШИПА бар (SHEEP ≈ шипа)! У неё в руках шипы, и она ими защищается.',
+        association: 'Қойға қараңыз - оның қолында ШИПА бар (SHEEP ≈ шипа)! Оның қолында шипалар бар, ол олармен өзін қорғайды.',
         examples: [
             'The sheep gives wool - Овца даёт шерсть',
             'Sheep live in flocks - Овцы живут стадами'
