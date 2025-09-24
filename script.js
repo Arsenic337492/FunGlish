@@ -866,7 +866,7 @@ const animalWordsKz = [
         russian: 'Верблюд',
         kazakh: 'Түйе',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/camel-%D2%9B%D0%B0%D0%BC%D0%B0%D0%BB.jpg?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/camel.mp3',
         associations: {
             ru: 'Посмотри на верблюда - он стоит рядом с КАМНЕМ (CAMEL ≈ камень)! Он охраняет каменную крепость.',
             kz: 'Түйеге қараңыз - ол ҚАМАЛдың қасында тұр (CAMEL ≈ қамал)! Ол қамалды қорғайды және оны қорғайды.'
@@ -887,7 +887,7 @@ const animalWordsKz = [
         russian: 'Утка',
         kazakh: 'Үйрек',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/duck-%D0%B4%D0%B0%D0%BA.jpg?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/duck.mp3',
         associations: {
             ru: 'Посмотри на утку - она смотрит на ДОМ (DUCK ≈ дом)! Она удивляется, глядя на красивый дом.',
             kz: 'Үйрекке қараңыз - ол ДАҚқа қарап тұр (DUCK ≈ дақ)! Ол даққа қарап таңғалады.'
@@ -908,7 +908,7 @@ const animalWordsKz = [
         russian: 'Гусь',
         kazakh: 'Қаз',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/goose-%D2%9B%D2%B1%D1%81.jpg?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/goose.mp3',
         associations: {
             ru: 'Посмотри на гуся - он относится к ПТИЦАМ (GOOSE ≈ птица)! Он принадлежит к виду птиц и гордится этим.',
             kz: 'Қазға қараңыз - ол ҚҰСтарға жатады (GOOSE ≈ құс)! Ол құстар түріне жатады және онымен мақтанады.'
@@ -929,7 +929,7 @@ const animalWordsKz = [
         russian: 'Сова',
         kazakh: 'Үкі',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/owl-%D0%B0%D1%83%D1%8B%D0%BB.jpg?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/owl.mp3',
         associations: {
             ru: 'Посмотри на сову - она летает над ДЕРЕВНЕЙ (OWL ≈ ол)! Она летает над деревней и всё видит.',
             kz: 'Үкіге қараңыз - ол АУЫЛдың үстінде ұшады (OWL ≈ ауыл)! Ол ауылдың үстінде ұшып бәрін көреді.'
@@ -950,7 +950,7 @@ const animalWordsKz = [
         russian: 'Пчела',
         kazakh: 'Ара',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/bee-%D0%B1%D0%B8.jpg?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/bee.mp3',
         associations: {
             ru: 'Посмотри на пчелу - она танцует БАЛЕТ (BEE ≈ балет)! Она танцует балет, показывая другим пчёлам путь к цветам.',
             kz: 'Араға қараңыз - ол БИ билеп тұр (BEE ≈ би)! Ол би билеп басқа араларға гүлдерге баратын жолды көрсетеді.'
@@ -971,7 +971,7 @@ const animalWordsKz = [
         russian: 'Лошадь',
         kazakh: 'Ат',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D0%B5/horse-%D0%BE%D1%80%D1%8B%D1%81.jpg?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/horse.mp3',
         associations: {
             ru: 'Посмотри на лошадь - она носит КОРОНУ (HORSE ≈ корона)! Она носит корону и выглядит красиво.',
             kz: 'Атқа қараңыз - ол ОРЫС киімін киіп тұр (HORSE ≈ орыс)! Ол орыс киімін киіп әдемі көрінеді.'
@@ -1019,7 +1019,7 @@ const foodWordsKz = [
         russian: 'Масло',
         kazakh: 'Сары май',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/butter-%D0%B1%D0%B0%D1%82%D1%8B%D1%80.jpg?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/butter.mp3',
         associations: {
             kz: 'БАТЫР майды ұстап тұр (BUTTER ≈ батыр)! Ол батыр сияқты күшті және майды қорғайды.'
         },
@@ -1035,7 +1035,7 @@ const foodWordsKz = [
         russian: 'Морковь',
         kazakh: 'Сәбіз',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/carrot-%D2%9B%D0%B0%D1%80%D1%8B.png?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/carrot.mp3',
         associations: {
             kz: 'ҚАРЫ адам сәбіз жеп тұр (CARROT ≈ қары)! Қарт адам денсаулығы үшін сәбіз жейді.'
         },
@@ -1051,7 +1051,7 @@ const foodWordsKz = [
         russian: 'Мёд',
         kazakh: 'Бал',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/honey-%D1%85%D0%B0%D0%BD.png?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/honey.mp3',
         associations: {
             kz: 'ХАН балды ұстап тұр (HONEY ≈ хан)! Қазақ ханы ең дәмді балды ішеді.'
         },
@@ -1067,7 +1067,7 @@ const foodWordsKz = [
         russian: 'Соль',
         kazakh: 'Тұз',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/salt-%D1%81%D0%B0%D0%BB%D1%82.png?raw=true',
-        audio: '#',
+        audio: 'https://github.com/Arsenic337492/FunGlish/raw/refs/heads/main/%D0%BE%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0/salt.mp3',
         associations: {
             kz: 'САЛТ - қазақтың дәстүрі (SALT ≈ салт)! Тұз қосу да бір салт, дәстүр.'
         },
