@@ -1273,12 +1273,6 @@ function selectLanguage(lang) {
     currentLanguage = lang;
     localStorage.setItem('selectedLanguage', lang);
     
-    // Закрываем модальное окно
-    document.getElementById('languageModal').classList.remove('active');
-    
-    // Обновляем интерфейс
-    updateLanguageInterface();
-    
     // Сохраняем в профиль пользователя (если авторизован)
     const user = auth.currentUser;
     if (user) {
@@ -1287,10 +1281,12 @@ function selectLanguage(lang) {
         });
     }
     
-    showNotification(
-        t(lang === 'ru' ? 'language_changed_ru' : 'language_changed_kz'), 
-        'success'
-    );
+    // Перенаправляем на соответствующую страницу
+    if (lang === 'kz') {
+        window.location.href = 'learning-kz.html';
+    } else {
+        window.location.href = 'learning.html';
+    }
 }
 
 function showLanguageSettings() {
