@@ -918,6 +918,9 @@ const animalWordsKz = [
     }
 ];
 
+// Общая переменная для обратной совместимости
+const animalWords = currentLanguage === 'kz' ? animalWordsKz : animalWordsRu;
+
 // Массив слов для раздела "Еда"
 const foodWords = [
     {
@@ -1005,9 +1008,16 @@ let currentCategory = 'animals'; // 'animals' или 'food'
 // Функция получения правильного массива слов
 function getWords(category) {
     if (category === 'animals') {
-        return currentLanguage === 'kz' ? animalWordsKz : animalWordsRu;
+        // Проверяем какой массив существует
+        if (typeof animalWordsKz !== 'undefined' && currentLanguage === 'kz') {
+            return animalWordsKz;
+        } else if (typeof animalWordsRu !== 'undefined') {
+            return animalWordsRu;
+        } else if (typeof animalWords !== 'undefined') {
+            return animalWords; // Старое название
+        }
     } else if (category === 'food') {
-        return foodWords; // Пока один массив для еды
+        return foodWords || [];
     }
     return [];
 }
