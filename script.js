@@ -1011,6 +1011,7 @@ const animalWordsKz = [
 const foodWordsKz = [
     {
         english: 'Butter',
+        russian: 'Масло',
         kazakh: 'Сары май',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/butter-%D0%B1%D0%B0%D1%82%D1%8B%D1%80.jpg?raw=true',
         audio: '#',
@@ -1026,6 +1027,7 @@ const foodWordsKz = [
     },
     {
         english: 'Carrot',
+        russian: 'Морковь',
         kazakh: 'Сәбіз',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/carrot-%D2%9B%D0%B0%D1%80%D1%8B.png?raw=true',
         audio: '#',
@@ -1041,6 +1043,7 @@ const foodWordsKz = [
     },
     {
         english: 'Honey',
+        russian: 'Мёд',
         kazakh: 'Бал',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/honey-%D1%85%D0%B0%D0%BD.png?raw=true',
         audio: '#',
@@ -1056,6 +1059,7 @@ const foodWordsKz = [
     },
     {
         english: 'Salt',
+        russian: 'Соль',
         kazakh: 'Тұз',
         image: 'https://github.com/Arsenic337492/FunGlish/blob/main/%D0%B5%D0%B4%D0%B0/salt-%D1%81%D0%B0%D0%BB%D1%82.png?raw=true',
         audio: '#',
