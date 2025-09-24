@@ -1122,3 +1122,21 @@
         font-size: 2rem;
     }
 }
+.hero-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+}
+
+.hero-card h1 {
+    color: var(--text);
+    margin-bottom: 20px;
+}
+
+.hero-card p {
+    color: var(--text);
+    opacity: 0.8;
+    margin-bottom: 30px;
+}
