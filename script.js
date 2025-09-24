@@ -1230,21 +1230,41 @@ let currentWordIndex = 0;
 let currentCategory = 'animals'; // 'animals' или 'food'
 
 // Функция получения правильного массива слов
+// ЗАЩИЩЕННАЯ функция получения слов
 function getWords(category) {
-    if (category === 'animals') {
-        if (currentLanguage === 'kz') {
-            return animalWordsKz;
-        } else {
-            return animalWordsRu;
+    try {
+        if (!category) {
+            console.error('Category not provided');
+            return [];
         }
-    } else if (category === 'food') {
-        if (currentLanguage === 'kz') {
-            return foodWordsKz;
-        } else {
-            return foodWords;
+        
+        let words = [];
+        
+        if (category === 'animals') {
+            if (currentLanguage === 'kz') {
+                words = typeof animalWordsKz !== 'undefined' ? animalWordsKz : [];
+            } else {
+                words = typeof animalWordsRu !== 'undefined' ? animalWordsRu : [];
+            }
+        } else if (category === 'food') {
+            if (currentLanguage === 'kz') {
+                words = typeof foodWordsKz !== 'undefined' ? foodWordsKz : [];
+            } else {
+                words = typeof foodWords !== 'undefined' ? foodWords : [];
+            }
         }
+        
+        // Проверяем что все слова имеют необходимые поля
+        return words.filter(word => {
+            return word && 
+                   word.english && 
+                   (word.russian || word.kazakh) &&
+                   word.image;
+        });
+    } catch (error) {
+        console.error('Error getting words:', error);
+        return [];
     }
-    return [];
 }
 
 // Функция для отображения текущего слова
@@ -1501,8 +1521,36 @@ function playAudio(audioUrl) {
     }
 }
 
-// Система языков
-let currentLanguage = window.currentLanguage || 'ru'; // Используем установленный язык или русский по умолчанию
+// Система языков - ЗАЩИТА ОТ ОШИБОК
+let currentLanguage = window.currentLanguage || localStorage.getItem('selectedLanguage') || 'ru';
+
+// Функция безопасного перевода
+function t(key, params = {}) {
+    try {
+        if (typeof translations === 'undefined' || !translations) {
+            console.warn('Translations not loaded, using fallback');
+            return key;
+        }
+        
+        let text = translations[currentLanguage] && translations[currentLanguage][key] 
+            ? translations[currentLanguage][key] 
+            : translations['ru'] && translations['ru'][key] 
+            ? translations['ru'][key] 
+            : key;
+        
+        // Заменяем параметры в тексте
+        if (params && typeof params === 'object') {
+            Object.keys(params).forEach(param => {
+                text = text.replace(`{${param}}`, params[param]);
+            });
+        }
+        
+        return text;
+    } catch (error) {
+        console.error('Translation error:', error);
+        return key;
+    }
+}
 
 function selectLanguage(lang) {
     currentLanguage = lang;
@@ -1665,83 +1713,206 @@ let currentTest = {
     totalQuestions: 5
 };
 
+// ЗАЩИЩЕННАЯ функция запуска теста
 function startTest(category) {
-    currentTest.category = category;
-    currentTest.currentQuestion = 0;
-    currentTest.correctAnswers = 0;
-    currentTest.questions = generateTestQuestions(category);
-    
-    return showTestQuestion();
+    try {
+        if (!category) {
+            return '<div class="error">Ошибка: категория не указана</div>';
+        }
+        
+        // Инициализируем тест
+        currentTest = {
+            category: category,
+            currentQuestion: 0,
+            correctAnswers: 0,
+            totalQuestions: 4,
+            questions: []
+        };
+        
+        // Генерируем вопросы
+        currentTest.questions = generateTestQuestions(category);
+        
+        if (!currentTest.questions || currentTest.questions.length === 0) {
+            return '<div class="error">Ошибка: не удалось создать вопросы для этой категории</div>';
+        }
+        
+        // Обновляем количество вопросов
+        currentTest.totalQuestions = currentTest.questions.length;
+        
+        return showTestQuestion();
+    } catch (error) {
+        console.error('Error starting test:', error);
+        return '<div class="error">Ошибка при запуске теста</div>';
+    }
 }
 
+// ПОЛНОСТЬЮ ЗАЩИЩЕННАЯ функция генерации тестов
 function generateTestQuestions(category) {
-    const words = getWords(category);
-    const questions = [];
-    const usedWords = new Set();
-    
-    // Генерируем 5 вопросов
-    for (let i = 0; i < currentTest.totalQuestions; i++) {
-        let randomWord;
-        do {
-            randomWord = words[Math.floor(Math.random() * words.length)];
-        } while (usedWords.has(randomWord.english));
+    try {
+        const words = getWords(category);
         
-        usedWords.add(randomWord.english);
+        if (!words || words.length === 0) {
+            console.error('No words available for category:', category);
+            return [];
+        }
         
-        // Случайный тип вопроса
-        const questionTypes = ['translate-to-russian', 'translate-to-english', 'anagram'];
-        const questionType = questionTypes[Math.floor(Math.random() * questionTypes.length)];
+        const questions = [];
+        const usedWords = new Set();
         
-        questions.push({
-            type: questionType,
-            word: randomWord,
-            options: generateOptions(randomWord, words, questionType)
-        });
+        // Определяем количество вопросов (минимум 1, максимум количество слов)
+        const questionsCount = Math.min(Math.max(1, currentTest.totalQuestions || 3), words.length);
+        currentTest.totalQuestions = questionsCount;
+        
+        // Создаем копию массива слов для перемешивания
+        const shuffledWords = [...words].sort(() => Math.random() - 0.5);
+        
+        // Генерируем вопросы
+        for (let i = 0; i < questionsCount && i < shuffledWords.length; i++) {
+            const word = shuffledWords[i];
+            
+            if (!word || !word.english) {
+                console.warn('Invalid word object:', word);
+                continue;
+            }
+            
+            // Проверяем что слово не использовалось
+            if (usedWords.has(word.english)) {
+                continue;
+            }
+            
+            usedWords.add(word.english);
+            
+            // Выбираем тип вопроса
+            const questionTypes = ['translate-to-russian', 'translate-to-english'];
+            // Добавляем анаграмму только если слово не слишком длинное
+            if (word.english.length <= 8) {
+                questionTypes.push('anagram');
+            }
+            
+            const questionType = questionTypes[Math.floor(Math.random() * questionTypes.length)];
+            
+            const options = generateOptions(word, words, questionType);
+            
+            if (options && options.length > 0) {
+                questions.push({
+                    type: questionType,
+                    word: word,
+                    options: options
+                });
+            }
+        }
+        
+        return questions;
+    } catch (error) {
+        console.error('Error generating test questions:', error);
+        return [];
     }
-    
-    return questions;
 }
 
+// МАКСИМАЛЬНО ЗАЩИЩЕННАЯ функция генерации вариантов ответов
 function generateOptions(correctWord, allWords, questionType) {
-    const options = [];
-    const usedOptions = new Set();
-    
-    if (questionType === 'translate-to-russian') {
-        const correctTranslation = currentLanguage === 'kz' ? correctWord.kazakh : correctWord.russian;
-        options.push({ text: correctTranslation, correct: true });
-        usedOptions.add(correctTranslation);
+    try {
+        if (!correctWord || !allWords || !Array.isArray(allWords)) {
+            console.error('Invalid parameters for generateOptions');
+            return [{ text: correctWord?.english || 'Error', correct: true }];
+        }
         
-        while (options.length < 4) {
-            const randomWord = allWords[Math.floor(Math.random() * allWords.length)];
-            const randomTranslation = currentLanguage === 'kz' ? randomWord.kazakh : randomWord.russian;
-            if (randomTranslation && !usedOptions.has(randomTranslation)) {
-                options.push({ text: randomTranslation, correct: false });
-                usedOptions.add(randomTranslation);
+        const options = [];
+        const usedOptions = new Set();
+        
+        if (questionType === 'translate-to-russian') {
+            // Получаем правильный перевод
+            let correctTranslation;
+            if (currentLanguage === 'kz') {
+                correctTranslation = correctWord.kazakh || correctWord.russian || 'Перевод отсутствует';
+            } else {
+                correctTranslation = correctWord.russian || correctWord.kazakh || 'Перевод отсутствует';
+            }
+            
+            options.push({ text: correctTranslation, correct: true });
+            usedOptions.add(correctTranslation);
+            
+            // Собираем все возможные переводы
+            const availableTranslations = [];
+            allWords.forEach(word => {
+                if (!word) return;
+                
+                let translation;
+                if (currentLanguage === 'kz') {
+                    translation = word.kazakh || word.russian;
+                } else {
+                    translation = word.russian || word.kazakh;
+                }
+                
+                if (translation && !usedOptions.has(translation) && translation !== correctTranslation) {
+                    availableTranslations.push(translation);
+                }
+            });
+            
+            // Перемешиваем и добавляем до 3 вариантов
+            const shuffled = shuffleArray(availableTranslations);
+            const maxOptions = Math.min(3, shuffled.length);
+            
+            for (let i = 0; i < maxOptions; i++) {
+                options.push({ text: shuffled[i], correct: false });
+            }
+            
+            // Если вариантов мало, добавляем заглушки
+            while (options.length < 2) {
+                options.push({ text: 'Вариант ' + options.length, correct: false });
+            }
+            
+        } else if (questionType === 'translate-to-english') {
+            const correctEnglish = correctWord.english || 'Error';
+            options.push({ text: correctEnglish, correct: true });
+            usedOptions.add(correctEnglish);
+            
+            // Собираем английские слова
+            const availableEnglish = [];
+            allWords.forEach(word => {
+                if (word && word.english && !usedOptions.has(word.english)) {
+                    availableEnglish.push(word.english);
+                }
+            });
+            
+            // Перемешиваем и добавляем
+            const shuffled = shuffleArray(availableEnglish);
+            const maxOptions = Math.min(3, shuffled.length);
+            
+            for (let i = 0; i < maxOptions; i++) {
+                options.push({ text: shuffled[i], correct: false });
+            }
+            
+            // Добавляем заглушки если нужно
+            while (options.length < 2) {
+                options.push({ text: 'Option ' + options.length, correct: false });
             }
         }
-    } else if (questionType === 'translate-to-english') {
-        options.push({ text: correctWord.english, correct: true });
-        usedOptions.add(correctWord.english);
         
-        while (options.length < 4) {
-            const randomWord = allWords[Math.floor(Math.random() * allWords.length)];
-            if (!usedOptions.has(randomWord.english)) {
-                options.push({ text: randomWord.english, correct: false });
-                usedOptions.add(randomWord.english);
-            }
-        }
+        return shuffleArray(options);
+    } catch (error) {
+        console.error('Error generating options:', error);
+        return [{ text: correctWord?.english || 'Error', correct: true }];
     }
-    
-    return shuffleArray(options);
 }
 
+// ЗАЩИЩЕННАЯ функция перемешивания массива
 function shuffleArray(array) {
-    const newArray = [...array];
-    for (let i = newArray.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    try {
+        if (!Array.isArray(array) || array.length === 0) {
+            return array || [];
+        }
+        
+        const newArray = [...array];
+        for (let i = newArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        }
+        return newArray;
+    } catch (error) {
+        console.error('Error shuffling array:', error);
+        return array || [];
     }
-    return newArray;
 }
 
 function scrambleWord(word) {
@@ -1749,14 +1920,26 @@ function scrambleWord(word) {
     return shuffleArray(letters).join('');
 }
 
+// МАКСИМАЛЬНО ЗАЩИЩЕННАЯ функция показа вопроса
 function showTestQuestion() {
-    const question = currentTest.questions[currentTest.currentQuestion];
-    let categoryName;
-    if (currentLanguage === 'kz') {
-        categoryName = currentTest.category === 'animals' ? 'Жануарлар' : 'Тамақ';
-    } else {
-        categoryName = currentTest.category === 'animals' ? 'Животные' : 'Еда';
-    }
+    try {
+        // Проверяем что тест инициализирован
+        if (!currentTest || !currentTest.questions || currentTest.questions.length === 0) {
+            return '<div class="error">Ошибка: тест не инициализирован</div>';
+        }
+        
+        // Проверяем индекс вопроса
+        if (currentTest.currentQuestion >= currentTest.questions.length) {
+            return showTestResults();
+        }
+        
+        const question = currentTest.questions[currentTest.currentQuestion];
+        if (!question || !question.word) {
+            return '<div class="error">Ошибка: некорректный вопрос</div>';
+        }
+        
+        // Получаем название категории
+        const categoryName = currentTest.category === 'animals' ? t('animals') : t('food');
     
     let questionHTML = '';
     
@@ -1821,6 +2004,10 @@ function showTestQuestion() {
             ${questionHTML}
         </div>
     `;
+    } catch (error) {
+        console.error('Error showing test question:', error);
+        return '<div class="error">Ошибка при отображении вопроса</div>';
+    }
 }
 
 function checkTestAnswer(button, isCorrect) {
