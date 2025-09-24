@@ -1443,14 +1443,22 @@ function scrambleWord(word) {
 
 function showTestQuestion() {
     const question = currentTest.questions[currentTest.currentQuestion];
-    const categoryName = currentTest.category === 'animals' ? 'Животные' : 'Еда';
+    let categoryName;
+    if (currentLanguage === 'kz') {
+        categoryName = currentTest.category === 'animals' ? 'Жануарлар' : 'Тамақ';
+    } else {
+        categoryName = currentTest.category === 'animals' ? 'Животные' : 'Еда';
+    }
     
     let questionHTML = '';
     
     if (question.type === 'translate-to-russian') {
+        const questionText = currentLanguage === 'kz' ? 
+            `"${question.word.english}" сөзі қалай аударылады?` : 
+            `Как переводится слово "${question.word.english}"?`;
         questionHTML = `
             <div class="question">
-                <h3>Как переводится слово "${question.word.english}"?</h3>
+                <h3>${questionText}</h3>
                 <div class="answers">
                     ${question.options.map(option => 
                         `<button onclick="checkTestAnswer(this, ${option.correct})">${option.text}</button>`
@@ -1459,9 +1467,12 @@ function showTestQuestion() {
             </div>
         `;
     } else if (question.type === 'translate-to-english') {
+        const questionText = currentLanguage === 'kz' ? 
+            `"${question.word.russian}" ағылшынша қалай болады?` : 
+            `Как по-английски будет "${question.word.russian}"?`;
         questionHTML = `
             <div class="question">
-                <h3>Как по-английски будет "${question.word.russian}"?</h3>
+                <h3>${questionText}</h3>
                 <div class="answers">
                     ${question.options.map(option => 
                         `<button onclick="checkTestAnswer(this, ${option.correct})">${option.text}</button>`
@@ -1471,21 +1482,33 @@ function showTestQuestion() {
         `;
     } else if (question.type === 'anagram') {
         const scrambled = scrambleWord(question.word.english);
+        const questionText = currentLanguage === 'kz' ? 
+            `Әріптерді дұрыс орналастырыңыз: <span class="anagram">${scrambled}</span>` :
+            `Расставьте буквы правильно: <span class="anagram">${scrambled}</span>`;
+        const placeholder = currentLanguage === 'kz' ? 
+            'Дұрыс сөзді енгізіңіз' : 
+            'Введите правильное слово';
+        const buttonText = currentLanguage === 'kz' ? 'Тексеру' : 'Проверить';
         questionHTML = `
             <div class="question">
-                <h3>Расставьте буквы правильно: <span class="anagram">${scrambled}</span></h3>
+                <h3>${questionText}</h3>
                 <div class="anagram-input">
-                    <input type="text" id="anagramAnswer" placeholder="Введите правильное слово" style="padding: 10px; font-size: 16px; margin: 10px; border-radius: 5px; border: 2px solid #ddd;">
-                    <button onclick="checkAnagramAnswer()" style="padding: 10px 20px; font-size: 16px; background: #1976D2; color: white; border: none; border-radius: 5px; cursor: pointer;">Проверить</button>
+                    <input type="text" id="anagramAnswer" placeholder="${placeholder}" style="padding: 10px; font-size: 16px; margin: 10px; border-radius: 5px; border: 2px solid #ddd;">
+                    <button onclick="checkAnagramAnswer()" style="padding: 10px 20px; font-size: 16px; background: #1976D2; color: white; border: none; border-radius: 5px; cursor: pointer;">${buttonText}</button>
                 </div>
             </div>
         `;
     }
     
+    const testTitle = currentLanguage === 'kz' ? `Тестілеу: ${categoryName}` : `Тестирование: ${categoryName}`;
+    const progressText = currentLanguage === 'kz' ? 
+        `Сұрақ ${currentTest.currentQuestion + 1} / ${currentTest.totalQuestions}` :
+        `Вопрос ${currentTest.currentQuestion + 1} из ${currentTest.totalQuestions}`;
+    
     return `
         <div class="test-container">
-            <h2>Тестирование: ${categoryName}</h2>
-            <div class="progress">Вопрос ${currentTest.currentQuestion + 1} из ${currentTest.totalQuestions}</div>
+            <h2>${testTitle}</h2>
+            <div class="progress">${progressText}</div>
             ${questionHTML}
         </div>
     `;
@@ -1601,19 +1624,45 @@ function nextTestQuestion() {
 
 function showTestResults() {
     const percentage = Math.round((currentTest.correctAnswers / currentTest.totalQuestions) * 100);
-    const categoryName = currentTest.category === 'animals' ? 'Животные' : 'Еда';
     
-    let resultMessage = '';
+    let categoryName, resultMessage, correctText, accuracyText, repeatText, backText;
+    
+    if (currentLanguage === 'kz') {
+        categoryName = currentTest.category === 'animals' ? 'Жануарлар' : 'Тамақ';
+        correctText = `Дұрыс жауаптар: ${currentTest.correctAnswers} / ${currentTest.totalQuestions}`;
+        accuracyText = `Дәлдік: ${percentage}%`;
+        repeatText = 'Тестті қайталау';
+        backText = 'Оқуға қайту';
+        
+        if (percentage >= 80) {
+            resultMessage = 'Өте жақсы! 🎉';
+        } else if (percentage >= 60) {
+            resultMessage = 'Жақсы! 😊';
+        } else {
+            resultMessage = 'Қайталау керек 💪';
+        }
+    } else {
+        categoryName = currentTest.category === 'animals' ? 'Животные' : 'Еда';
+        correctText = `Правильных ответов: ${currentTest.correctAnswers} из ${currentTest.totalQuestions}`;
+        accuracyText = `Точность: ${percentage}%`;
+        repeatText = 'Повторить тест';
+        backText = 'К обучению';
+        
+        if (percentage >= 80) {
+            resultMessage = 'Отлично! 🎉';
+        } else if (percentage >= 60) {
+            resultMessage = 'Хорошо! 😊';
+        } else {
+            resultMessage = 'Нужно повторить 💪';
+        }
+    }
+    
     let resultColor = '';
-    
     if (percentage >= 80) {
-        resultMessage = 'Отлично! 🎉';
         resultColor = '#4caf50';
     } else if (percentage >= 60) {
-        resultMessage = 'Хорошо! 😊';
         resultColor = '#ff9800';
     } else {
-        resultMessage = 'Нужно повторить 💪';
         resultColor = '#f44336';
     }
     
