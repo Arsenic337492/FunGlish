@@ -1529,6 +1529,11 @@ function playAudio(audioUrl) {
 // Система языков - ЗАЩИТА ОТ ОШИБОК
 let currentLanguage = window.currentLanguage || localStorage.getItem('selectedLanguage') || 'ru';
 
+// Устанавливаем русский как язык по умолчанию
+if (!localStorage.getItem('selectedLanguage')) {
+    currentLanguage = 'ru';
+}
+
 // Функция безопасного перевода
 function t(key, params = {}) {
     try {
@@ -1582,11 +1587,10 @@ function selectLanguage(lang) {
     const message = lang === 'kz' ? t('language_changed_kz') : t('language_changed_ru');
     showNotification(message, 'success');
     
-    // Перенаправляем на соответствующую страницу (только если на неправильной)
-    const currentPage = window.location.pathname;
-    if (lang === 'kz' && !currentPage.includes('learning-kz.html')) {
+    // Перенаправляем на соответствующую страницу
+    if (lang === 'kz') {
         setTimeout(() => window.location.href = 'learning-kz.html', 1000);
-    } else if (lang === 'ru' && currentPage.includes('learning-kz.html')) {
+    } else {
         setTimeout(() => window.location.href = 'learning.html', 1000);
     }
 }
