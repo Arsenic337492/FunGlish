@@ -1140,3 +1140,20 @@
     opacity: 0.8;
     margin-bottom: 30px;
 }
+.language-toggle {
+    background: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #fff !important;
+    border-radius: 999px !important;
+    padding: 8px 15px !important;
+    height: 38px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-right: 10px;
+}
+
+.language-toggle:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
