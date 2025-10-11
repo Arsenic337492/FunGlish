@@ -1710,8 +1710,8 @@ document.addEventListener('click', function(event) {
         authModal.classList.remove('active');
     }
     
-    // Не позволяем закрыть модальное окно выбора языка для неавторизованных пользователей
-    if (event.target === languageModal && auth.currentUser) {
+    // Позволяем закрыть модальное окно выбора языка всем пользователям
+    if (event.target === languageModal) {
         languageModal.classList.remove('active');
     }
 });
@@ -2233,4 +2233,8 @@ function updateLanguageButton() {
             langButton.textContent = '🇷🇺 RU';
         }
     }
+}
+// Показ модального окна выбора языка
+function showLanguageModal() {
+    document.getElementById('languageModal').classList.add('active');
 }
