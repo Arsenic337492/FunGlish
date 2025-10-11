@@ -1581,12 +1581,8 @@ function selectLanguage(lang) {
     const message = lang === 'kz' ? t('language_changed_kz') : t('language_changed_ru');
     showNotification(message, 'success');
     
-    // Перенаправляем на соответствующую страницу
-    if (lang === 'kz') {
-        setTimeout(() => window.location.href = 'learning-kz.html', 1000);
-    } else {
-        setTimeout(() => window.location.href = 'learning.html', 1000);
-    }
+    // Обновляем кнопку языка
+    updateLanguageButton();
 }
 
 function showLanguageSettings() {
