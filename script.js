@@ -119,6 +119,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Проверяем язык
     checkLanguageOnLoad();
+    
+    // Обновляем кнопку языка
+    updateLanguageButton();
 
     // Инициализация обработчиков для сайдбара
     const sidebarLinks = document.querySelectorAll('.tree-view a');
@@ -279,167 +282,161 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ...
-auth.onAuthStateChanged(async user => {
-    const loginButton = document.querySelector('.login-button');
-    const premiumFeatures = document.getElementById('premium-features');
+    // Отслеживание состояния авторизации
+    auth.onAuthStateChanged(async user => {
+        const loginButtons = document.querySelectorAll('.login-button');
+        const loginButton = document.querySelector('.login-button');
+        const lessonContent = document.getElementById('lesson-content');
 
-    if (user) {
-        // Пользователь залогинен. Загружаем данные.
-        const userDoc = await db.collection('users').doc(user.uid).get();
-        const userData = userDoc.exists ? userDoc.data() : { name: t('user'), surname: '' };
-        const displayName = userData.name || t('user');
-
-        // Теперь, когда данные загружены, обновляем язык.
-        if (userData.language) {
-            currentLanguage = userData.language;
-            localStorage.setItem('selectedLanguage', userData.language);
-        }
-        
-        // Скрываем блок "премиум-фич", если он есть.
+        // Скрываем блок "премиум-фич"
+        const premiumFeatures = document.getElementById('premium-features');
         if (premiumFeatures) {
-            premiumFeatures.style.display = 'none';
+            premiumFeatures.style.display = user ? 'none' : 'block';
         }
 
-        // Обновляем кнопку входа на кнопку "Профиль"
-        loginButton.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-            <span data-translate="profile">${t('profile')}</span>
-        `;
-        loginButton.onclick = () => {
-            // Удаляем старые элементы
-            const oldOverlay = document.querySelector('.profile-sidebar-overlay');
-            const oldSidebar = document.querySelector('.profile-sidebar');
-            if (oldOverlay) oldOverlay.remove();
-            if (oldSidebar) oldSidebar.remove();
-            
-            // Создаем новые
-            const overlay = document.createElement('div');
-            overlay.className = 'profile-sidebar-overlay';
-            document.body.appendChild(overlay);
-            
-            const sidebar = document.createElement('div');
-            sidebar.className = 'profile-sidebar';
-            sidebar.innerHTML = `
-                <div class="profile-header">
-                    <div class="profile-top">
-                        <div class="avatar">👤</div>
-                        <div class="user-info">
-                            <h3>${displayName}</h3>
-                        </div>
-                        <button class="logout-icon" onclick="auth.signOut().then(() => window.location.reload())">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                <polyline points="16 17 21 12 16 7"></polyline>
-                                <line x1="21" y1="12" x2="9" y2="12"></line>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="progress-section">
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 45%"></div>
-                        </div>
-                        <div class="progress-stats">
-                            <span>45% ${t('completed')}</span>
-                            <span>55% ${t('remaining')}</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="profile-stats" id="profile-stats">
-                    <div class="stat-item">
-                        <span class="stat-value" id="learned-words">0</span>
-                        <span class="stat-label">${t('learned_words')}</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value" id="streak-days">0</span>
-                        <span class="stat-label">${t('streak_days')}</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value" id="accuracy">0%</span>
-                        <span class="stat-label">${t('accuracy')}</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value" id="total-tests">0</span>
-                        <span class="stat-label">${t('total_tests')}</span>
-                    </div>
-                </div>
+        // Проверяем язык для неавторизованных пользователей
+        if (!user) {
+            checkLanguageForGuest();
+        }
 
-                <div class="profile-actions">    
-                    <button class="action-button language-btn" onclick="showLanguageSettings()">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M5 8l6 6"></path>
-                            <path d="M4 14l6-6 2-3"></path>
-                            <path d="M2 5h12"></path>
-                            <path d="M7 2h1l8 22"></path>
-                            <path d="M22 9h-7"></path>
-                        </svg>
-                        ${t('language')}: <span id="current-language">${t('russian')}</span>
-                    </button>
-                    <button class="action-button achievements-btn" onclick="showAchievements()">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
-                            <path d="M19 15V9"></path>
-                            <path d="M5 15V9"></path>
-                            <path d="M19.8 9c0-1-.8-1.9-1.8-1.9H6c-1 0-1.8.9-1.8 1.9m15.6 0c0 4.4-3.6 8-8 8s-8-3.6-8-8"></path>
-                        </svg>
-                        ${t('achievements')}
-                    </button>
-                    <button class="action-button settings-btn" onclick="showSettings()">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                        </svg>
-                        ${t('settings')}
-                    </button>
-                </div>
+        if (user) {
+            // Пользователь залогинен
+            const userDoc = await db.collection('users').doc(user.uid).get();
+            const userData = userDoc.exists ? userDoc.data() : { name: t('user'), surname: '' };
+            const displayName = userData.name || t('user');
+            
+            // Загружаем язык пользователя
+            if (userData.language) {
+                currentLanguage = userData.language;
+                localStorage.setItem('selectedLanguage', userData.language);
+                updateLanguageInterface();
+            }
+
+            // Обновляем кнопку входа
+            loginButton.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span data-translate="profile">${t('profile')}</span>
             `;
-            document.body.appendChild(sidebar);
-            
-            // Показываем сайдбар
-            setTimeout(() => {
-                overlay.classList.add('active');
-                sidebar.classList.add('active');
-            }, 10);
-            
-            // Обработчик закрытия
-            overlay.onclick = () => {
-                overlay.classList.remove('active');
-                sidebar.classList.remove('active');
+            // Обновляем перевод
+            updateLanguageInterface();
+            loginButton.onclick = () => {
+                // Удаляем старые элементы
+                const oldOverlay = document.querySelector('.profile-sidebar-overlay');
+                const oldSidebar = document.querySelector('.profile-sidebar');
+                if (oldOverlay) oldOverlay.remove();
+                if (oldSidebar) oldSidebar.remove();
+                
+                // Создаем новые
+                const overlay = document.createElement('div');
+                overlay.className = 'profile-sidebar-overlay';
+                document.body.appendChild(overlay);
+                
+                const sidebar = document.createElement('div');
+                sidebar.className = 'profile-sidebar';
+                    sidebar.innerHTML = `
+                        <div class="profile-header">
+                            <div class="profile-top">
+                                <div class="avatar">👤</div>
+                                <div class="user-info">
+                                    <h3>${displayName}</h3>
+                                </div>
+                                <button class="logout-icon" onclick="auth.signOut().then(() => window.location.reload())">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                        <polyline points="16 17 21 12 16 7"></polyline>
+                                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="progress-section">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 45%"></div>
+                                </div>
+                                <div class="progress-stats">
+                                    <span>45% ${t('completed')}</span>
+                                    <span>55% ${t('remaining')}</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-stats" id="profile-stats">
+                            <div class="stat-item">
+                                <span class="stat-value" id="learned-words">0</span>
+                                <span class="stat-label">${t('learned_words')}</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" id="streak-days">0</span>
+                                <span class="stat-label">${t('streak_days')}</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" id="accuracy">0%</span>
+                                <span class="stat-label">${t('accuracy')}</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" id="total-tests">0</span>
+                                <span class="stat-label">${t('total_tests')}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-actions">    
+
+                            <button class="action-button achievements-btn" onclick="showAchievements()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
+                                    <path d="M19 15V9"></path>
+                                    <path d="M5 15V9"></path>
+                                    <path d="M19.8 9c0-1-.8-1.9-1.8-1.9H6c-1 0-1.8.9-1.8 1.9m15.6 0c0 4.4-3.6 8-8 8s-8-3.6-8-8"></path>
+                                </svg>
+                                ${t('achievements')}
+                            </button>
+                            <button class="action-button settings-btn" onclick="showSettings()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                ${t('settings')}
+                            </button>
+                        </div>
+                    `;
+                document.body.appendChild(sidebar);
+                
+                // Показываем сайдбар
                 setTimeout(() => {
-                    overlay.remove();
-                    sidebar.remove();
-                }, 300);
+                    overlay.classList.add('active');
+                    sidebar.classList.add('active');
+                }, 10);
+                
+                // Обработчик закрытия
+                overlay.onclick = () => {
+                    overlay.classList.remove('active');
+                    sidebar.classList.remove('active');
+                    setTimeout(() => {
+                        overlay.remove();
+                        sidebar.remove();
+                    }, 300);
+                };
+                
+                // Загружаем статистику
+                loadUserStats();
             };
-            
-            // Загружаем статистику
-            loadUserStats();
-        };
-
-    } else {
-        // Пользователь не залогинен
-        if (premiumFeatures) {
-            premiumFeatures.style.display = 'block';
+        } else {
+            // Пользователь не залогинен
+            loginButton.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M15 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H15"/>
+                    <path d="M10 17L15 12L10 7"/>
+                    <path d="M15 12H3"/>
+                </svg>
+                <span data-translate="login">Вход</span>
+            `;
+            // Обновляем перевод
+            updateLanguageInterface();
+            loginButton.onclick = showLoginModal;
         }
-
-        loginButton.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M15 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H15"/>
-                <path d="M10 17L15 12L10 7"/>
-                <path d="M15 12H3"/>
-            </svg>
-            <span data-translate="login">Вход</span>
-        `;
-        loginButton.onclick = showLoginModal;
-    }
-    // Вызов `updateLanguageInterface` здесь, в конце обработчика, гарантирует, что 
-    // интерфейс обновится только после полной авторизации.
-    updateLanguageInterface();
-});
-    
+    });
 });
 
 // Функция для переключения видимости пароля
@@ -2195,4 +2192,45 @@ function showTestResults() {
         </div>
     `;
 }
+// Функция переключения языка
+function toggleLanguage() {
+    const newLang = currentLanguage === 'ru' ? 'kz' : 'ru';
+    currentLanguage = newLang;
+    localStorage.setItem('selectedLanguage', newLang);
+    
+    // Сохраняем в профиль пользователя (если авторизован)
+    const user = auth.currentUser;
+    if (user) {
+        db.collection('users').doc(user.uid).update({
+            language: newLang
+        });
+    }
+    
+    // Обновляем кнопку языка
+    updateLanguageButton();
+    
+    // Показываем уведомление
+    const message = newLang === 'kz' ? 'Тіл қазақ тіліне өзгертілді' : 'Язык изменен на русский';
+    showNotification(message, 'success');
+    
+    // Перенаправляем на соответствующую страницу
+    setTimeout(() => {
+        if (newLang === 'kz') {
+            window.location.href = 'learning-kz.html';
+        } else {
+            window.location.href = 'learning.html';
+        }
+    }, 1000);
+}
 
+// Обновление кнопки языка
+function updateLanguageButton() {
+    const langButton = document.getElementById('current-lang');
+    if (langButton) {
+        if (currentLanguage === 'kz') {
+            langButton.textContent = '🇰🇿 KZ';
+        } else {
+            langButton.textContent = '🇷🇺 RU';
+        }
+    }
+}
